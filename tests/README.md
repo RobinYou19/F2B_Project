@@ -9,4 +9,4 @@ Bilan
 On peut obtenir du non JSX à partir du JSX ici :
 https://babeljs.io/repl 
 - SkateJS : même problème que pour ReactJS sauf que la il n'y a pas de syntaxe sans JSX
-- x-tag, l'héritage fonctionne dans le browser, mais les 'extensions' (notés ::) ne fonctionne pas, donc pas d'héritage de template, ni d'event .. donc en gros aucun intérêt :( 
+- x-tag, l'héritage fonctionne dans le browser, mais les 'extensions' (notés ::) ne sont pas hérités (voire écrase l'existant), donc pas d'héritage de template, ni d'event .. donc en gros aucun intérêt :( 
