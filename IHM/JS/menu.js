@@ -1,10 +1,12 @@
-var myElement = window.document;
-
-// create a simple instance
-// by default, it only adds horizontal recognizers
-var mc = new Hammer(myElement);
-
-// listen to events...
-mc.on("panleft panright tap press", function(ev) {
-    console.log(ev.type +" gesture detected.");
-});
+function menuDisplay() 
+{
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") 
+  {
+    x.className += " responsive";
+  } 
+  else 
+  {
+    x.className = "topnav";
+  }
+}
