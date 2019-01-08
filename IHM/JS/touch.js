@@ -1,5 +1,6 @@
 var myElement     = window.document;
 var mc            = new Hammer(myElement);
+var md            = new Hammer.Manager(myElement);
 var pages_list    = ["menu.html", "house.html","modules.html", "scenarios.html",
 										 "favorites.html", "configuration.html", "account.html"]
 
@@ -53,3 +54,11 @@ mc.on("panright", function(ev)
   dest = panright_dict[name];
   window.location.href = "../HTML/"+dest;
 });
+
+/*********************************************/
+
+md.add(new Hammer.Tap({ event: 'twice_double_tap', taps: 2}));
+md.on("twice_double_tap",function(ev)
+{
+	window.location.href = "../HTML/menu.html";
+})
