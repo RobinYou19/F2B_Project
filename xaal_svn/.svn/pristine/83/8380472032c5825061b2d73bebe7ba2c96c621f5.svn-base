@@ -1,0 +1,30 @@
+[config]
+  addr = 6eb64b72-6e51-11e8-8f96-00fec8f7138c
+  phy_addr = 7.7.7
+
+
+[devices]
+
+  [[Lamp-1]]
+    type = Lamp
+    cmd = 0/0/1
+    state = 0/1/0
+    addr = b28a9b77-28f4-4764-86ee-f85a6cda58a1
+  
+  [[Power-1]]
+    type = PowerRelay
+    cmd = 0/0/2
+    state = 0/1/1
+    addr = b28a9b77-28f4-4764-86ee-f85a6cda58a2
+  
+  [[Power-2]]
+    type = PowerRelay
+    cmd = 0/0/3
+    state = 0/1/2
+    addr = b28a9b77-28f4-4764-86ee-f85a6cda58a3
+  
+  [[Foo]]
+    type = PowerRelay
+    cmd = 0/0/4
+    state = 0/1/3
+    addr = b28a9b77-28f4-4764-86ee-f85a6cda58a4

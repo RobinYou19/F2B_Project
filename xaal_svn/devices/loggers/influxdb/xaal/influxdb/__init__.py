@@ -1,0 +1,1 @@
+from .influxdblogger import setup
