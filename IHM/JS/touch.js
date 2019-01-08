@@ -57,8 +57,8 @@ mc.on("panright", function(ev)
 
 /*********************************************/
 
-md.add(new Hammer.Tap({ event: 'twice_double_tap', taps: 2}));
-md.on("twice_double_tap",function(ev)
+md.add(new Hammer.Tap({ event: 'double_tap', taps: 2}));
+md.on("double_tap",function(ev)
 {
 	window.location.href = "../HTML/menu.html";
 })
