@@ -9,9 +9,9 @@
   </label>
 
   <a href="/menu" class="menu-item blue"> <i class="fas fa-home"></i> </a>
-  <a href="modules.html" class="menu-item green"> <i class="fas fa-puzzle-piece"></i> </a>
-  <a href="favorites.html" class="menu-item red"> <i class="fa fa-heart"></i> </a>
-  <a href="scenarios.html" class="menu-item purple"> <i class="fas fa-tasks"></i> </a>
-  <a href="configuration.html" class="menu-item orange"> <i class="fas fa-tools"></i> </a>
-  <a href="account.html" class="menu-item lightblue"> <i class="fa fa-user-circle"></i> </a>
+  <a href="/modules" class="menu-item green"> <i class="fas fa-puzzle-piece"></i> </a>
+  <a href="/favorites" class="menu-item red"> <i class="fa fa-heart"></i> </a>
+  <a href="/scenarios" class="menu-item purple"> <i class="fas fa-tasks"></i> </a>
+  <a href="/configuration" class="menu-item orange"> <i class="fas fa-tools"></i> </a>
+  <a href="/account" class="menu-item lightblue"> <i class="fa fa-user-circle"></i> </a>
 </nav>

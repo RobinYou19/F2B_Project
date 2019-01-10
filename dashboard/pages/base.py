@@ -107,3 +107,33 @@ def links():
 @view('menu.mako')
 def menu():
     return {'title':'Menu'}
+
+@route('/house')
+@view('house.mako')
+def house():
+    return {'title':'House'}
+
+@route('/modules')
+@view('modules.mako')
+def modules():
+    return {'title':'Modules'}
+
+@route('/scenarios')
+@view('scenarios.mako')
+def scenarios():
+    return {'title':'Scenarios'}
+
+@route('/favorites')
+@view('favorites.mako')
+def favorites():
+    return {'title':'Favorites'}
+
+@route('/configuration')
+@view('configuration.mako')
+def configuration():
+    return {'title':'Configuration'}
+
+@route('/account')
+@view('account.mako')
+def account():
+    return {'title':'Account'}

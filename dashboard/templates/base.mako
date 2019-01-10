@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Menu</title>
+  <title>${title}</title>
   <meta name="keywords" content="" />
   <meta name="description" content="" />
   <meta name="mobile-web-app-capable" content="yes">
@@ -15,13 +15,13 @@
 </head>
 <body>
   <div class="topnav" id="myTopnav">
-    <a href="menu.mako" style="color:#3290B1">Menu</a>
-    <a href="house.html">House</a>
-    <a href="modules.html">Modules</a>
-    <a href="scenarios.html">Scenarios</a>
-    <a href="favorites.html">Favorites</a>
-    <a href="configuration.html">Configuration</a>
-    <a href="account.html">Account</a>
+    <a href="/menu">Menu</a>
+    <a href="/house">House</a>
+    <a href="/modules">Modules</a>
+    <a href="/scenarios">Scenarios</a>
+    <a href="/favorites">Favorites</a>
+    <a href="/configuration">Configuration</a>
+    <a href="/account">Account</a>
     <a href="javascript:void(0);" class="icon" onclick="menuDisplay()">
       <i class="fa fa-bars"></i>
     </a>
@@ -32,7 +32,7 @@
 </div>
 
 </body>
-<script type="text/javascript" src="static//Multitouch/hammer.js"></script>
+<script type="text/javascript" src="/static/js/hammer.js"></script>
 <script src="/static/js/menu.js"></script>
 <script src="/static/js/touch.js"></script>
 
@@ -41,5 +41,3 @@
 
 <script src="/static/js/site.js"></script>
 </html>
-
-
