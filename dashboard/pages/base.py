@@ -84,9 +84,6 @@ def save_metadata(addr):
     
 
 
-
-
-
 @route('/grid')
 @view('grid.mako')
 def test_grid():
@@ -106,12 +103,15 @@ def links():
 @route('/menu')
 @view('menu.mako')
 def menu():
-    return {'title':'Menu'}
+    return {"title" : "Menu"}
 
 @route('/house')
 @view('house.mako')
-def house():
-    return {'title':'House'}
+def get_devices_house():
+    r = {"title" : "devices list"}
+    devs = xaal_core.monitor.devices
+    r.update({"devs" : devs})
+    return r
 
 @route('/modules')
 @view('modules.mako')
