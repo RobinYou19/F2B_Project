@@ -10,6 +10,7 @@
   <meta name="description" content="" />
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="manifest" href="/static/manifest.json">
+  <link rel="stylesheet" href="/static/css/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="/static/css/menu.css">
   <link rel="stylesheet" href="/static/fonts/fontawesome/css/all.css">
 </head>
@@ -29,15 +30,20 @@
 
   <div id="main">
     ${self.body()}
-</div>
+  </div>
+
+<lamp></lamp>
 
 </body>
 <script type="text/javascript" src="/static/js/hammer.js"></script>
 <script src="/static/js/menu.js"></script>
 <script src="/static/js/touch.js"></script>
+<script src="/static/js/components.js"></script>
 
 <script src="/static/js/riot+compiler.min.js"></script>
 <script src="/static/js/socket.io.slim.js"></script>
 
 <script src="/static/js/site.js"></script>
+
+<script src="static/css/bootstrap/js/bootstrap.min.js"
 </html>
