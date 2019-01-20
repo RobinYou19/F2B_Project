@@ -1,7 +1,5 @@
 <%inherit file="base.mako"/>
 
-<link rel="stylesheet" href="/static/css/clock.css">
-
 <body>
 
 <div class="col-sm-3">
@@ -16,10 +14,10 @@
 
 %for dev in devs :
 	%if "lamp" in dev.devtype :
-		<lamp-basic address=${dev.address} light=${dev.attributes['light']}></lamp-basic>
+		<lamp-basic address=${dev.address} light=${dev.attributes}></lamp-basic>
 	%endif
 %endfor
 
 </body>
 
-<script src="/static/js/component.js"></script>
+<script src="/static/js/components.js"></script>

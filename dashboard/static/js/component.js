@@ -44,18 +44,26 @@ class Lamp extends HTMLElement
   const address = this.getAttribute('address');
   const light = this.getAttribute('light');
 
+  console.log(light);
+
   var img1 = "/static/imgs/light-on.svg";
   var img2 = "/static/imgs/light-off.svg";
 
   if (light == "ON")
   {
     this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
-                      "<img src=" + img1 + ">" + "</div></div>"
+                      "<img src=" + img1 + ">" +
+                      "<button type='button' class='btn btn-success'>  ON  </button>" +
+                      "<button type='button' class='btn btn-danger'>  OFF  </button>" +
+                      "</div></div>" ;
   }
   else 
   {
     this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
-                      "<img src=" + img2 + ">" + "</div></div>"    
+                      "<img src=" + img2 + ">" +
+                       "<button type='button' class='btn btn-success'>  ON  </button>" +
+                      "<button type='button' class='btn btn-danger'>  OFF  </button>" +
+                      "</div></div>" ;
   }
   
   }
