@@ -15,9 +15,9 @@
 %for dev in devs :
 	%if "lamp" in dev.devtype :
 		<lamp-basic address=${dev.address} light=${dev.attributes}></lamp-basic>
+	%elif "thermometer" in dev.devtype :
+		<thermometer-basic address=${dev.address} attributes=${dev.attributes}></thermometer-basic>
 	%endif
 %endfor
 
 </body>
-
-<script src="/static/js/components.js"></script>

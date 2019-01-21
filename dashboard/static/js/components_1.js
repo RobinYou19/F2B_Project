@@ -1,10 +1,12 @@
 /* Tried to decrease as much as possible the dependencies on JS libraries (like jQuery)
 */
-window.onload = function() {
-			  tick();
+window.onload = function() 
+{
+	tick();
 };
 
-function tick(){
+function tick()
+{
   var hoursTicker = document.getElementById("hours");
   var minutesTicker = document.getElementById("minutes");
   
@@ -50,7 +52,6 @@ class Lamp extends HTMLElement
 
   update()
   {
-
     const address = this.getAttribute('address');
     const light = this.getAttribute('light');
 
@@ -62,7 +63,7 @@ class Lamp extends HTMLElement
     if (light == "ON")
     {
       this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
-                        "Address : " + address + "<br>" + 
+                        "<h5>Light : " + light +"</h5>" +
                         "<a href = /generic/" + address +">" +
                         "<img src=" + img1 + ">" + "<br>" + "</a>" +
                         "<button type='button' onclick='turn_on()' class='btn btn-success'>  ON  </button>" +
@@ -72,7 +73,7 @@ class Lamp extends HTMLElement
     else 
     {
       this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
-                        "Address : " + address + "<br>" + 
+                        "<h5>Light : " + light +"</h5>" +
                         "<a href = /generic/" + address +">" +
                         "<img src=" + img2 + ">" + "<br>" + "</a>" +
                         "<button type='button' onclick='turn_on()' class='btn btn-success'>  ON  </button>" +
@@ -83,3 +84,40 @@ class Lamp extends HTMLElement
 }
 
 customElements.define('lamp-basic', Lamp);
+
+function rise_temp()
+{
+  console.log("Rise Temp asked");
+}
+
+function down_temp()
+{
+  console.log("Down Temp asked")
+}
+
+class Thermometer extends HTMLElement
+{
+  constructor()
+  {
+    super();
+    this.update();
+  }
+
+  update()
+  {
+    console.log("Thermometer detected");
+    var img = "static/imgs/thermometer-profile.png";
+
+    const attributes = this.getAttribute('attributes')
+    const address = this.getAttribute('address');
+    this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
+                     "<h5>Thermometer : " + attributes.temperature +"</h5>" +
+                     "<a href = /generic/" + address +">" +
+                     "<img src=" + img + " height='50' width='16'>" + "<br>" + "</a>" +
+                     "<button type='button' onclick='rise_temp()' class='btn btn-success'>  +  </button>" +
+                     "<button type='button' onclick='down_temp()' class='btn btn-danger'>  -  </button>" +
+                     "</div></div>" ;
+  }
+}
+
+customElements.define('thermometer-basic', Thermometer);

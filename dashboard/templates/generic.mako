@@ -1,40 +1,32 @@
 <%inherit file="base.mako"/>
 
+<body>
 
-<table width=100%>
-<tr valign=top><td>
-<h2>Information</h2>
-<table width=100%>
-  <tr><th>Name</th><th>value</th></tr>
-  <tr><td>address</td><td>${dev.address}</td></tr>
-  <tr><td>devtype</td><td>${dev.devtype}</td></tr>
-</table>
-</td>
-<td>
-<h2>Description</h2>
-<table width=100%>
-  <tr><th>Name</th><th>value</th></tr>
-% for k in dev.description:
-<%
-    value = dev.description[k]
-    if not value:
-        continue
-%>
-  <tr><td>${k}</td><td>${value}</td></tr>
-% endfor
-</table>
-</td></tr>
-</table>
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">
+        %if "lamp" in dev.devtype :
+          <img src="/static/imgs/lampe-profile.png" alt="Lamp Profile" style="width:300px;height:300px;">
+        %elif "thermometer" in dev.devtype :
+          <img src="/static/imgs/thermometer-profile.svg" alt="Thermometer Profile" style="width:300px;height:300px;">
+        %else :
+          <img src="other-image.png" alt="Image Not Available for This Component" style="width:300px;height:300px;">     
+        %endif
+      </div>
+      <div class="flip-card-back">
+        <h2>Type ${dev.devtype}</h2> 
+        <p>Address ${dev.address}</p> 
+        % for k in dev.description:
+        <%
+          value = dev.description[k]
+          if not value:
+              continue
+        %>
+            <p>${k} : ${value}</p>
+        %endfor
+        <h4>Attributes : </h4>
+      </div>
+    </div>
+  </div>
 
-<h2>Attributes</h2>
-<div data-is="generic-attrs" xaal_addr="${dev.address}"></div>
-<script type="riot/tag" src="/static/tags/generic_attrs.tag"></script>
-
-<h2>Meta Data</h2>
-<table width=100%>
-  <tr><th>key</th><th>value</th></tr>
-% for k in dev.db:
-  <tr><td>${k}</td><td>${dev.db[k]}</td></tr>
-% endfor   
-</table>
-<a href="/edit_metadata/${dev.address}">Edit meta-data</a>
+</body>

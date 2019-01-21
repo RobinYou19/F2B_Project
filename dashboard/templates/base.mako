@@ -14,7 +14,10 @@
   <link rel="stylesheet" href="/static/css/menu.css">
   <link rel="stylesheet" href="/static/css/component.css">
   <link rel="stylesheet" href="/static/css/clock_1.css">
+  <link rel="stylesheet" href="/static/css/generic.css">
   <link rel="stylesheet" href="/static/fonts/fontawesome/css/all.css">
+  <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
+
 </head>
 <body>
   <div class="topnav" id="myTopnav">
@@ -34,8 +37,6 @@
     ${self.body()}
   </div>
 
-<lamp></lamp>
-
 </body>
 <script src="/static/js/hammer.js"></script>
 <script src="/static/js/menu.js"></script>
@@ -44,6 +45,7 @@
 <script src="/static/js/socket.io.slim.js"></script>
 
 <script src="/static/js/site.js"></script>
+<script src="/static/js/components_1.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="static/css/bootstrap/js/bootstrap.min.js"></script>

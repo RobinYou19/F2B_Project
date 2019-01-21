@@ -8,7 +8,7 @@
   <span class="lines line-3"></span>
   </label>
 
-  <a href="/menu" class="menu-item blue"> <i class="fas fa-home"></i> </a>
+  <a href="/house" class="menu-item blue"> <i class="fas fa-home"></i> </a>
   <a href="/modules" class="menu-item green"> <i class="fas fa-puzzle-piece"></i> </a>
   <a href="/favorites" class="menu-item red"> <i class="fa fa-heart"></i> </a>
   <a href="/scenarios" class="menu-item purple"> <i class="fas fa-tasks"></i> </a>
