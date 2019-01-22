@@ -42,6 +42,11 @@ function turn_off()
   console.log("off request sended");
 }
 
+function getLightStatus(address)
+{
+  return "";
+}
+
 class Lamp extends HTMLElement 
 {
   constructor()
@@ -53,12 +58,12 @@ class Lamp extends HTMLElement
   update()
   {
     const address = this.getAttribute('address');
-    const light = "";
+    const light_status = getLightStatus(address);
 
     var img1 = "/static/imgs/light-on.svg";
     var img2 = "/static/imgs/light-off.svg";
 
-    if (light == "ON")
+    if (light_status == "ON")
     {
       this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
                         "<h5>Light : " + "</h5>" +
