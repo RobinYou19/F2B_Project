@@ -32,9 +32,10 @@ function tick()
   setTimeout('tick()',60000);
 };
 
-function turn_on()
+function turn_on(address)
 {
   console.log("on request sended");
+  sio_send_request(address,'on',{});
 }
 
 function turn_off()
@@ -69,7 +70,7 @@ class Lamp extends HTMLElement
                         "<h5>Light : " + "</h5>" +
                         "<a href = /generic/" + address +">" +
                         "<img src=" + img1 + ">" + "<br>" + "</a>" +
-                        "<button type='button' onclick='turn_on()' class='btn btn-success'>  ON  </button>" +
+                        "<button type='button' onclick='turn_on(" + address +")'" + "class='btn btn-success'>  ON  </button>" +
                         "<button type='button' onclick='turn_off()' class='btn btn-danger'>  OFF  </button>" +
                         "</div></div>" ;
     }
@@ -79,7 +80,7 @@ class Lamp extends HTMLElement
                         "<h5>Light : " + "</h5>" +
                         "<a href = /generic/" + address +">" +
                         "<img src=" + img2 + ">" + "<br>" + "</a>" +
-                        "<button type='button' onclick='turn_on()' class='btn btn-success'>  ON  </button>" +
+                        "<button type='button' onclick='turn_on(" + address +")'" + "class='btn btn-success'>  ON  </button>" +
                         "<button type='button' onclick='turn_off()' class='btn btn-danger'>  OFF  </button>" +
                         "</div></div>" ;
     }
