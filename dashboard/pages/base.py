@@ -137,3 +137,14 @@ def configuration():
 @view('account.mako')
 def account():
     return {'title':'Account'}
+
+
+@route('/type')
+@view('type.mako')
+def type():
+    return {'title':'Type'}
+
+@route('/localisation')
+@view('localisation.mako')
+def localisation():
+    return {'title':'Localisation'}
