@@ -26,65 +26,54 @@ function tick()
   hoursTicker.style.cssText = "-webkit-transform: rotate("+ angleHours + "deg);"
   minutesTicker.style.cssText = "-webkit-transform: rotate("+ angleMinutes + "deg);"
   
-  
   document.getElementById("digital").innerHTML = h + " : " + m;
   
   setTimeout('tick()',60000);
 };
 
-function turn_on(address)
-{
-  console.log("on request sended");
-  sio_send_request(address,'on',{});
-}
-
-function turn_off()
-{
-  console.log("off request sended");
-}
-
-function getLightStatus(address)
-{
-  return "";
-}
 
 class Lamp extends HTMLElement 
 {
-  constructor()
+  connectedCallback () 
   {
-    super();
-    this.update();
+    this.address = this.getAttribute('address');
+    this.on = "on";
+    this.off= "off";
+
+    var address = this.getAttribute('address');
+
+    this.render(address);
   }
 
-  update()
+  render(address)
   {
-    const address = this.getAttribute('address');
-    const light_status = getLightStatus(address);
+    var toto = "toto";
+    var img = "/static/imgs/light-off.svg";
 
-    var img1 = "/static/imgs/light-on.svg";
-    var img2 = "/static/imgs/light-off.svg";
+    this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
+                      "<h5>Light : " + "</h5>" +
+                      "<a href = /generic/" + this.address +">" +
+                      "<img src=" + img + ">" + "<br>" + "</a>" +
+                      "<button type='button' id='onButton'  class='btn btn-success'>  ON  </button>" +
+                      "<button type='button' id='offButton' class='btn btn-danger'>  OFF  </button>" +
+                      "</div></div>" ;
 
-    if (light_status == "ON")
+    var onButton = document.getElementById("onButton");
+
+    onButton.onclick = function ()
     {
-      this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
-                        "<h5>Light : " + "</h5>" +
-                        "<a href = /generic/" + address +">" +
-                        "<img src=" + img1 + ">" + "<br>" + "</a>" +
-                        "<button type='button' onclick='turn_on(" + address +")'" + "class='btn btn-success'>  ON  </button>" +
-                        "<button type='button' onclick='turn_off()' class='btn btn-danger'>  OFF  </button>" +
-                        "</div></div>" ;
+      sio_send_request(address, 'on', {});
+      console.log('on request sended to ' + address);
     }
-    else 
+
+    offButton.onclick = function ()
     {
-      this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
-                        "<h5>Light : " + "</h5>" +
-                        "<a href = /generic/" + address +">" +
-                        "<img src=" + img2 + ">" + "<br>" + "</a>" +
-                        "<button type='button' onclick='turn_on(" + address +")'" + "class='btn btn-success'>  ON  </button>" +
-                        "<button type='button' onclick='turn_off()' class='btn btn-danger'>  OFF  </button>" +
-                        "</div></div>" ;
+      sio_send_request(address, 'off', {});
+      console.log('off request sended to ' + address);
     }
+
   }
+
 }
 
 customElements.define('lamp-basic', Lamp);
