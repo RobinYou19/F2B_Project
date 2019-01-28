@@ -14,9 +14,9 @@
 
 %for dev in devs :
 	%if "lamp" in dev.devtype :
-		<lamp-basic address=${dev.address}></lamp-basic>
+		<lamp-basic address=${dev.address} status=${dev.attributes['light']}></lamp-basic>
 	%elif "thermometer" in dev.devtype :
-		<thermometer-basic address=${dev.address}></thermometer-basic>
+		<thermometer-basic address=${dev.address} temperature=${dev.attributes['temperature']}></thermometer-basic>
 	%elif "barometer" in dev.devtype :
 		<barometer-basic address=${dev.address}></barometer-basic>
 	%elif "hygrometer" in dev.devtype :
@@ -28,6 +28,7 @@
 	%elif "hmi" in dev.devtype :
 		<hmi-basic address=${dev.address}></hmi-basic>
 	%endif
+
 %endfor
 
 </body>

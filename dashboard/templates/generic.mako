@@ -30,11 +30,19 @@
         <%
           value = dev.description[k]
           if not value:
-              continue
+            continue
         %>
-            <p>${k} : ${value}</p>
+          <p>${k} : ${value}</p>
         %endfor
         <h4>Attributes : </h4>
+        % for key in dev.attributes :
+        <%
+          value = dev.attributes[key]
+          if not value:
+            continue
+        %>
+          <p>${key} : ${value}</p>
+        %endfor
       </div>
     </div>
   </div>

@@ -34,29 +34,41 @@ function tick()
 
 class Lamp extends HTMLElement 
 {
-  connectedCallback () 
+  constructor () 
   {
+    super();
     this.address = this.getAttribute('address');
-    this.on = "on";
-    this.off= "off";
+    this.status  = this.getAttribute('status');
 
-    var address = this.getAttribute('address');
-
-    this.render(address);
+    this.render(this.address, this.status);
   }
 
-  render(address)
+  render(address, status)
   {
-    var toto = "toto";
-    var img = "/static/imgs/light-off.svg";
+    var onImg  = "/static/imgs/light-on.png";
+    var offImg = "/static/imgs/light-off.svg";
 
-    this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
+    if (status == "True")
+    {
+      this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
+                        "<h5>Light : " + "</h5>" +
+                        "<a href = /generic/" + address +">" +
+                        "<img src=" + onImg + " height='50' width='50'>" + "</a>" + "<br>" +
+                        "<button type='button' id='onButton'  class='btn btn-success'>  ON  </button>" +
+                        "<button type='button' id='offButton' class='btn btn-danger'>  OFF  </button>" +
+                        "</div></div>" ;     
+    }
+
+    else 
+    {
+      this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
                       "<h5>Light : " + "</h5>" +
-                      "<a href = /generic/" + this.address +">" +
-                      "<img src=" + img + ">" + "<br>" + "</a>" +
+                      "<a href = /generic/" + address +">" +
+                      "<img src=" + offImg + ">" + "</a>" + "<br>" +
                       "<button type='button' id='onButton'  class='btn btn-success'>  ON  </button>" +
                       "<button type='button' id='offButton' class='btn btn-danger'>  OFF  </button>" +
                       "</div></div>" ;
+    }
 
     var onButton = document.getElementById("onButton");
 
@@ -64,48 +76,37 @@ class Lamp extends HTMLElement
     {
       sio_send_request(address, 'on', {});
       console.log('on request sended to ' + address);
+      status = true;
     }
 
     offButton.onclick = function ()
     {
       sio_send_request(address, 'off', {});
       console.log('off request sended to ' + address);
+      status = false;
     }
-
   }
-
 }
 
 customElements.define('lamp-basic', Lamp);
-
-function rise_temp()
-{
-  console.log("Rise Temp asked");
-}
-
-function down_temp()
-{
-  console.log("Down Temp asked")
-}
 
 class Thermometer extends HTMLElement
 {
   constructor()
   {
     super();
-    this.update();
+    this.address = this.getAttribute('address');
+    this.temperature = this.getAttribute('temperature');
+    this.update(this.address , this.temperature);
   }
 
-  update()
+  update(address, temperature)
   {
     var img = "static/imgs/thermometer-profile.png";
-    const address = this.getAttribute('address');
     this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
-                     "<h5>Thermometer : " +"</h5>" +
+                     "<h5>Thermometer : " + temperature + "°C </h5>" +
                      "<a href = /generic/" + address +">" +
                      "<img src=" + img + " height='50' width='16'>" + "<br>" + "</a>" +
-                     "<button type='button' onclick='rise_temp()' class='btn btn-success'>  +  </button>" +
-                     "<button type='button' onclick='down_temp()' class='btn btn-danger'>  -  </button>" +
                      "</div></div>" ;
   }
 }
