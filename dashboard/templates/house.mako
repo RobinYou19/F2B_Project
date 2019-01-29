@@ -15,20 +15,26 @@
 %for dev in devs :
 	%if "lamp" in dev.devtype :
 		<lamp-basic address=${dev.address} status=${dev.attributes['light']}></lamp-basic>
+
 	%elif "thermometer" in dev.devtype :
 		<thermometer-basic address=${dev.address} temperature=${dev.attributes['temperature']}></thermometer-basic>
+
 	%elif "barometer" in dev.devtype :
-		<barometer-basic address=${dev.address}></barometer-basic>
+		<barometer-basic address=${dev.address} pressure=${dev.attributes['pressure']}></barometer-basic>
+
 	%elif "hygrometer" in dev.devtype :
-		<hygrometer-basic address=${dev.address}></hygrometer-basic>
+		<hygrometer-basic address=${dev.address} humidity=${dev.attributes['humidity']}></hygrometer-basic>
+
 	%elif "windgauge" in dev.devtype :
-		<windgauge-basic address=${dev.address}></windgauge-basic>
+		<windgauge-basic address=${dev.address} strength=${dev.attributes['windStrength']} angle=${dev.attributes['windAngle']} ></windgauge-basic>
+
 	%elif "gateway" in dev.devtype :
 		<gateway-basic address=${dev.address}></gateway-basic>
+
 	%elif "hmi" in dev.devtype :
 		<hmi-basic address=${dev.address}></hmi-basic>
-	%endif
 
+	%endif
 %endfor
 
 </body>

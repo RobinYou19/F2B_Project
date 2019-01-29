@@ -123,12 +123,12 @@ class Barometer extends HTMLElement
     this.update(this.address , this.pressure);
   }
 
-  update(address, update)
+  update(address, pressure)
   {
     var img = "static/imgs/barometer-profile.png";
 
     this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
-                 "<h5>Barometer : " + pressure + "hPa </h5>" +
+                 "<h5>Barometer : " + pressure + " hPa </h5>" +
                  "<a href = /generic/" + address +">" +
                  "<img src=" + img + " height='50' width='50'>" + "<br>" + "</a>" +
                  "</div></div>" ;
@@ -142,20 +142,21 @@ class Hygrometer extends HTMLElement
   constructor()
   {
     super();
-    this.update();
+    this.address  = this.getAttribute('address');
+    this.humidity = this.getAttribute('humidity');
+
+    this.update(this.address , this.humidity);
   }
 
-  update()
+  update(address , humidity)
   {
     var img = "static/imgs/hygrometer-profile.png";
-    const address = this.getAttribute('address');
 
     this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
-                 "<h5>Hygrometer : " +"</h5>" +
-                 "<a href = /generic/" + address +">" +
-                 "<img src=" + img + " height='50' width='50'>" + "<br>" + "</a>" +
-                 "<h6> Current value : </h6>" +
-                 "</div></div>" ;
+                     "<h5>Hygrometer : " + humidity + " % </h5>" +
+                     "<a href = /generic/" + address +">" +
+                     "<img src=" + img + " height='50' width='50'>" + "<br>" + "</a>" +
+                     "</div></div>" ;
   }
 }
 
@@ -166,19 +167,20 @@ class Windgauge extends HTMLElement
   constructor()
   {
     super();
-    this.update();
+    this.address  = this.getAttribute('address');
+    this.strength = this.getAttribute('strength');
+    this.angle    = this.getAttribute('angle');
+    this.update(this.address, this.strength, this.angle);
   }
 
-  update()
+  update(address, strength, angle)
   {
     var img = "static/imgs/windgauge-profile.png";
-    const address = this.getAttribute('address');
 
     this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
-                     "<h5>Windgauge : " +"</h5>" +
+                     "<h5>Windgauge : " + strength + "km/h -" + angle + "°</h5>" +
                      "<a href = /generic/" + address +">" +
                      "<img src=" + img + " height='50' width='50'>" + "<br>" + "</a>" +
-                     "<h6> Current value : </h6>" +
                      "</div></div>" ;
   }
 }
@@ -190,19 +192,19 @@ class Gateway extends HTMLElement
   constructor()
   {
     super();
-    this.update();
+    this.address = this.getAttribute('address');
+
+    this.update(this.address);
   }
 
-  update()
+  update(address)
   {
-    var img = "static/imgs/gateway-profile.png";
-    const address = this.getAttribute('address');
+    var img  = "static/imgs/gateway-profile.png";
 
     this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
-                     "<h5>Gateway : " +"</h5>" +
+                     "<h5>Gateway : " + " </h5>" +
                      "<a href = /generic/" + address +">" +
                      "<img src=" + img + " height='50' width='50'>" + "<br>" + "</a>" +
-                     "<h6> Current value : </h6>" +
                      "</div></div>" ;
   }
 }
@@ -226,7 +228,6 @@ class Hmi extends HTMLElement
                      "<h5>HMI : " +"</h5>" +
                      "<a href = /generic/" + address +">" +
                      "<img src=" + img + " height='50' width='50'>" + "<br>" + "</a>" +
-                     "<h6> Current value : </h6>" +
                      "</div></div>" ;
   }
 }
