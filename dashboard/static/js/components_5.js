@@ -271,7 +271,7 @@ class Powerrelay extends HTMLElement
 
     if (power == "True")
     {
-      this.innerHTML = "<div class='col-sm-3'><div id='on_power_relay' class='draggable'>" +
+      this.innerHTML = "<div class='col-sm-3'><div id='pr_basic' class='draggable'>" +
                         "<h5>Powerrelay" + "</h5>" +
                         "<a href = /generic/" + address +">" +
                         "<img src=" + img + " height='50' width='50'>" + "</a>" + "<br>" +
@@ -281,7 +281,7 @@ class Powerrelay extends HTMLElement
     }
     else
     {
-      this.innerHTML = "<div class='col-sm-3'><div id='off_power_relay' class='draggable'>" +
+      this.innerHTML = "<div class='col-sm-3'><div id='pr_basic' class='draggable'>" +
                         "<h5>Powerrelay" + "</h5>" +
                         "<a href = /generic/" + address +">" +
                         "<img src=" + img + " height='50' width='50'>" + "</a>" + "<br>" +
@@ -291,14 +291,23 @@ class Powerrelay extends HTMLElement
     }
 
     var pronButton = document.getElementById("pronButton");
+    var proffButton = document.getElementById("proffButton");
+
+    var new_on_button_id  = "pronButton" + address ;
+    var new_off_button_id = "proffButton" + address;
+
+    pronButton.setAttribute("id", new_on_button_id);
+    proffButton.setAttribute("id", new_off_button_id);
+
+    var pr_basic_div = document.getElementById("pr_basic");
+    var new_pr_div_id = "pr_basic" + address ;
+    pr_basic_div.setAttribute("id", new_pr_div_id);
 
     pronButton.onclick = function ()
     {
       sio_send_request(address, 'on', {});
       console.log('on request sended to ' + address);
     }
-
-    var proffButton = document.getElementById("proffButton");
 
     proffButton.onclick = function ()
     {
