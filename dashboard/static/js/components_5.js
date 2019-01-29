@@ -48,14 +48,16 @@ class Lamp extends HTMLElement
     var onImg  = "/static/imgs/light-on.png";
     var offImg = "/static/imgs/light-off.svg";
 
+    console.log(status);
+
     if (status == "True")
     {
       this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
-                        "<h5>Light : " + "</h5>" +
+                        "<h5>Light" + "</h5>" +
                         "<a href = /generic/" + address +">" +
                         "<img src=" + onImg + " height='50' width='50'>" + "</a>" + "<br>" +
-                        "<button type='button' id='onButton'  class='btn btn-success'>  ON  </button>" +
-                        "<button type='button' id='offButton' class='btn btn-danger'>  OFF  </button>" +
+                        "<button type='button' id='lamponButton'  class='btn btn-success'>  ON  </button>" +
+                        "<button type='button' id='lampoffButton' class='btn btn-danger'>  OFF  </button>" +
                         "</div></div>" ;     
     }
 
@@ -65,30 +67,30 @@ class Lamp extends HTMLElement
                       "<h5>Light : " + "</h5>" +
                       "<a href = /generic/" + address +">" +
                       "<img src=" + offImg + ">" + "</a>" + "<br>" +
-                      "<button type='button' id='onButton'  class='btn btn-success'>  ON  </button>" +
-                      "<button type='button' id='offButton' class='btn btn-danger'>  OFF  </button>" +
+                      "<button type='button' id='lamponButton'  class='btn btn-success'>  ON  </button>" +
+                      "<button type='button' id='lampoffButton' class='btn btn-danger'>  OFF  </button>" +
                       "</div></div>" ;
     }
 
-    var onButton = document.getElementById("onButton");
+    var lamponButton = document.getElementById("lamponButton");
 
-    onButton.onclick = function ()
+    lamponButton.onclick = function ()
     {
       sio_send_request(address, 'on', {});
       console.log('on request sended to ' + address);
-      status = true;
     }
 
-    offButton.onclick = function ()
+    var lampoffButton = document.getElementById("lampoffButton");
+
+    lampoffButton.onclick = function ()
     {
       sio_send_request(address, 'off', {});
       console.log('off request sended to ' + address);
-      status = false;
     }
   }
 }
 
-customElements.define('lamp-basic', Lamp);
+customElements.define('lamp-dimmer', Lamp);
 
 class Thermometer extends HTMLElement
 {
@@ -202,7 +204,7 @@ class Gateway extends HTMLElement
     var img  = "static/imgs/gateway-profile.png";
 
     this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
-                     "<h5>Gateway : " + " </h5>" +
+                     "<h5>Gateway" + " </h5>" +
                      "<a href = /generic/" + address +">" +
                      "<img src=" + img + " height='50' width='50'>" + "<br>" + "</a>" +
                      "</div></div>" ;
@@ -216,16 +218,16 @@ class Hmi extends HTMLElement
   constructor()
   {
     super();
-    this.update();
+    this.address = this.getAttribute('address');
+    this.update(this.address);
   }
 
-  update()
+  update(address)
   {
     var img = "static/imgs/hmi-profile.png";
-    const address = this.getAttribute('address');
 
     this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
-                     "<h5>HMI : " +"</h5>" +
+                     "<h5>HMI" +"</h5>" +
                      "<a href = /generic/" + address +">" +
                      "<img src=" + img + " height='50' width='50'>" + "<br>" + "</a>" +
                      "</div></div>" ;
@@ -233,3 +235,45 @@ class Hmi extends HTMLElement
 }
 
 customElements.define('hmi-basic' , Hmi);
+
+class Powerrelay extends HTMLElement 
+{
+  constructor () 
+  {
+    super();
+    this.address = this.getAttribute('address');
+    this.power   = this.getAttribute('power');
+
+    this.render(this.address, this.power);
+  }
+
+  render(address, power)
+  {
+    var img = "static/imgs/powerrelay-profile.png";
+
+    this.innerHTML = "<div class='col-sm-3'><div id='onpowerrelay' class='draggable'>" +
+                      "<h5>Powerrelay" + "</h5>" +
+                      "<a href = /generic/" + address +">" +
+                      "<img src=" + img + " height='50' width='50'>" + "</a>" + "<br>" +
+                      "<button type='button' id='pronButton'  class='btn btn-success'>  ON  </button>" +
+                      "<button type='button' id='proffButton' class='btn btn-danger'>  OFF  </button>" +
+                      "</div></div>" ;
+
+    var pronButton = document.getElementById("pronButton");
+
+    pronButton.onclick = function ()
+    {
+      sio_send_request(address, 'on', {});
+    }
+
+    var proffButton = document.getElementById("proffButton");
+
+    proffButton.onclick = function ()
+    {
+      sio_send_request(address, 'off', {});
+      console.log('off request sended to ' + address);
+    }
+  }
+}
+
+customElements.define('powerrelay-basic', Powerrelay);
