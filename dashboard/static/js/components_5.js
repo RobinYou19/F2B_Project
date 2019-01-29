@@ -50,7 +50,7 @@ class Lamp extends HTMLElement
 
     if (status == "True")
     {
-      this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
+      this.innerHTML = "<div class='col-sm-3'><div id='lamp_dimmer' class='draggable'>" +
                         "<h5>Light" + "</h5>" +
                         "<a href = /generic/" + address +">" +
                         "<img src=" + onImg + " height='50' width='50'>" + "</a>" + "<br>" +
@@ -61,7 +61,7 @@ class Lamp extends HTMLElement
 
     else 
     {
-      this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
+      this.innerHTML = "<div class='col-sm-3'><div id='lamp_dimmer' class='draggable'>" +
                       "<h5>Light : " + "</h5>" +
                       "<a href = /generic/" + address +">" +
                       "<img src=" + offImg + ">" + "</a>" + "<br>" +
@@ -79,6 +79,10 @@ class Lamp extends HTMLElement
     lamponButton.setAttribute("id", new_on_button_id);
     lampoffButton.setAttribute("id", new_off_button_id);
 
+    var lamp_dimmer_div = document.getElementById("lamp_dimmer");
+    var new_lamp_div_id = "lamp_dimmer" + address ;
+    lamp_dimmer_div.setAttribute("id", new_lamp_div_id);
+
     lamponButton.onclick = function ()
     {
       sio_send_request(address, 'on', {});
@@ -89,6 +93,17 @@ class Lamp extends HTMLElement
     {
       sio_send_request(address, 'off', {});
       console.log('off request sended to ' + address);
+    }
+
+    var total_div = document.getElementById(new_lamp_div_id);
+
+    if (status == "True")
+    {
+      total_div.style.backgroundColor = "#4DEE63";
+    }
+    else
+    {
+      total_div.style.backgroundColor = "#F88752";
     }
   }
 }
@@ -280,6 +295,7 @@ class Powerrelay extends HTMLElement
     pronButton.onclick = function ()
     {
       sio_send_request(address, 'on', {});
+      console.log('on request sended to ' + address);
     }
 
     var proffButton = document.getElementById("proffButton");
