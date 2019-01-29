@@ -16,3 +16,23 @@ img
 {
 	margin: 2%;
 }
+
+#on_power_relay
+{
+	background-color: #4DEE63;	
+}
+
+#off_power_relay
+{
+	background-color: #F88752;
+}
+
+#on_lamp_dimmer
+{
+	background-color: #4DEE63;
+}
+
+#off_lamp_dimmer
+{
+	background-color: #F88752;
+}

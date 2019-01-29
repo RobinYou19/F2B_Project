@@ -48,8 +48,6 @@ class Lamp extends HTMLElement
     var onImg  = "/static/imgs/light-on.png";
     var offImg = "/static/imgs/light-off.svg";
 
-    console.log(status);
-
     if (status == "True")
     {
       this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
@@ -73,14 +71,19 @@ class Lamp extends HTMLElement
     }
 
     var lamponButton = document.getElementById("lamponButton");
+    var lampoffButton = document.getElementById("lampoffButton");
+
+    var new_on_button_id  = "lamponButton" + address ;
+    var new_off_button_id = "lampoffButton" + address;
+
+    lamponButton.setAttribute("id", new_on_button_id);
+    lampoffButton.setAttribute("id", new_off_button_id);
 
     lamponButton.onclick = function ()
     {
       sio_send_request(address, 'on', {});
       console.log('on request sended to ' + address);
     }
-
-    var lampoffButton = document.getElementById("lampoffButton");
 
     lampoffButton.onclick = function ()
     {
@@ -251,13 +254,26 @@ class Powerrelay extends HTMLElement
   {
     var img = "static/imgs/powerrelay-profile.png";
 
-    this.innerHTML = "<div class='col-sm-3'><div id='onpowerrelay' class='draggable'>" +
-                      "<h5>Powerrelay" + "</h5>" +
-                      "<a href = /generic/" + address +">" +
-                      "<img src=" + img + " height='50' width='50'>" + "</a>" + "<br>" +
-                      "<button type='button' id='pronButton'  class='btn btn-success'>  ON  </button>" +
-                      "<button type='button' id='proffButton' class='btn btn-danger'>  OFF  </button>" +
-                      "</div></div>" ;
+    if (power == "True")
+    {
+      this.innerHTML = "<div class='col-sm-3'><div id='on_power_relay' class='draggable'>" +
+                        "<h5>Powerrelay" + "</h5>" +
+                        "<a href = /generic/" + address +">" +
+                        "<img src=" + img + " height='50' width='50'>" + "</a>" + "<br>" +
+                        "<button type='button' id='pronButton'  class='btn btn-success'>  ON  </button>" +
+                        "<button type='button' id='proffButton' class='btn btn-danger'>  OFF  </button>" +
+                        "</div></div>" ;
+    }
+    else
+    {
+      this.innerHTML = "<div class='col-sm-3'><div id='off_power_relay' class='draggable'>" +
+                        "<h5>Powerrelay" + "</h5>" +
+                        "<a href = /generic/" + address +">" +
+                        "<img src=" + img + " height='50' width='50'>" + "</a>" + "<br>" +
+                        "<button type='button' id='pronButton'  class='btn btn-success'>  ON  </button>" +
+                        "<button type='button' id='proffButton' class='btn btn-danger'>  OFF  </button>" +
+                        "</div></div>" ;      
+    }
 
     var pronButton = document.getElementById("pronButton");
 
