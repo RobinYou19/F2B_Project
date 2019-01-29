@@ -314,6 +314,17 @@ class Powerrelay extends HTMLElement
       sio_send_request(address, 'off', {});
       console.log('off request sended to ' + address);
     }
+
+    var total_div = document.getElementById(new_pr_div_id);
+
+    if (power == "True")
+    {
+      total_div.style.backgroundColor = "#4DEE63";
+    }
+    else
+    {
+      total_div.style.backgroundColor = "#F88752";
+    }
   }
 }
 

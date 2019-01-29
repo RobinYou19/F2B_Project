@@ -1,13 +1,13 @@
 <%inherit file="base.mako"/>
 
-<ul class="nav flex-column">
-  <li class="nav-item">
-    <a class="nav-link active" href="/type">Type</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="/localisation">Localisation</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="#">Add Module</a>
-  </li>
-</ul>
+<div class='col-sm-4'>
+	<a href="/type">
+		<img src="/static/imgs/type.png" alt="type" height='200' width='200'></img>
+	</a>
+</div>
+
+<div class='col-sm-4'>
+	<a href="/localisation">
+		<img src="/static/imgs/localisation.png" alt="type" height='200' width='200'></img>
+	</a>
+</div>

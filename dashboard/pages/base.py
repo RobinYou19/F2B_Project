@@ -148,3 +148,68 @@ def type():
 @view('localisation.mako')
 def localisation():
     return {'title':'Localisation'}
+
+
+@route('/barometers')
+@view('barometers.mako')
+def get_devices_barometers():
+    r = {"title" : "devices list"}
+    devs = xaal_core.monitor.devices
+    r.update({"devs" : devs})
+    return r
+
+@route('/gateways')
+@view('gateways.mako')
+def get_devices_gateways():
+    r = {"title" : "devices list"}
+    devs = xaal_core.monitor.devices
+    r.update({"devs" : devs})
+    return r
+
+@route('/hmis')
+@view('hmis.mako')
+def get_devices_hmis():
+    r = {"title" : "devices list"}
+    devs = xaal_core.monitor.devices
+    r.update({"devs" : devs})
+    return r
+
+@route('/hygrometers')
+@view('hygrometers.mako')
+def get_devices_hygrometers():
+    r = {"title" : "devices list"}
+    devs = xaal_core.monitor.devices
+    r.update({"devs" : devs})
+    return r
+
+@route('/lights')
+@view('lights.mako')
+def get_devices_lights():
+    r = {"title" : "devices list"}
+    devs = xaal_core.monitor.devices
+    r.update({"devs" : devs})
+    return r
+
+@route('/power_relays')
+@view('power_relays.mako')
+def get_devices_power_relays():
+    r = {"title" : "devices list"}
+    devs = xaal_core.monitor.devices
+    r.update({"devs" : devs})
+    return r
+
+@route('/thermometers')
+@view('thermometers.mako')
+def get_devices_thermometers():
+    r = {"title" : "devices list"}
+    devs = xaal_core.monitor.devices
+    r.update({"devs" : devs})
+    return r
+
+@route('/windgauges')
+@view('windgauges.mako')
+def get_devices_windgauges():
+    r = {"title" : "devices list"}
+    devs = xaal_core.monitor.devices
+    r.update({"devs" : devs})
+    return r
