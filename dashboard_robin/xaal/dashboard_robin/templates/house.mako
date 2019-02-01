@@ -56,6 +56,4 @@
 	%endif
 %endfor
 
-<div-title title="coucou"></div-title>
-
 </body>

@@ -64,6 +64,75 @@ class basicTitle extends HTMLElement
 
 customElements.define('title-basic', basicTitle);
 
+class basicImage extends HTMLElement
+{
+  constructor()
+  {
+    super();
+  }
+
+  connectedCallback()
+  {
+    if (this.hasAttribute('src'))
+    {
+      this.src = this.getAttribute('src');
+    }
+    else
+    {
+      this.src = "/static/imgs/no-image.png";
+    }
+
+    if (this.hasAttribute('address'))
+    {
+      this.address = this.getAttribute('address');
+    }
+    else
+    {
+      this.address = "";
+    }
+
+    if (this.hasAttribute('height'))
+    {
+      this.height = this.getAttribute('height');
+    }
+    else
+    {
+      this.height = '50';
+    }
+
+    if (this.hasAttribute('width'))
+    {
+      this.width = this.getAttribute('width');
+    }
+    else
+    {
+      this.width = '50';
+    }
+
+    if (!this.shadowRoot)
+    {
+      var shadow  = this.attachShadow({mode : 'open'});
+      var link    = document.createElement('a');
+      var img     = document.createElement('img');
+      var dest    = "/generic/" + this.address;
+      var style   = document.createElement('style');
+
+      link.setAttribute('href', dest);
+      img.setAttribute('src',    this.src);
+      img.setAttribute('height', this.height);
+      img.setAttribute('width',  this.width);
+
+      style.textContent = ``;
+
+      shadow.appendChild(style);
+      shadow.appendChild(link);
+      link.appendChild(img);
+    }
+  }
+}
+
+customElements.define('image-basic', basicImage);
+
 
 class divTitle extends HTMLElement
 {
