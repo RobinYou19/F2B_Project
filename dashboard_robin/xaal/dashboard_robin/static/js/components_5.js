@@ -23,10 +23,97 @@ function tick()
   setTimeout('tick()',60000);
 };
 
+class basicTitle extends HTMLElement
+{
+  constructor()
+  {
+    super();
+  }
+
+  connectedCallback()
+  {
+    if (this.hasAttribute('title'))
+    {
+      this.title = this.getAttribute('title');
+    }
+    else
+    {
+      this.title = "Unfound Title";
+    }
+
+    if (!this.shadowRoot)
+    {
+      var shadow = this.attachShadow({mode : 'open'});
+
+      var titleContent = document.createElement('h4');
+      titleContent.innerHTML = this.title;
+
+      var style = document.createElement('style');
+      style.textContent = `
+      h4
+      {
+        font-style: bold;
+      }
+      `;
+
+      shadow.appendChild(style);
+      shadow.appendChild(titleContent);
+    }
+  }
+}
+
+customElements.define('title-basic', basicTitle);
+
+
+class divTitle extends HTMLElement
+{
+  constructor()
+  {
+    super();
+  }
+
+  connectedCallback()
+  {
+    if (this.hasAttribute('title'))
+    {
+      this.title = this.getAttribute('title');
+    }
+    else
+    {
+      this.title = "Unfound Title";
+    }
+
+    if (!this.shadowRoot)  
+    {
+      var shadow = this.attachShadow({mode : 'open'});
+
+      var div = document.createElement('div');
+      div.setAttribute('class', 'test_class');
+
+      var title_basic = document.createElement('title-basic');
+      title_basic.setAttribute('title', this.title);
+
+      var style = document.createElement('style');
+      style.textContent = `
+      .test_class
+      {
+        color : red;
+      }
+      `;
+
+      shadow.appendChild(style);
+      shadow.appendChild(div);
+      div.appendChild(title_basic);
+    }
+  }
+}
+
+customElements.define('div-title', divTitle);
+
 
 class Lamp extends HTMLElement 
 {
-  constructor () 
+  constructor() 
   {
     super();
     this.address = this.getAttribute('address');

@@ -7,19 +7,8 @@
 	margin: 5%;
 }
 
-/*
-  Watch diameter: 400px;
-  Each ticker shall be less than 200px wide;
-  Hours ticker width > Minutes ticker width;
-
-  Therefore,
-  
-  Hours ticker width: 150px;
-  Minutes Ticker width: 100px;
-
-*/
-
-div#watch {
+div#watch 
+{
   position: relative;
   margin: auto;
   width: 100px;
@@ -32,7 +21,8 @@ div#watch {
   background-color: #123;
 }
 
-div#hours, div#minutes {
+div#hours, div#minutes 
+{
   position: absolute;
   top: 50%;
   left: 50%;
@@ -42,17 +32,18 @@ div#hours, div#minutes {
   
   border-radius:5px;
   
-  /* Required to fix the left corner of the ticker*/
    -webkit-transform-origin: 0% 0%;
 }
 
-div#hours {
+div#hours 
+{
   z-index:10;
   width: 25px;
   height: 2px;  
 }
 
-div#minutes {
+div#minutes 
+{
   z-index:15;
   width: 40px;
   height: 2px;  
@@ -60,7 +51,8 @@ div#minutes {
   background-color: #000;   
 }
 
-div#digital {
+div#digital 
+{
   position: relative;
   margin: auto;
   
