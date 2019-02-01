@@ -1,6 +1,0 @@
-[config]
-api_key   = xxxx
-place     = "Brest,FR"
-temperature   = xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-humidity      = xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
-pressure      = xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx

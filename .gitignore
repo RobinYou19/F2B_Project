@@ -1,0 +1,6 @@
+#ignore all the .pyc files
+*.pyc
+#ignore the __pycache__ files
+__pycache__
+dashboard/xaal/__pycache__
+dashboard/xaal/dashboard/__pycache__

@@ -1,7 +1,0 @@
-README.rst
-setup.py
-xaal.schemas.egg-info/PKG-INFO
-xaal.schemas.egg-info/SOURCES.txt
-xaal.schemas.egg-info/dependency_links.txt
-xaal.schemas.egg-info/requires.txt
-xaal.schemas.egg-info/top_level.txt

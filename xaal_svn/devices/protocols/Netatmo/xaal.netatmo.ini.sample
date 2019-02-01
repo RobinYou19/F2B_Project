@@ -1,8 +1,0 @@
-[config]
-  grant_type = password
-  client_id = xxxxxxxxxxxxxxxxxxxx
-  client_secret = xxxxxxxxxxxxxxxxxx
-  password = xxxxxxxxxxxxxxxxx
-  username = xxxxxxxxxxxxxxxxx
-  scope = read_station
-  device_id = 70:ee:50:1f:56:60

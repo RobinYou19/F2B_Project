@@ -1,2 +1,0 @@
-from .lmsensors import LMSensors
-

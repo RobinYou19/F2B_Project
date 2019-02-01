@@ -1,4 +1,0 @@
-xaal.lib
-bottle
-gevent
-gevent-websocket

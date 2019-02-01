@@ -1,4 +1,0 @@
-ujson>=1.33
-pysodium
-configobj
-coloredlogs
