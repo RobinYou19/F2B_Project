@@ -1,3 +1,12 @@
+.box 
+{
+	border-style: groove;
+	border-radius: 5px;
+	height: 150%;
+	background-color: rgba(255, 255, 255, .5);
+	margin: 5%;
+}
+
 /*
   Watch diameter: 400px;
   Each ticker shall be less than 200px wide;
