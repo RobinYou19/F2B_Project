@@ -39,7 +39,7 @@
 
 </body>
 <script src="/static/js/hammer.js"></script>
-<script src="/static/js/menu.js"></script>
+<script src="static/js/navigation.js"></script>
 
 <script src="/static/js/riot+compiler.min.js"></script>
 <script src="/static/js/socket.io.slim.js"></script>
@@ -49,13 +49,4 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="static/css/bootstrap/js/bootstrap.min.js"></script>
-
-<script src="http://cdn.date-fns.org/v1.0.0/date_fns.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-$( function() {
-  $( ".draggable" ).draggable();
-} );
-  </script>
 </html>

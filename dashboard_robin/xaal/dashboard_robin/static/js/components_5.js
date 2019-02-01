@@ -1,5 +1,3 @@
-/* Tried to decrease as much as possible the dependencies on JS libraries (like jQuery)
-*/
 window.onload = function() 
 {
 	tick();
@@ -13,15 +11,9 @@ function tick()
   var now = new Date();
   var h = now.getHours();
   var m = now.getMinutes(); 
-  
-  /* Formula to convert the time into degrees */
+
   var angleHours = h/12 * 360 - 90;
   var angleMinutes = m/60 * 360 - 90;
-  
-  /*
-    Formula
-    angle = percentage (h/12 or m/60) * 360 - offset(90deg)
-  */
   
   hoursTicker.style.cssText = "-webkit-transform: rotate("+ angleHours + "deg);"
   minutesTicker.style.cssText = "-webkit-transform: rotate("+ angleMinutes + "deg);"
@@ -45,30 +37,15 @@ class Lamp extends HTMLElement
 
   render(address, status)
   {
-    var onImg  = "/static/imgs/light-on.png";
-    var offImg = "/static/imgs/light-off.svg";
+    var img  = "/static/imgs/lampe-profile.png";
 
-    if (status == "True")
-    {
-      this.innerHTML = "<div class='col-sm-3'><div id='lamp_dimmer' class='draggable'>" +
+      this.innerHTML = "<div id='lamp_dimmer' class='box'>" +
                         "<h5>Light" + "</h5>" +
                         "<a href = /generic/" + address +">" +
-                        "<img src=" + onImg + " height='50' width='50'>" + "</a>" + "<br>" +
+                        "<img src=" + img + " height='50' width='50'>" + "</a>" + "<br>" +
                         "<button type='button' id='lamponButton'  class='btn btn-success'>  ON  </button>" +
                         "<button type='button' id='lampoffButton' class='btn btn-danger'>  OFF  </button>" +
-                        "</div></div>" ;     
-    }
-
-    else 
-    {
-      this.innerHTML = "<div class='col-sm-3'><div id='lamp_dimmer' class='draggable'>" +
-                      "<h5>Light : " + "</h5>" +
-                      "<a href = /generic/" + address +">" +
-                      "<img src=" + offImg + ">" + "</a>" + "<br>" +
-                      "<button type='button' id='lamponButton'  class='btn btn-success'>  ON  </button>" +
-                      "<button type='button' id='lampoffButton' class='btn btn-danger'>  OFF  </button>" +
-                      "</div></div>" ;
-    }
+                        "</div>" ;
 
     var lamponButton = document.getElementById("lamponButton");
     var lampoffButton = document.getElementById("lampoffButton");
@@ -123,11 +100,11 @@ class Thermometer extends HTMLElement
   update(address, temperature)
   {
     var img = "static/imgs/thermometer-profile.png";
-    this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
+    this.innerHTML = "<div class='box'>" +
                      "<h5>Thermometer : " + temperature + "°C </h5>" +
                      "<a href = /generic/" + address +">" +
                      "<img src=" + img + " height='50' width='16'>" + "<br>" + "</a>" +
-                     "</div></div>" ;
+                     "</div>" ;
   }
 }
 
@@ -147,11 +124,11 @@ class Barometer extends HTMLElement
   {
     var img = "static/imgs/barometer-profile.png";
 
-    this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
+    this.innerHTML = "<div class='box'>" +
                  "<h5>Barometer : " + pressure + " hPa </h5>" +
                  "<a href = /generic/" + address +">" +
                  "<img src=" + img + " height='50' width='50'>" + "<br>" + "</a>" +
-                 "</div></div>" ;
+                 "</div>" ;
   }
 }
 
@@ -172,11 +149,11 @@ class Hygrometer extends HTMLElement
   {
     var img = "static/imgs/hygrometer-profile.png";
 
-    this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
+    this.innerHTML = "<div class='box'>" +
                      "<h5>Hygrometer : " + humidity + " % </h5>" +
                      "<a href = /generic/" + address +">" +
                      "<img src=" + img + " height='50' width='50'>" + "<br>" + "</a>" +
-                     "</div></div>" ;
+                     "</div>" ;
   }
 }
 
@@ -197,11 +174,11 @@ class Windgauge extends HTMLElement
   {
     var img = "static/imgs/windgauge-profile.png";
 
-    this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
+    this.innerHTML = "<div class='box'>" +
                      "<h5>Windgauge : " + strength + "km/h -" + angle + "°</h5>" +
                      "<a href = /generic/" + address +">" +
                      "<img src=" + img + " height='50' width='50'>" + "<br>" + "</a>" +
-                     "</div></div>" ;
+                     "</div>" ;
   }
 }
 
@@ -221,11 +198,11 @@ class Gateway extends HTMLElement
   {
     var img  = "static/imgs/gateway-profile.png";
 
-    this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
+    this.innerHTML = "<div class='box'>" +
                      "<h5>Gateway" + " </h5>" +
                      "<a href = /generic/" + address +">" +
                      "<img src=" + img + " height='50' width='50'>" + "<br>" + "</a>" +
-                     "</div></div>" ;
+                     "</div>" ;
   }
 }
 
@@ -244,11 +221,11 @@ class Hmi extends HTMLElement
   {
     var img = "static/imgs/hmi-profile.png";
 
-    this.innerHTML = "<div class='col-sm-3'><div class='draggable'>" +
+    this.innerHTML = "<div class='box'>" +
                      "<h5>HMI" +"</h5>" +
                      "<a href = /generic/" + address +">" +
                      "<img src=" + img + " height='50' width='50'>" + "<br>" + "</a>" +
-                     "</div></div>" ;
+                     "</div>" ;
   }
 }
 
@@ -271,23 +248,23 @@ class Powerrelay extends HTMLElement
 
     if (power == "True")
     {
-      this.innerHTML = "<div class='col-sm-3'><div id='pr_basic' class='draggable'>" +
+      this.innerHTML = "<div id='pr_basic' class='box'>" +
                         "<h5>Powerrelay" + "</h5>" +
                         "<a href = /generic/" + address +">" +
                         "<img src=" + img + " height='50' width='50'>" + "</a>" + "<br>" +
                         "<button type='button' id='pronButton'  class='btn btn-success'>  ON  </button>" +
                         "<button type='button' id='proffButton' class='btn btn-danger'>  OFF  </button>" +
-                        "</div></div>" ;
+                        "</div>" ;
     }
     else
     {
-      this.innerHTML = "<div class='col-sm-3'><div id='pr_basic' class='draggable'>" +
+      this.innerHTML = "<div id='pr_basic' class='box'>" +
                         "<h5>Powerrelay" + "</h5>" +
                         "<a href = /generic/" + address +">" +
                         "<img src=" + img + " height='50' width='50'>" + "</a>" + "<br>" +
                         "<button type='button' id='pronButton'  class='btn btn-success'>  ON  </button>" +
                         "<button type='button' id='proffButton' class='btn btn-danger'>  OFF  </button>" +
-                        "</div></div>" ;      
+                        "</div>" ;      
     }
 
     var pronButton = document.getElementById("pronButton");

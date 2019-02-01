@@ -150,6 +150,8 @@ function sio_query_attributes(addr) {
 //================ Main ========================================================
 evt_bus = new EventBus();
 
+
+/*
 riot.compile(function() {
     tags = riot.mount('*');
     evt_bus.trigger('tags-mount');
@@ -160,3 +162,4 @@ riot.compile(function() {
 if (detectMobile() == true) {
     document.addEventListener("visibilitychange", visibilityChanged);
 }
+*/
