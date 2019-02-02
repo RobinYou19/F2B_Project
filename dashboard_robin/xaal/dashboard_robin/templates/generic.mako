@@ -10,7 +10,7 @@
           <img src="/static/imgs/lampe-profile.png" alt="Lamp Profile" style="width:300px;height:300px;">
 
         %elif "thermometer.basic" in dev.devtype :
-          <img src="/static/imgs/thermometer-profile.svg" alt="Thermometer Profile" style="width:300px;height:300px;">
+          <img src="/static/imgs/thermometer.png" alt="Thermometer Profile" style="width:300px;height:300px;">
 
         %elif "barometer.basic" in dev.devtype :
           <img src="/static/imgs/barometer-profile.png" alt="Barometer Profile" style="width:280px;height:330px;">
@@ -25,7 +25,7 @@
           <img src="/static/imgs/gateway-profile.png" alt="Gateway Profile" style="width:280px;height:330px;">
 
         %elif "hmi.basic" in dev.devtype :
-          <img src="/static/imgs/hmi-profile.png" alt="HMI Profile" style="width:280px;height:330px;">
+          <img src="/static/imgs/hmi.png" alt="HMI Profile" style="width:280px;height:330px;">
 
         %elif "powerrelay.basic" in dev.devtype :
           <img src="/static/imgs/powerrelay-profile.png" alt="PowerRelay Profile" style="width:280px;height:330px;"> 

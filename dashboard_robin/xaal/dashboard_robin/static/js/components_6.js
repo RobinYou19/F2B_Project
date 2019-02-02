@@ -12,13 +12,18 @@ function tick()
   var h = now.getHours();
   var m = now.getMinutes(); 
 
+  if (m.length == 1)
+  {
+    m = "0" + m;
+  }
+
   var angleHours = h/12 * 360 - 90;
   var angleMinutes = m/60 * 360 - 90;
   
   hoursTicker.style.cssText = "-webkit-transform: rotate("+ angleHours + "deg);"
   minutesTicker.style.cssText = "-webkit-transform: rotate("+ angleMinutes + "deg);"
   
-  document.getElementById("digital").innerHTML = h + " : " + m;
+  document.getElementById("digital").innerHTML = "<b>"+ h +  " : " + m + "</b>";
   
   setTimeout('tick()',60000);
 };
