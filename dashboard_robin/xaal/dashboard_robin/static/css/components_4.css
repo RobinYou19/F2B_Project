@@ -7,6 +7,16 @@
 	margin: 5%;
 }
 
+.link_category
+{
+  border-style: groove;
+  border-radius: 50px;
+  height: 150%;
+  background-color: rgba(22, 137, 237, 1);
+  margin: 5%;
+  padding: 15%;
+}
+
 div#watch 
 {
   position: relative;

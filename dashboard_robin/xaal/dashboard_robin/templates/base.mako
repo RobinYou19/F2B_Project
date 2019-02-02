@@ -12,7 +12,7 @@
   <link rel="manifest" href="/static/manifest.json">
   <link rel="stylesheet" href="/static/css/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="/static/css/menu.css">
-  <link rel="stylesheet" href="/static/css/component_3.css">
+  <link rel="stylesheet" href="/static/css/components_4.css">
   <link rel="stylesheet" href="/static/css/generic.css">
   <link rel="stylesheet" href="/static/fonts/fontawesome/css/all.css">
   <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
