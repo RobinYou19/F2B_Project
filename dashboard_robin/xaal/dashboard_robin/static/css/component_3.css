@@ -19,6 +19,9 @@ div#watch
   box-shadow: 0 0 10px 2px #123;
   
   background-color: #123;
+
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 div#hours, div#minutes 
@@ -68,4 +71,7 @@ div#digital
   text-align: center;
   line-height:25px;
   font-size:75%;
+
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
