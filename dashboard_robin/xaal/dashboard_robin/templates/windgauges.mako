@@ -4,7 +4,9 @@
 
 %for dev in devs :
 	%if 'windgauge.basic' in dev.devtype :
-		<windgauge-basic address=${dev.address} strength=${dev.attributes['windStrength']} angle=${dev.attributes['windAngle']} ></windgauge-basic>
+		<div class='col-sm-3'>
+			<basic-device address=${dev.address} title=${dev.devtype} value=${dev.attributes['windStrength']} src='/static/imgs/windgauge-profile.png'></basic-device>
+		</div>
 	%endif
 %endfor
 

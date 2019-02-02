@@ -64,6 +64,76 @@ class basicTitle extends HTMLElement
 
 customElements.define('title-basic', basicTitle);
 
+class valueTitle extends HTMLElement
+{
+  constructor()
+  {
+    super();
+  }
+
+  connectedCallback()
+  {
+    if (this.hasAttribute('title'))
+    {
+      this.title = this.getAttribute('title');
+    }
+    else
+    {
+      this.title = "Unfound Title";
+    }
+    if (this.hasAttribute('value'))
+    {
+      this.value = this.getAttribute('value');
+    }
+    else
+    {
+      this.value = "Unfound Value";
+    }
+
+    if (!this.shadowRoot)
+    {
+      var shadow = this.attachShadow({mode : 'open'});
+
+      var titleContent = document.createElement('h4');
+      titleContent.innerHTML = this.title + " :<br>" + this.value;
+
+      if (this.title.includes("barometer"))
+      {
+        titleContent.innerHTML += "hPa";
+      }
+      else if (this.title.includes("hygrometer"))
+      {
+        titleContent.innerHTML += "%";
+      }
+      else if (this.title.includes("windgauge"))
+      {
+        titleContent.innerHTML += "km/h";
+      }
+      else if (this.title.includes("thermometer"))
+      {
+        titleContent.innerHTML += "°C";
+      }
+      else
+      {
+        titleContent.innerHTML += "";
+      }
+
+      var style = document.createElement('style');
+      style.textContent = `
+      h4
+      {
+        font-style: bold;
+      }
+      `;
+
+      shadow.appendChild(style);
+      shadow.appendChild(titleContent);
+    }
+  }
+}
+
+customElements.define('title-value', valueTitle);
+
 class basicImage extends HTMLElement
 {
   constructor()
@@ -79,7 +149,7 @@ class basicImage extends HTMLElement
     }
     else
     {
-      this.src = "/static/imgs/no-image.png";
+      this.src = "/static/imgs/default-object.png";
     }
 
     if (this.hasAttribute('address'))
@@ -241,7 +311,7 @@ class OnOffButtons extends HTMLElement
 customElements.define('onoff-buttons', OnOffButtons);
 
 
-class LampDimmer extends HTMLElement 
+class OnOffDevice extends HTMLElement 
 {
   constructor() 
   {
@@ -272,7 +342,7 @@ class LampDimmer extends HTMLElement
     }
     else
     {
-      this.src = "/static/imgs/lampe-profile.png";
+      this.src = "/static/imgs/default-image.jpeg";
     }
     if (this.hasAttribute('title'))
     {
@@ -280,7 +350,7 @@ class LampDimmer extends HTMLElement
     }
     else
     {
-      this.title = 'LampDimmer';
+      this.title = 'OnOffDevice';
     }
     if (this.hasAttribute('height'))
     {
@@ -309,7 +379,7 @@ class LampDimmer extends HTMLElement
       var buttons = document.createElement('onoff-buttons');
       var endline = document.createElement('br');
 
-      var div_id  = 'lamp_dimmer' + this.address ;
+      var div_id  = 'on_off_device' + this.address ;
       content.setAttribute('id', div_id);
       if (this.status == "True")
       {
@@ -359,235 +429,111 @@ class LampDimmer extends HTMLElement
   }
 }
 
-customElements.define('lamp-dimmer', LampDimmer);
+customElements.define('onoff-device', OnOffDevice);
 
-/*
-    if (status == "True")
+class BasicDevice extends HTMLElement
+{
+  constructor()
+  {
+    super();
+  }
+
+  connectedCallback()
+  {
+    if (this.hasAttribute('address'))
     {
-      total_div.style.backgroundColor = "#4DEE63";
+      this.address = this.getAttribute('address');
     }
     else
     {
-      total_div.style.backgroundColor = "#F88752";
+      this.address = "";
     }
-*/
-
-class Thermometer extends HTMLElement
-{
-  constructor()
-  {
-    super();
-    this.address = this.getAttribute('address');
-    this.temperature = this.getAttribute('temperature');
-    this.update(this.address , this.temperature);
-  }
-
-  update(address, temperature)
-  {
-    var img = "static/imgs/thermometer-profile.png";
-    this.innerHTML = "<div class='box'>" +
-                     "<h5>Thermometer : " + temperature + "°C </h5>" +
-                     "<a href = /generic/" + address +">" +
-                     "<img src=" + img + " height='50' width='16'>" + "<br>" + "</a>" +
-                     "</div>" ;
-  }
-}
-
-customElements.define('thermometer-basic', Thermometer);
-
-class Barometer extends HTMLElement 
-{
-  constructor()
-  {
-    super();
-    this.address  = this.getAttribute('address');
-    this.pressure = this.getAttribute('pressure');
-    this.update(this.address , this.pressure);
-  }
-
-  update(address, pressure)
-  {
-    var img = "static/imgs/barometer-profile.png";
-
-    this.innerHTML = "<div class='box'>" +
-                 "<h5>Barometer : " + pressure + " hPa </h5>" +
-                 "<a href = /generic/" + address +">" +
-                 "<img src=" + img + " height='50' width='50'>" + "<br>" + "</a>" +
-                 "</div>" ;
-  }
-}
-
-customElements.define('barometer-basic' , Barometer);
-
-class Hygrometer extends HTMLElement 
-{
-  constructor()
-  {
-    super();
-    this.address  = this.getAttribute('address');
-    this.humidity = this.getAttribute('humidity');
-
-    this.update(this.address , this.humidity);
-  }
-
-  update(address , humidity)
-  {
-    var img = "static/imgs/hygrometer-profile.png";
-
-    this.innerHTML = "<div class='box'>" +
-                     "<h5>Hygrometer : " + humidity + " % </h5>" +
-                     "<a href = /generic/" + address +">" +
-                     "<img src=" + img + " height='50' width='50'>" + "<br>" + "</a>" +
-                     "</div>" ;
-  }
-}
-
-customElements.define('hygrometer-basic' , Hygrometer);
-
-class Windgauge extends HTMLElement 
-{
-  constructor()
-  {
-    super();
-    this.address  = this.getAttribute('address');
-    this.strength = this.getAttribute('strength');
-    this.angle    = this.getAttribute('angle');
-    this.update(this.address, this.strength, this.angle);
-  }
-
-  update(address, strength, angle)
-  {
-    var img = "static/imgs/windgauge-profile.png";
-
-    this.innerHTML = "<div class='box'>" +
-                     "<h5>Windgauge : " + strength + "km/h -" + angle + "°</h5>" +
-                     "<a href = /generic/" + address +">" +
-                     "<img src=" + img + " height='50' width='50'>" + "<br>" + "</a>" +
-                     "</div>" ;
-  }
-}
-
-customElements.define('windgauge-basic' , Windgauge);
-
-class Gateway extends HTMLElement 
-{
-  constructor()
-  {
-    super();
-    this.address = this.getAttribute('address');
-
-    this.update(this.address);
-  }
-
-  update(address)
-  {
-    var img  = "static/imgs/gateway-profile.png";
-
-    this.innerHTML = "<div class='box'>" +
-                     "<h5>Gateway" + " </h5>" +
-                     "<a href = /generic/" + address +">" +
-                     "<img src=" + img + " height='50' width='50'>" + "<br>" + "</a>" +
-                     "</div>" ;
-  }
-}
-
-customElements.define('gateway-basic' , Gateway);
-
-class Hmi extends HTMLElement 
-{
-  constructor()
-  {
-    super();
-    this.address = this.getAttribute('address');
-    this.update(this.address);
-  }
-
-  update(address)
-  {
-    var img = "static/imgs/hmi-profile.png";
-
-    this.innerHTML = "<div class='box'>" +
-                     "<h5>HMI" +"</h5>" +
-                     "<a href = /generic/" + address +">" +
-                     "<img src=" + img + " height='50' width='50'>" + "<br>" + "</a>" +
-                     "</div>" ;
-  }
-}
-
-customElements.define('hmi-basic' , Hmi);
-
-class Powerrelay extends HTMLElement 
-{
-  constructor () 
-  {
-    super();
-    this.address = this.getAttribute('address');
-    this.power   = this.getAttribute('power');
-
-    this.render(this.address, this.power);
-  }
-
-  render(address, power)
-  {
-    var img = "static/imgs/powerrelay-profile.png";
-
-    if (power == "True")
+    if (this.hasAttribute('src'))
     {
-      this.innerHTML = "<div id='pr_basic' class='box'>" +
-                        "<h5>Powerrelay" + "</h5>" +
-                        "<a href = /generic/" + address +">" +
-                        "<img src=" + img + " height='50' width='50'>" + "</a>" + "<br>" +
-                        "<button type='button' id='pronButton'  class='btn btn-success'>  ON  </button>" +
-                        "<button type='button' id='proffButton' class='btn btn-danger'>  OFF  </button>" +
-                        "</div>" ;
+      this.src = this.getAttribute('src');
     }
     else
     {
-      this.innerHTML = "<div id='pr_basic' class='box'>" +
-                        "<h5>Powerrelay" + "</h5>" +
-                        "<a href = /generic/" + address +">" +
-                        "<img src=" + img + " height='50' width='50'>" + "</a>" + "<br>" +
-                        "<button type='button' id='pronButton'  class='btn btn-success'>  ON  </button>" +
-                        "<button type='button' id='proffButton' class='btn btn-danger'>  OFF  </button>" +
-                        "</div>" ;      
+      this.src = "/static/imgs/default-image.jpeg";
     }
-
-    var pronButton = document.getElementById("pronButton");
-    var proffButton = document.getElementById("proffButton");
-
-    var new_on_button_id  = "pronButton" + address ;
-    var new_off_button_id = "proffButton" + address;
-
-    pronButton.setAttribute("id", new_on_button_id);
-    proffButton.setAttribute("id", new_off_button_id);
-
-    var pr_basic_div = document.getElementById("pr_basic");
-    var new_pr_div_id = "pr_basic" + address ;
-    pr_basic_div.setAttribute("id", new_pr_div_id);
-
-    pronButton.onclick = function ()
+    if (this.hasAttribute('title'))
     {
-      sio_send_request(address, 'on', {});
-      console.log('on request sended to ' + address);
-    }
-
-    proffButton.onclick = function ()
-    {
-      sio_send_request(address, 'off', {});
-      console.log('off request sended to ' + address);
-    }
-
-    var total_div = document.getElementById(new_pr_div_id);
-
-    if (power == "True")
-    {
-      total_div.style.backgroundColor = "#4DEE63";
+      this.title = this.getAttribute('title');
     }
     else
     {
-      total_div.style.backgroundColor = "#F88752";
+      this.title = 'BasicDevice';
+    }
+    if (this.hasAttribute('height'))
+    {
+      this.height = this.getAttribute('height');
+    }
+    else
+    {
+      this.height = '50';
+    }
+    if (this.hasAttribute('width'))
+    {
+      this.width = this.getAttribute('width');
+    }
+    else
+    {
+      this.width = '50';
+    }
+    if (this.hasAttribute('value'))
+    {
+      this.value = this.getAttribute('value');
+    }
+    else
+    {
+      this.value = "NoValue";
+    }
+
+    if (!this.shadowRoot)
+    {
+      var shadow  = this.attachShadow({mode : 'open'});
+      var content = document.createElement('div');
+      var style   = document.createElement('style');
+      var image   = document.createElement('image-basic');
+
+      if (this.value != "NoValue")
+      {
+        var title = document.createElement('title-value');
+        title.setAttribute('title', this.title);
+        title.setAttribute('value', this.value);
+      }
+      else
+      {
+        var title = document.createElement('title-basic');
+        title.setAttribute('title', this.title);
+      }
+
+      var div_id = "basic_device" + this.address ;
+      content.setAttribute('div', div_id);
+      content.setAttribute('class', 'box');
+
+      image.setAttribute('src', this.src);
+      image.setAttribute('height', this.height);
+      image.setAttribute('width', this.width);
+      image.setAttribute('address', this.address);
+
+      style.textContent = `
+      .box 
+      {
+        background-color: rgba(255, 255, 255, .5);
+        border-style: groove;
+        border-radius: 5px;
+        height: 150%;
+        margin: 5%;
+      }
+      `;
+
+      shadow.appendChild(style);
+      shadow.appendChild(content);
+      content.appendChild(title);
+      content.appendChild(image);
     }
   }
 }
 
-customElements.define('powerrelay-basic', Powerrelay);
+customElements.define('basic-device', BasicDevice);

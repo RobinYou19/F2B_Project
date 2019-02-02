@@ -4,7 +4,9 @@
 
 %for dev in devs :
 	%if 'hmi.basic' in dev.devtype :
-		<hmi-basic address=${dev.address}></hmi-basic>
+		<div class='col-sm-3'>
+			<basic-device address=${dev.address} title=${dev.devtype} src='/static/imgs/hmi-profile.png'></basic-device>
+		</div>
 	%endif
 %endfor
 

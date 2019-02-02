@@ -15,43 +15,50 @@
 %for dev in devs :
 	%if "lamp.dimmer" in dev.devtype :
 		<div class='col-sm-3'>
-				<lamp-dimmer address=${dev.address} title=${dev.devtype} status=${dev.attributes['light']} ></lamp-dimmer>
+			<onoff-device address=${dev.address} title=${dev.devtype} status=${dev.attributes['light']} src='static/imgs/lampe-profile.png'></onoff-device>
 		</div>
 
-	%elif "thermometer.basic" in dev.devtype :
+	%elif "powerrelay.basic" in dev.devtype :
+	<div class='col-sm-3'>
+		<onoff-device address=${dev.address} title=${dev.devtype} status=${dev.attributes['power']} src='static/imgs/powerrelay-profile.png'></onoff-device>
+	</div>
+	%endif
+%endfor
+
+%for dev in devs :
+	%if "thermometer.basic" in dev.devtype :
 		<div class='col-sm-3'>
-			<thermometer-basic address=${dev.address} title=${dev.devtype} temperature=${dev.attributes['temperature']}></thermometer-basic>
+			<basic-device address=${dev.address} title=${dev.devtype} value=${dev.attributes['temperature']} src='static/imgs/thermometer-profile.png' width='20'></basic-device>
 		</div>
 
 	%elif "barometer.basic" in dev.devtype :
 		<div class='col-sm-3'>
-			<barometer-basic address=${dev.address} title=${dev.devtype}  pressure=${dev.attributes['pressure']}></barometer-basic>
+			<basic-device address=${dev.address} title=${dev.devtype}  value=${dev.attributes['pressure']} src="static/imgs/barometer-profile.png"></barometer-basic>
 		</div>
 
 	%elif "hygrometer.basic" in dev.devtype :
 		<div class='col-sm-3'>
-			<hygrometer-basic address=${dev.address} title=${dev.devtype} humidity=${dev.attributes['humidity']}></hygrometer-basic>
-	</div>	
+			<basic-device address=${dev.address} title=${dev.devtype} value=${dev.attributes['humidity']} src='/static/imgs/hygrometer-profile.png'></basic-device>
+		</div>	
 
 	%elif "windgauge.basic" in dev.devtype :
 		<div class='col-sm-3'>
-			<windgauge-basic address=${dev.address} title=${dev.devtype} strength=${dev.attributes['windStrength']} angle=${dev.attributes['windAngle']} ></windgauge-basic>
+			<basic-device address=${dev.address} title=${dev.devtype} value=${dev.attributes['windStrength']} src='/static/imgs/windgauge-profile.png'></basic-device>
 		</div>
 
-	%elif "gateway.basic" in dev.devtype :
+	%endif
+%endfor
+
+%for dev in devs :
+	%if "gateway.basic" in dev.devtype :
 		<div class='col-sm-3'>
-			<gateway-basic address=${dev.address} title=${dev.devtype}></gateway-basic>
-	</div>	
+			<basic-device address=${dev.address} title=${dev.devtype} src='/static/imgs/gateway-profile.png'></basic-device>
+		</div>	
 
 	%elif "hmi.basic" in dev.devtype :
-	<div class='col-sm-3'>
-		<hmi-basic address=${dev.address} title=${dev.devtype}></hmi-basic>
-	</div>
-
-	%elif "powerrelay.basic" in dev.devtype :
-	<div class='col-sm-3'>
-		<powerrelay-basic address=${dev.address} title=${dev.devtype} power=${dev.attributes['power']}></powerrelay-basic>
-	</div>
+		<div class='col-sm-3'>
+			<basic-device address=${dev.address} title=${dev.devtype} src='/static/imgs/hmi-profile.png'></basic-device>
+		</div>
 
 	%endif
 %endfor

@@ -4,7 +4,9 @@
 
 %for dev in devs :
 	%if 'hygrometer.basic' in dev.devtype :
-		<hygrometer-basic address=${dev.address} humidity=${dev.attributes['humidity']}></hygrometer-basic>
+		<div class='col-sm-3'>
+			<basic-device address=${dev.address} title=${dev.devtype} value=${dev.attributes['humidity']} src='/static/imgs/hygrometer-profile.png'></basic-device>
+	</div>	
 	%endif
 %endfor
 
