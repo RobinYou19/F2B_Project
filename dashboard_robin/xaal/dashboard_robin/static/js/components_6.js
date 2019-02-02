@@ -199,7 +199,7 @@ class OnOffButtons extends HTMLElement
         border: none;
         border-radius: 15px;
         box-shadow: 0 2px #999;
-        margin: 1px;
+        margin: 1px 1px 3px 1px;
       }
 
       .button:active 
@@ -229,7 +229,6 @@ class OnOffButtons extends HTMLElement
       {
         background-color: rgb(180, 60, 60)
       }
-
       `;
 
       shadow.appendChild(style);
@@ -242,56 +241,127 @@ class OnOffButtons extends HTMLElement
 customElements.define('onoff-buttons', OnOffButtons);
 
 
-class Lamp extends HTMLElement 
+class LampDimmer extends HTMLElement 
 {
   constructor() 
   {
     super();
-    this.address = this.getAttribute('address');
-    this.status  = this.getAttribute('status');
-
-    this.render(this.address, this.status);
   }
 
-  render(address, status)
+  connectedCallback()
   {
-    var img  = "/static/imgs/lampe-profile.png";
-
-      this.innerHTML = "<div id='lamp_dimmer' class='box'>" +
-                        "<h5>Light" + "</h5>" +
-                        "<a href = /generic/" + address +">" +
-                        "<img src=" + img + " height='50' width='50'>" + "</a>" + "<br>" +
-                        "<button type='button' id='lamponButton'  class='btn btn-success'>  ON  </button>" +
-                        "<button type='button' id='lampoffButton' class='btn btn-danger'>  OFF  </button>" +
-                        "</div>" ;
-
-    var lamponButton = document.getElementById("lamponButton");
-    var lampoffButton = document.getElementById("lampoffButton");
-
-    var new_on_button_id  = "lamponButton" + address ;
-    var new_off_button_id = "lampoffButton" + address;
-
-    lamponButton.setAttribute("id", new_on_button_id);
-    lampoffButton.setAttribute("id", new_off_button_id);
-
-    var lamp_dimmer_div = document.getElementById("lamp_dimmer");
-    var new_lamp_div_id = "lamp_dimmer" + address ;
-    lamp_dimmer_div.setAttribute("id", new_lamp_div_id);
-
-    lamponButton.onclick = function ()
+    if (this.hasAttribute('address'))
     {
-      sio_send_request(address, 'on', {});
-      console.log('on request sended to ' + address);
+      this.address = this.getAttribute('address');
+    }
+    else
+    {
+      this.address = "";
+    }
+    if (this.hasAttribute('status'))
+    {
+      this.status = this.getAttribute('status');
+    }
+    else
+    {
+      this.status = "";
+    }
+    if (this.hasAttribute('src'))
+    {
+      this.src = this.getAttribute('src');
+    }
+    else
+    {
+      this.src = "/static/imgs/lampe-profile.png";
+    }
+    if (this.hasAttribute('title'))
+    {
+      this.title = this.getAttribute('title');
+    }
+    else
+    {
+      this.title = 'LampDimmer';
+    }
+    if (this.hasAttribute('height'))
+    {
+      this.height = this.getAttribute('height');
+    }
+    else
+    {
+      this.height = '50';
+    }
+    if (this.hasAttribute('width'))
+    {
+      this.width = this.getAttribute('width');
+    }
+    else
+    {
+      this.width = '50';
     }
 
-    lampoffButton.onclick = function ()
+    if (!this.shadowRoot)
     {
-      sio_send_request(address, 'off', {});
-      console.log('off request sended to ' + address);
+      var shadow  = this.attachShadow({mode : 'open'});
+      var content = document.createElement('div');
+      var style   = document.createElement('style');
+      var title   = document.createElement('title-basic');
+      var image   = document.createElement('image-basic');
+      var buttons = document.createElement('onoff-buttons');
+      var endline = document.createElement('br');
+
+      var div_id  = 'lamp_dimmer' + this.address ;
+      content.setAttribute('id', div_id);
+      if (this.status == "True")
+      {
+        content.setAttribute('class', 'box box-on');
+      }
+      else
+      {
+        content.setAttribute('class', 'box box-off');
+      }
+
+      title.setAttribute('title', this.title);
+
+      image.setAttribute('src', this.src);
+      image.setAttribute('height', this.height);
+      image.setAttribute('width', this.width);
+      image.setAttribute('address', this.address);
+
+      buttons.setAttribute('address', this.address);
+
+      style.textContent = `
+      .box 
+      {
+        border-style: groove;
+        border-radius: 5px;
+        height: 150%;
+        margin: 5%;
+      }
+
+      .box-on
+      {
+        background-color: #4DEE63;
+      }
+
+      .box-off
+      {
+        background-color: #F88752;
+      }
+      `;
+
+      shadow.appendChild(style);
+      shadow.appendChild(content);
+      content.appendChild(title);
+      content.appendChild(image);
+      content.appendChild(endline);
+      content.appendChild(buttons);
     }
+  }
+}
 
-    var total_div = document.getElementById(new_lamp_div_id);
+customElements.define('lamp-dimmer', LampDimmer);
 
+/*
     if (status == "True")
     {
       total_div.style.backgroundColor = "#4DEE63";
@@ -300,10 +370,7 @@ class Lamp extends HTMLElement
     {
       total_div.style.backgroundColor = "#F88752";
     }
-  }
-}
-
-customElements.define('lamp-dimmer', Lamp);
+*/
 
 class Thermometer extends HTMLElement
 {
