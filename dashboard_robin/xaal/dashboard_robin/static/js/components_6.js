@@ -133,51 +133,113 @@ class basicImage extends HTMLElement
 
 customElements.define('image-basic', basicImage);
 
-
-class divTitle extends HTMLElement
+class OnOffButtons extends HTMLElement
 {
   constructor()
   {
     super();
   }
-
   connectedCallback()
   {
-    if (this.hasAttribute('title'))
+    if (this.hasAttribute('address'))
     {
-      this.title = this.getAttribute('title');
+      this.address = this.getAttribute('address');
     }
     else
     {
-      this.title = "Unfound Title";
+      this.address = "";
     }
 
-    if (!this.shadowRoot)  
+    if (!this.shadowRoot)
     {
-      var shadow = this.attachShadow({mode : 'open'});
+      var shadow    = this.attachShadow({mode : 'open'});
+      var style     = document.createElement('style');
+      var onButton  = document.createElement('button');
+      var offButton = document.createElement('button');
 
-      var div = document.createElement('div');
-      div.setAttribute('class', 'test_class');
+      var onButtonId  = "ON" + this.address ;
+      var offButtonId = "OFF" + this.address;
 
-      var title_basic = document.createElement('title-basic');
-      title_basic.setAttribute('title', this.title);
+      onButton.setAttribute('id', onButtonId);
+      offButton.setAttribute('id', offButtonId);
 
-      var style = document.createElement('style');
-      style.textContent = `
-      .test_class
+      onButton.setAttribute('class', 'button button-on');
+      offButton.setAttribute('class', 'button button-off');
+
+      onButton.innerHTML  = "ON";
+      offButton.innerHTML = "OFF";
+
+      var address = this.address;
+
+      onButton.addEventListener('click', function()
       {
-        color : red;
+        var addr = this.id.replace('ON', '');
+        sio_send_request(addr, 'on', {});
+        console.log("ON request sent to " + addr);
+      })
+
+      offButton.addEventListener('click', function()
+      {
+        var addr = this.id.replace('OFF', '');
+        sio_send_request(addr, 'off', {});
+        console.log("OFF request sent to " + addr);
+      })
+
+      style.textContent = `
+      .button 
+      {
+        display: inline-block;
+        font-size: 14px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #aaa;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 2px #999;
+        margin: 1px;
       }
+
+      .button:active 
+      {
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+      }
+
+      .button-on
+      {
+        background-color: rgb(28, 184, 65);
+        padding: 5px 14px;
+      }
+
+      .button-on:hover 
+      {
+        background-color: #3e8e41
+      }
+
+      .button-off
+      {
+        padding: 5px 10px;
+        background-color: rgb(202, 60, 60);
+      }
+
+      .button-off:hover 
+      {
+        background-color: rgb(180, 60, 60)
+      }
+
       `;
 
       shadow.appendChild(style);
-      shadow.appendChild(div);
-      div.appendChild(title_basic);
+      shadow.appendChild(onButton);
+      shadow.appendChild(offButton);
     }
   }
 }
 
-customElements.define('div-title', divTitle);
+customElements.define('onoff-buttons', OnOffButtons);
 
 
 class Lamp extends HTMLElement 

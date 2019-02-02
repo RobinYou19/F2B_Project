@@ -44,7 +44,7 @@
 <script src="/static/js/socket.io.slim.js"></script>
 
 <script src="/static/js/site.js"></script>
-<script src="/static/js/components_5.js"></script>
+<script src="/static/js/components_6.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="static/css/bootstrap/js/bootstrap.min.js"></script>
