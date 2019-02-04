@@ -2,7 +2,10 @@ from .default import view,route,xaal_core
 
 from bottle import request,redirect,get,post
 
-import copy
+import copy, json, os
+
+double_lamps = [('lamp_entree', 'lamp_couloir'), ('lamp_salon', 'lamp_salle'),
+                ('lamp_cuisine', 'lamp_sdb')]
 
 @route('/stats')
 @view('stats.mako')
@@ -111,6 +114,7 @@ def get_devices_house():
     r = {"title" : "devices list"}
     devs = xaal_core.monitor.devices
     r.update({"devs" : devs})
+    r.update({"double_lamps" : double_lamps})
     return r
 
 @route('/modules')

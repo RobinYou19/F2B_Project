@@ -12,8 +12,7 @@
   <link rel="manifest" href="/static/manifest.json">
   <link rel="stylesheet" href="/static/css/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="/static/css/menu.css">
-  <link rel="stylesheet" href="/static/css/components_4.css">
-  <link rel="stylesheet" href="/static/css/generic.css">
+  <link rel="stylesheet" href="/static/css/components_5.css">
   <link rel="stylesheet" href="/static/fonts/fontawesome/css/all.css">
   <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
 
@@ -44,7 +43,7 @@
 <script src="/static/js/socket.io.slim.js"></script>
 
 <script src="/static/js/site.js"></script>
-<script src="/static/js/components_7.js"></script>
+<script src="/static/js/components_8.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="static/css/bootstrap/js/bootstrap.min.js"></script>

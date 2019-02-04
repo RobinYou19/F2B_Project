@@ -12,6 +12,30 @@
 	</div>
 </div>
 
+%for couple in double_lamps :
+	<% first_lamp = devs.fetch_one_kv('nickname',couple[0]) %>
+	<% second_lamp = devs.fetch_one_kv('nickname',couple[1]) %>
+	<div class='col-sm-3'>
+	%if first_lamp :
+		<onoff-device address=${first_lamp.address} title=${couple[0]} status=${first_lamp.attributes['light']} src='static/imgs/lampe-profile.png'></onoff-device>
+		<hr>
+		%if second_lamp :
+			<onoff-device address=${second_lamp.address} title=${couple[0]} status=${second_lamp.attributes['light']} src='static/imgs/lampe-profile.png'></onoff-device>
+		%else :
+			<notfound-device name=${couple[1]} src='static/imgs/lampe-profile.png'></notfound-device>
+		%endif
+	%else :
+		<notfound-device name=${couple[0]} src='static/imgs/lampe-profile.png'></notfound-device>
+		<hr>
+		%if second_lamp :
+			<onoff-device address=${second_lamp.address} title=${couple[0]} status=${second_lamp.attributes['light']} src='static/imgs/lampe-profile.png'></onoff-device>
+		%else :
+			<notfound-device name=${couple[1]} src='static/imgs/lampe-profile.png'></notfound-device>	
+		% endif
+	%endif
+	</div>
+%endfor
+
 %for dev in devs :
 	%if "lamp.dimmer" in dev.devtype :
 		<div class='col-sm-3'>

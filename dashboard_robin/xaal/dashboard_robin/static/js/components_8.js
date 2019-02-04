@@ -1,3 +1,5 @@
+/* @author : You Robin */
+
 window.onload = function() 
 {
 	tick();
@@ -31,48 +33,7 @@ function tick()
   setTimeout('tick()',60000);
 };
 
-class basicTitle extends HTMLElement
-{
-  constructor()
-  {
-    super();
-  }
-
-  connectedCallback()
-  {
-    if (this.hasAttribute('title'))
-    {
-      this.title = this.getAttribute('title');
-    }
-    else
-    {
-      this.title = "Unfound Title";
-    }
-
-    if (!this.shadowRoot)
-    {
-      var shadow = this.attachShadow({mode : 'open'});
-
-      var titleContent = document.createElement('h4');
-      titleContent.innerHTML = this.title;
-
-      var style = document.createElement('style');
-      style.textContent = `
-      h4
-      {
-        font-style: bold;
-      }
-      `;
-
-      shadow.appendChild(style);
-      shadow.appendChild(titleContent);
-    }
-  }
-}
-
-customElements.define('title-basic', basicTitle);
-
-class valueTitle extends HTMLElement
+class Title extends HTMLElement
 {
   constructor()
   {
@@ -103,28 +64,36 @@ class valueTitle extends HTMLElement
       var shadow = this.attachShadow({mode : 'open'});
 
       var titleContent = document.createElement('h4');
-      titleContent.innerHTML = this.title + " :<br>" + this.value;
 
-      if (this.title.includes("barometer"))
+      if (this.value != "No Value")
       {
-        titleContent.innerHTML += "hPa";
+        titleContent.innerHTML = this.title + " :<br>" + this.value;
+
+        if (this.title.includes("barometer"))
+        {
+          titleContent.innerHTML += "hPa";
+        }
+        else if (this.title.includes("hygrometer"))
+        {
+          titleContent.innerHTML += "%";
+        }
+        else if (this.title.includes("windgauge"))
+        {
+          titleContent.innerHTML += "km/h";
+        }
+        else if (this.title.includes("thermometer"))
+        {
+          titleContent.innerHTML += "°C";
+        }
+        else
+        {
+          titleContent.innerHTML += "";
+        }       
       }
-      else if (this.title.includes("hygrometer"))
-      {
-        titleContent.innerHTML += "%";
-      }
-      else if (this.title.includes("windgauge"))
-      {
-        titleContent.innerHTML += "km/h";
-      }
-      else if (this.title.includes("thermometer"))
-      {
-        titleContent.innerHTML += "°C";
-      }
-      else
-      {
-        titleContent.innerHTML += "";
-      }
+    else
+    {
+      titleContent.innerHTML = this.title
+    }
 
       var style = document.createElement('style');
       style.textContent = `
@@ -140,7 +109,7 @@ class valueTitle extends HTMLElement
   }
 }
 
-customElements.define('title-value', valueTitle);
+customElements.define('basic-title', Title);
 
 class basicImage extends HTMLElement
 {
@@ -166,7 +135,7 @@ class basicImage extends HTMLElement
     }
     else
     {
-      this.address = "";
+      this.address = "No Address";
     }
 
     if (this.hasAttribute('height'))
@@ -192,8 +161,16 @@ class basicImage extends HTMLElement
       var shadow  = this.attachShadow({mode : 'open'});
       var link    = document.createElement('a');
       var img     = document.createElement('img');
-      var dest    = "/generic/" + this.address;
       var style   = document.createElement('style');
+
+      if (this.address != "No Address")
+      {
+        var dest = "/generic/" + this.address;
+      }
+      else
+      {
+        var dest = "#";
+      }
 
       link.setAttribute('href', dest);
       img.setAttribute('src',    this.src);
@@ -246,8 +223,6 @@ class OnOffButtons extends HTMLElement
 
       onButton.innerHTML  = "ON";
       offButton.innerHTML = "OFF";
-
-      var address = this.address;
 
       onButton.addEventListener('click', function()
       {
@@ -373,7 +348,7 @@ class BasicDevice extends HTMLElement
     }
     else
     {
-      this.value = 'NoValue';
+      this.value = 'No Value';
     }
     if (this.hasAttribute('class'))
     {
@@ -391,17 +366,9 @@ class BasicDevice extends HTMLElement
       var style   = document.createElement('style');
       var image   = document.createElement('image-basic');
 
-      if (this.value != 'NoValue')
-      {
-        var title = document.createElement('title-value');
-        title.setAttribute('title', this.title);
-        title.setAttribute('value', this.value);
-      }
-      else
-      {
-        var title = document.createElement('title-basic');
-        title.setAttribute('title', this.title);
-      }
+      var title = document.createElement('basic-title');
+      title.setAttribute('title', this.title);
+      title.setAttribute('value', this.value);
 
       var div_id = "basic_device" + this.address ;
       content.setAttribute('div', div_id);
@@ -415,7 +382,7 @@ class BasicDevice extends HTMLElement
       style.textContent = `
       .box 
       {
-        background-color: rgba(255, 255, 255, .5);
+        background-color: rgba(22, 137, 237, 1);
         border-style: groove;
         border-radius: 5px;
         height: 150%;
@@ -435,6 +402,13 @@ customElements.define('basic-device', BasicDevice);
 
 class OnOffDevice extends HTMLElement 
 {
+  // Specify observed attributes so that
+  // attributeChangedCallback will work
+  static get observedAttributes() 
+  {
+    return ['status'];
+  }
+
   constructor() 
   {
     super();
@@ -496,7 +470,7 @@ class OnOffDevice extends HTMLElement
     }
     else
     {
-      this.value = "NoValue";
+      this.value = "No Value";
     }
 
     if (!this.shadowRoot)
@@ -510,7 +484,7 @@ class OnOffDevice extends HTMLElement
 
       var div_id  = 'on_off_device' + this.address ;
       content.setAttribute('id', div_id);
-      if (this.status == "True")
+      if (this.status == 'True')
       {
         content.setAttribute('class', 'box box-on');
       }
@@ -556,6 +530,79 @@ class OnOffDevice extends HTMLElement
       content.appendChild(buttons);
     }
   }
+
+  attributeChangedCallback(name, oldValue, newValue)
+  {
+    console.log('Element attributes changed.');
+  }
 }
 
 customElements.define('onoff-device', OnOffDevice);
+
+
+class NotFoundDevice extends HTMLElement
+{
+  constructor()
+  {
+    super();
+  }
+
+  connectedCallback()
+  {
+    if (this.hasAttribute('name'))
+    {
+      this.name = this.getAttribute('name');
+    }
+    else
+    {
+      this.name = "";
+    }
+    if (this.hasAttribute('src'))
+    {
+      this.src = this.getAttribute('src');
+    }
+    else
+    {
+      this.src = 'NoSrc';
+    }  
+    if (!this.shadowRoot)
+    {
+      var shadow  = this.attachShadow({mode : 'open'});
+      var content = document.createElement('div');
+      var style   = document.createElement('style');   
+      var title   = document.createElement('basic-title');
+
+      var content_id = 'NotFound' + this.name;
+      content.setAttribute('id', content_id);
+      content.setAttribute('class', 'unfound');
+
+      var displayed_title = 'UNFOUND : ' + this.name;
+      title.setAttribute('title', displayed_title);
+
+      shadow.appendChild(style);
+      shadow.appendChild(content);
+      content.appendChild(title);
+
+      style.textContent = `
+      .unfound
+      {
+        background-color: rgba(255, 255, 255, .5);
+        border-style: groove;
+        border-radius: 5px;
+        height: 150%;
+        margin: 5%;
+      }
+      `;
+
+      if (this.src != 'NoSrc')
+      {
+        var image = document.createElement('basic-image');
+        image.setAttribute('src', this.src);
+
+        content.appendChild(image);
+      }
+    }
+  }
+}
+
+customElements.define('notfound-device', NotFoundDevice);
