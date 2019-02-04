@@ -7,31 +7,31 @@
       <div class="flip-card-front">
 
         %if "lamp.dimmer" in dev.devtype :
-          <img src="/static/imgs/lampe-profile.png" alt="Lamp Profile" style="width:300px;height:300px;">
+          <img src="/static/imgs/lampe-profile.png" alt="Lamp Profile" style="width:300px;height:400px;">
 
         %elif "thermometer.basic" in dev.devtype :
-          <img src="/static/imgs/thermometer.png" alt="Thermometer Profile" style="width:300px;height:300px;">
+          <img src="/static/imgs/thermometer.png" alt="Thermometer Profile" style="width:300px;height:400px;">
 
         %elif "barometer.basic" in dev.devtype :
-          <img src="/static/imgs/barometer-profile.png" alt="Barometer Profile" style="width:280px;height:330px;">
+          <img src="/static/imgs/barometer-profile.png" alt="Barometer Profile" style="width:300px;height:400px;">
 
         %elif "hygrometer.basic" in dev.devtype :
-          <img src="/static/imgs/hygrometer-profile.png" alt="Hygrometer Profile" style="width:280px;height:330px;">
+          <img src="/static/imgs/hygrometer-profile.png" alt="Hygrometer Profile" style="width:300px;height:400px;">
 
         %elif "windgauge.basic" in dev.devtype :
-          <img src="/static/imgs/windgauge-profile.png" alt="Windgauge Profile" style="width:280px;height:330px;">
+          <img src="/static/imgs/windgauge-profile.png" alt="Windgauge Profile" style="width:300px;height:400px;">
 
         %elif "gateway.basic" in dev.devtype :
-          <img src="/static/imgs/gateway-profile.png" alt="Gateway Profile" style="width:280px;height:330px;">
+          <img src="/static/imgs/gateway-profile.png" alt="Gateway Profile" style="width:300px;height:400px;">
 
         %elif "hmi.basic" in dev.devtype :
-          <img src="/static/imgs/hmi.png" alt="HMI Profile" style="width:280px;height:330px;">
+          <img src="/static/imgs/hmi.png" alt="HMI Profile" style="width:300px;height:400px;">
 
         %elif "powerrelay.basic" in dev.devtype :
-          <img src="/static/imgs/powerrelay-profile.png" alt="PowerRelay Profile" style="width:280px;height:330px;"> 
+          <img src="/static/imgs/powerrelay-profile.png" alt="PowerRelay Profile" style="width:300px;height:400px;"> 
 
         %else :
-          <img src="other-image.png" alt="Image Not Available for This Component" style="width:300px;height:300px;">     
+          <img src="other-image.png" alt="Image Not Available for This Component" style="width:300px;height:400px;">     
         %endif
 
       </div>
