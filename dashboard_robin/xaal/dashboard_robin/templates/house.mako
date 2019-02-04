@@ -87,4 +87,8 @@
 	%endif
 %endfor
 
+<div class='col-sm-3'>
+	<uds-device src='/static/imgs/shutter-profile.png'></uds-device>
+</div>
+
 </body>
