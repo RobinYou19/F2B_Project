@@ -1,8 +1,8 @@
 .box, .link_category
 {
-	border-style: groove;
-	height: 150%;
-	margin: 5%;
+  border-style: groove;
+  height: 150%;
+  margin: 5%;
 }
 
 .box
@@ -15,7 +15,7 @@
 {
   border-radius: 50px;
   background-color: rgba(22, 137, 237, 1);
-  padding: 15%;
+  padding: 10%;
 }
 
 div#watch 
@@ -92,7 +92,7 @@ div#digital
   font-family: "Sofia";
   background-color: transparent;
   width: 300px;
-  height: 350px;
+  height: 400px;
   margin: 5%;
   border: 1px solid #f1f1f1;
   box-shadow: 2px 2px;
@@ -125,13 +125,13 @@ div#digital
 
 /* Style the front side (fallback if image is missing) */
 .flip-card-front {
-  background-color: #bbb;
+  background-color: rgba(22, 137, 237, 1);
   color: black;
 }
 
 /* Style the back side */
 .flip-card-back {
-  background-color: #bbb;
+  background-color: rgba(22, 137, 237, 1);
   color: white;
   transform: rotateY(180deg);
 }

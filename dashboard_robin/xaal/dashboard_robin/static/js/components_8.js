@@ -1,5 +1,8 @@
 /* @author : You Robin */
 
+//########################################################################
+//@CLOCK
+
 window.onload = function() 
 {
 	tick();
@@ -32,6 +35,9 @@ function tick()
   
   setTimeout('tick()',60000);
 };
+
+//########################################################################
+//@TITLE COMPONENT
 
 class Title extends HTMLElement
 {
@@ -71,7 +77,7 @@ class Title extends HTMLElement
 
         if (this.title.includes("barometer"))
         {
-          titleContent.innerHTML += "hPa";
+          titleContent.innerHTML += " hPa";
         }
         else if (this.title.includes("hygrometer"))
         {
@@ -79,7 +85,7 @@ class Title extends HTMLElement
         }
         else if (this.title.includes("windgauge"))
         {
-          titleContent.innerHTML += "km/h";
+          titleContent.innerHTML += " km/h";
         }
         else if (this.title.includes("thermometer"))
         {
@@ -110,6 +116,9 @@ class Title extends HTMLElement
 }
 
 customElements.define('basic-title', Title);
+
+//########################################################################
+//@IMAGE COMPONENT
 
 class basicImage extends HTMLElement
 {
@@ -187,6 +196,9 @@ class basicImage extends HTMLElement
 }
 
 customElements.define('image-basic', basicImage);
+
+//########################################################################
+//@ONOFFBUTTONS COMPONENT
 
 class OnOffButtons extends HTMLElement
 {
@@ -292,6 +304,141 @@ class OnOffButtons extends HTMLElement
 }
 
 customElements.define('onoff-buttons', OnOffButtons);
+
+//########################################################################
+//@UDSBUTTONS COMPONENT
+
+class UDSButtons extends HTMLElement
+{
+  constructor()
+  {
+    super();
+  }
+  connectedCallback()
+  {
+    if (this.hasAttribute('address'))
+    {
+      this.address = this.getAttribute('address');
+    }
+    else
+    {
+      this.address = "";
+    }
+
+    if (!this.shadowRoot)
+    {
+      var shadow     = this.attachShadow({mode : 'open'});
+      var style      = document.createElement('style');
+      var upButton   = document.createElement('button');
+      var downButton = document.createElement('button');
+      var stopButton = document.createElement('button');
+
+      var upButtonId   = "UP" + this.address ;
+      var downButtonId = "DOWN" + this.address;
+      var stopButtonId = "STOP" + this.address;
+
+      upButton.setAttribute('id', upButtonId);
+      downButton.setAttribute('id', downButtonId);
+      stopButton.setAttribute('id', stopButtonId);
+
+      upButton.setAttribute('class', 'button button-up');
+      downButton.setAttribute('class', 'button button-down');
+      stopButton.setAttribute('class', 'button button-stop');
+
+      upButton.innerHTML   = "UP";
+      downButton.innerHTML = "DOWN";
+      stopButton.innerHTML = "STOP";
+
+      upButton.addEventListener('click', function()
+      {
+        var addr = this.id.replace('UP', '');
+        sio_send_request(addr, 'up', {});
+        console.log("UP request sent to " + addr);
+      })
+
+      downButton.addEventListener('click', function()
+      {
+        var addr = this.id.replace('DOWN', '');
+        sio_send_request(addr, 'down', {});
+        console.log("DOWN request sent to " + addr);
+      })
+
+      stopButton.addEventListener('click', function()
+      {
+        var addr = this.id.replace('STOP', '');
+        sio_send_request(addr, 'stop', {});
+        console.log("STOP request sent to " + addr);
+      })
+
+      style.textContent = `
+      .button 
+      {
+        display: inline-block;
+        font-size: 14px;
+        cursor: pointer;
+        text-align: center;
+        text-decoration: none;
+        outline: none;
+        color: #fff;
+        background-color: #aaa;
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 2px #999;
+        margin: 1px 1px 3px 1px;
+      }
+
+      .button:active 
+      {
+        box-shadow: 0 5px #666;
+        transform: translateY(4px);
+      }
+
+      .button-up
+      {
+        background-color: rgb(28, 184, 65);
+        padding: 5px 14px;
+      }
+
+      .button-up:hover 
+      {
+        background-color: #3e8e41
+      }
+
+      .button-down
+      {
+        padding: 5px 10px;
+        background-color: rgb(202, 60, 60);
+      }
+
+      .button-down:hover 
+      {
+        background-color: rgb(180, 60, 60);
+      }
+
+      .button-stop
+      {
+        padding: 5px 10px;
+        background-color: rgb(255, 216, 0);
+      }
+
+      .button-stop:hover
+      {
+        background-color: rgb(184, 134, 11);
+      }
+      `;
+
+      shadow.appendChild(style);
+      shadow.appendChild(upButton);
+      shadow.appendChild(downButton);
+      shadow.appendChild(stopButton);
+    }
+  }
+}
+
+customElements.define('uds-buttons', UDSButtons);
+
+//########################################################################
+//@BASIC DEVICE COMPONENT
 
 class BasicDevice extends HTMLElement
 {
@@ -399,6 +546,9 @@ class BasicDevice extends HTMLElement
 }
 
 customElements.define('basic-device', BasicDevice);
+
+//########################################################################
+//@ONOFFDEVICE COMPONENT
 
 class OnOffDevice extends HTMLElement 
 {
@@ -539,6 +689,8 @@ class OnOffDevice extends HTMLElement
 
 customElements.define('onoff-device', OnOffDevice);
 
+//########################################################################
+//@NOTFOUNDDEVICE COMPONENT
 
 class NotFoundDevice extends HTMLElement
 {
