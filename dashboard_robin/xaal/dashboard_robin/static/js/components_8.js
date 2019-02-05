@@ -79,7 +79,7 @@ class Title extends HTMLElement
         {
           titleContent.innerHTML += " hPa";
         }
-        else if (this.title.includes("hygrometer"))
+        else if (this.title.includes("hygrometer") || this.title.includes("rh"))
         {
           titleContent.innerHTML += "%";
         }
@@ -87,9 +87,13 @@ class Title extends HTMLElement
         {
           titleContent.innerHTML += " km/h";
         }
-        else if (this.title.includes("thermometer"))
+        else if (this.title.includes("thermometer") || this.title.includes("temp"))
         {
           titleContent.innerHTML += "°C";
+        }
+        else if (this.title.includes("powermeter"))
+        {
+          titleContent.innerHTML += " W";
         }
         else
         {
@@ -842,8 +846,7 @@ class NotFoundDevice extends HTMLElement
       content.setAttribute('id', content_id);
       content.setAttribute('class', 'unfound');
 
-      var displayed_title = 'UNFOUND : ' + this.name;
-      title.setAttribute('title', displayed_title);
+      title.setAttribute('title', this.name);
 
       shadow.appendChild(style);
       shadow.appendChild(content);
@@ -862,7 +865,7 @@ class NotFoundDevice extends HTMLElement
 
       if (this.src != 'NoSrc')
       {
-        var image = document.createElement('basic-image');
+        var image = document.createElement('image-basic');
         image.setAttribute('src', this.src);
 
         content.appendChild(image);

@@ -11,8 +11,7 @@
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="manifest" href="/static/manifest.json">
   <link rel="stylesheet" href="/static/css/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/static/css/menu.css">
-  <link rel="stylesheet" href="/static/css/components_7.css">
+  <link rel="stylesheet" href="/static/css/main_1.css">
   <link rel="stylesheet" href="/static/fonts/fontawesome/css/all.css">
   <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
 
