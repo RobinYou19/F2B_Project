@@ -234,6 +234,24 @@ def get_devices_sdb():
   return r
 
 
+#################################################################
+#@ SCENARIOS PAGES
+
+@route('/on_dimmer_lamp_scenario')
+@view('on_dimmer_lamp_scenario.mako')
+def get_devices_scenario():
+  r = {"title" : "devices scenario"}
+  devs = xaal_core.monitor.devices
+  r.update({"devs" : devs})
+  return r
+
+@route('/off_dimmer_lamp_scenario')
+@view('off_dimmer_lamp_scenario.mako')
+def get_devices_scenario():
+  r = {"title" : "devices scenario"}
+  devs = xaal_core.monitor.devices
+  r.update({"devs" : devs})
+  return r
 
 #################################################################
 #@ OLD PAGES
@@ -265,7 +283,6 @@ def info():
     r.update({"query"   : request.query})
     r.update({"environ" : copy.copy(request.environ)})
     return r
-
 
 
 @route('/devices')
@@ -306,7 +323,6 @@ def save_metadata(addr):
     xaal_core.update_kv(addr,kv)
     return edit_metadata(addr)
     
-
 
 @route('/grid')
 @view('grid.mako')
