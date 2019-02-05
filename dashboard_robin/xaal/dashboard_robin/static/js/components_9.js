@@ -1,5 +1,11 @@
 /* @author : You Robin */
 
+basic_devices    = document.getElementsByTagName("basic-device");
+onoff_devices    = document.getElementsByTagName("onoff-device");
+notfound_devices = document.getElementsByTagName("notfound-device");
+uds_devices      = document.getElementsByTagName("uds-device");
+scenario_devices = document.getElementsByTagName("basic-scenario");
+
 //########################################################################
 //@CLOCK
 
@@ -971,3 +977,5 @@ class Scenario extends HTMLElement
 }
 
 customElements.define('basic-scenario', Scenario);
+
+//#############################################################
