@@ -410,3 +410,149 @@ a
 {
   text-decoration: underline;
 }
+
+/* HOUSE */
+
+.box, .link_category, .basic_box
+{
+  border-style: groove;
+  height: 150%;
+  margin: 5%;
+}
+
+.box
+{
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, .5);
+}
+
+.basic_box
+{
+  border-radius: 5px;
+  background-color: rgba(22, 137, 237, 1);
+}
+
+.link_category
+{
+  border-radius: 50px;
+  background-color: rgba(22, 137, 237, 1);
+  padding: 10%;
+}
+
+div#watch 
+{
+  position: relative;
+  margin: auto;
+  width: 150px;
+  height:150px;
+  
+  border-radius: 100px;
+  border: 2px solid #5cb8ff;
+  box-shadow: 0 0 10px 2px #123;
+  
+  background-color: #123;
+
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+div#hours, div#minutes 
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  
+  background-color: #fff;
+  box-shadow: 0 0 2px 2px #fff;
+  
+  border-radius:5px;
+  
+   -webkit-transform-origin: 0% 0%;
+}
+
+div#hours 
+{
+  z-index:10;
+  width: 45px;
+  height: 2px;  
+}
+
+div#minutes 
+{
+  z-index:15;
+  width: 70px;
+  height: 2px;  
+  
+  background-color: #000;   
+}
+
+div#digital 
+{
+  position: relative;
+  margin: auto;
+  
+  width: 75px;
+  height:25px;
+  
+  background-color: #123;
+  color: #fff;
+  
+  border: 2px solid #5cb8ff;
+  border-radius:25px;
+  
+  text-align: center;
+  line-height:25px;
+  font-size:75%;
+
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+/* The flip card container - set the width and height to whatever you want. We have added the border property to demonstrate that the flip itself goes out of the box on hover (remove perspective if you don't want the 3D effect */
+.flip-card {
+  font-family: "Sofia";
+  background-color: transparent;
+  width: 300px;
+  height: 400px;
+  margin: 5%;
+  border: 1px solid #f1f1f1;
+  box-shadow: 2px 2px;
+  border-radius: 5px;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: rgba(22, 137, 237, 1);
+  color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color: rgba(22, 137, 237, 1);
+  color: white;
+  transform: rotateY(180deg);
+}
