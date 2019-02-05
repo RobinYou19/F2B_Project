@@ -21,8 +21,8 @@
     <a href="/menu">Menu</a>
     <a href="/house">House</a>
     <a href="/modules">Modules</a>
-    <a href="/scenarios">Scenarios</a>
     <a href="/favorites">Favorites</a>
+    <a href="/scenarios">Scenarios</a>
     <a href="/configuration">Configuration</a>
     <a href="/account">Account</a>
     <a href="javascript:void(0);" class="icon" onclick="menuDisplay()">
