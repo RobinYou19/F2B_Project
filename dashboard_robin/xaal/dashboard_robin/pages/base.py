@@ -4,112 +4,23 @@ from bottle import request,redirect,get,post
 
 import copy, json, os
 
-double_lamps = [('lamp_entree', 'lamp_couloir'), ('lamp_salon', 'lamp_salle'),
-                ('lamp_cuisine', 'lamp_sdb')]
-shutters = [('Volet_Cuisine','2fe70f46-3ece-44d1-af34-2d82e10fb854'), 
-            ('Volet_SDB','e4b05165-be5d-46d5-acd0-4da7be1158ed')]
+#GLOBAL VARIABLES
+
+double_lamps        = [('lamp_entree' , 'lamp_couloir'), 
+                       ('lamp_salon'  , 'lamp_salle'),
+                       ('lamp_cuisine', 'lamp_sdb')]
+
+shutters            = [('Volet_Cuisine','2fe70f46-3ece-44d1-af34-2d82e10fb854'), 
+                       ('Volet_SDB'    ,'e4b05165-be5d-46d5-acd0-4da7be1158ed')]
 
 double_thermometers = [('temp_owm', 'temp_bureau')]
-double_hygrometers  = [('rh_owm', 'rh_bureau')]
+double_hygrometers  = [('rh_owm'  , 'rh_bureau'  )]
 
-wall_plug = ["5e50a1ed-5290-4cdb-b00f-1f968eee4401",
-             "5e50a1ed-5290-4cdb-b00f-1f968eee4402"]
+wall_plug           = ["5e50a1ed-5290-4cdb-b00f-1f968eee4401",
+                       "5e50a1ed-5290-4cdb-b00f-1f968eee4402"]
 
-@route('/stats')
-@view('stats.mako')
-def stats():
-    total = 0
-    results = {}
-    for dev in xaal_core.monitor.devices:
-        total = total + 1
-        try:
-            k = dev.devtype
-            results[k]=results[k]+1
-        except KeyError:
-            results.update({k:1})
-    r = {"title" : "Network stats"}
-    r.update({"total"   :total})
-    r.update({"devtypes":results})
-    r.update({"uptime"  : xaal_core.get_uptime()})
-    return r
-
-
-@route('/bottle_info')
-@view('bottle_info.mako')
-def info():
-    r = {"title" : "Bottle Server Info"}
-    r.update({"headers" : request.headers})
-    r.update({"query"   : request.query})
-    r.update({"environ" : copy.copy(request.environ)})
-    return r
-
-
-
-@route('/devices')
-@view('devices.mako')
-def get_device():
-    r = {"title" : "devices list"}
-    devs = xaal_core.monitor.devices
-    r.update({"devs" : devs})
-    return r
-
-
-@route('/generic/<addr>')
-@view('generic.mako')
-def get_device(addr):
-    r = {"title" : "device %s" % addr}
-    dev = xaal_core.get_device(addr)
-    if dev:
-        r.update({"dev" : dev})
-    return r
-
-@get('/edit_metadata/<addr>')
-@view('edit_metadata.mako')
-def edit_metadata(addr):
-    r = {"title" : "device %s" % addr}
-    dev = xaal_core.get_device(addr)
-    if dev:
-        r.update({"dev" : dev})
-    return r
-
-
-@post('/edit_metadata/<addr>')
-@view('edit_metadata.mako')
-def save_metadata(addr):
-    form = dict(request.forms.decode()) # just to shut up lint
-    kv = {}
-    for k in form:
-        key = str(k)
-        if form[k]=='': continue
-        if key.startswith('key_'):
-            id_ = key.split('key_')[-1]
-            v_key = 'value_'+id_
-            if v_key in form:
-                if form[v_key] =='':
-                    value = None
-                else:
-                    value = form[v_key]
-                kv.update({form[k]:value})
-    xaal_core.update_kv(addr,kv)
-    return edit_metadata(addr)
-    
-
-
-@route('/grid')
-@view('grid.mako')
-def test_grid():
-    return {"title" : "Grid","devices":xaal_core.monitor.devices}
-
-
-@route('/latency')
-def socketio_latency_test():
-    redirect('/static/latency.html')
-
-
-@route('/links')
-@view('links.mako')
-def links():
-    return {'title':'Links'}
+#################################################################
+#@ MENU PAGES
 
 @route('/menu')
 @view('menu.mako')
@@ -142,7 +53,10 @@ def scenarios():
 @route('/favorites')
 @view('favorites.mako')
 def favorites():
-    return {'title':'Favorites'}
+    r = {'title':'Favorites'}
+    devs = xaal_core.monitor.devices
+    r.update({"devs" : devs})
+    return r
 
 @route('/configuration')
 @view('configuration.mako')
@@ -155,6 +69,9 @@ def account():
     return {'title':'Account'}
 
 
+#################################################################
+#@ MODULE PAGES
+
 @route('/type')
 @view('type.mako')
 def type():
@@ -165,6 +82,9 @@ def type():
 def localisation():
     return {'title':'Localisation'}
 
+
+#################################################################
+#@ TYPE PAGES
 
 @route('/barometers')
 @view('barometers.mako')
@@ -229,3 +149,171 @@ def get_devices_windgauges():
     devs = xaal_core.monitor.devices
     r.update({"devs" : devs})
     return r
+
+#################################################################
+#@ GENERIC PAGES
+
+
+@route('/generic/<addr>')
+@view('generic.mako')
+def get_device(addr):
+    r = {"title" : "device %s" % addr}
+    dev = xaal_core.get_device(addr)
+    if dev:
+        r.update({"dev" : dev})
+    return r
+
+
+#################################################################
+#@ LOCALISATION PAGES
+
+@route('/bureau')
+@view('bureau.mako')
+def get_devices_bureau():
+  r = {"title" : "devices bureau list"}
+  devs = xaal_core.monitor.devices
+  r.update({"devs" : devs})
+  r.update({"thermometer_bureau" : double_thermometers[0][1]})
+  r.update({"hygrometer_bureau" : double_hygrometers[0][1]})
+  return r
+
+@route('/couloir')
+@view('couloir.mako')
+def get_devices_couloir():
+  r = {"title" : "devices couloir list"}
+  devs = xaal_core.monitor.devices
+  r.update({"devs" : devs})
+  r.update({"lamp_couloir" : double_lamps[0][1]})
+  return r
+
+@route('/cuisine')
+@view('cuisine.mako')
+def get_devices_cuisine():
+  r = {"title" : "devices cuisine list"}
+  devs = xaal_core.monitor.devices
+  r.update({"devs" : devs})
+  r.update({"lamp_cuisine" : double_lamps[2][0]})
+  r.update({"shutter_cuisine" : shutters[0]})
+  return r
+
+@route('/entree')
+@view('entree.mako')
+def get_devices_entree():
+  r = {"title" : "devices entree list"}
+  devs = xaal_core.monitor.devices
+  r.update({"devs" : devs})
+  r.update({"lamp_entree" : double_lamps[0][0]})
+  return r
+
+@route('/salle')
+@view('salle.mako')
+def get_devices_salle():
+  r = {"title" : "devices salle list"}
+  devs = xaal_core.monitor.devices
+  r.update({"devs" : devs})
+  r.update({"lamp_salle" : double_lamps[1][1]})
+  return r
+
+@route('/salon')
+@view('salon.mako')
+def get_devices_salon():
+  r = {"title" : "devices salon list"}
+  devs = xaal_core.monitor.devices
+  r.update({"devs" : devs})
+  r.update({"lamp_salon" : double_lamps[1][0]})
+  return r
+
+@route('/sdb')
+@view('sdb.mako')
+def get_devices_sdb():
+  r = {"title" : "devices salle de bain list"}
+  devs = xaal_core.monitor.devices
+  r.update({"devs" : devs})
+  r.update({"lamp_sdb" : double_lamps[2][1]})
+  r.update({"shutter_sdb" : shutters[1]})
+  return r
+
+
+
+#################################################################
+#@ OLD PAGES
+
+@route('/stats')
+@view('stats.mako')
+def stats():
+    total = 0
+    results = {}
+    for dev in xaal_core.monitor.devices:
+        total = total + 1
+        try:
+            k = dev.devtype
+            results[k]=results[k]+1
+        except KeyError:
+            results.update({k:1})
+    r = {"title" : "Network stats"}
+    r.update({"total"   :total})
+    r.update({"devtypes":results})
+    r.update({"uptime"  : xaal_core.get_uptime()})
+    return r
+
+
+@route('/bottle_info')
+@view('bottle_info.mako')
+def info():
+    r = {"title" : "Bottle Server Info"}
+    r.update({"headers" : request.headers})
+    r.update({"query"   : request.query})
+    r.update({"environ" : copy.copy(request.environ)})
+    return r
+
+
+
+@route('/devices')
+@view('devices.mako')
+def get_device():
+    r = {"title" : "devices list"}
+    devs = xaal_core.monitor.devices
+    r.update({"devs" : devs})
+    return r
+
+@get('/edit_metadata/<addr>')
+@view('edit_metadata.mako')
+def edit_metadata(addr):
+    r = {"title" : "device %s" % addr}
+    dev = xaal_core.get_device(addr)
+    if dev:
+        r.update({"dev" : dev})
+    return r
+
+
+@post('/edit_metadata/<addr>')
+@view('edit_metadata.mako')
+def save_metadata(addr):
+    form = dict(request.forms.decode()) # just to shut up lint
+    kv = {}
+    for k in form:
+        key = str(k)
+        if form[k]=='': continue
+        if key.startswith('key_'):
+            id_ = key.split('key_')[-1]
+            v_key = 'value_'+id_
+            if v_key in form:
+                if form[v_key] =='':
+                    value = None
+                else:
+                    value = form[v_key]
+                kv.update({form[k]:value})
+    xaal_core.update_kv(addr,kv)
+    return edit_metadata(addr)
+    
+
+
+@route('/grid')
+@view('grid.mako')
+def test_grid():
+    return {"title" : "Grid","devices":xaal_core.monitor.devices}
+
+
+@route('/latency')
+def socketio_latency_test():
+    redirect('/static/latency.html')
