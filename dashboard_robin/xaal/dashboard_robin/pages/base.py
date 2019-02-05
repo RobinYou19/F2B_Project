@@ -6,6 +6,14 @@ import copy, json, os
 
 double_lamps = [('lamp_entree', 'lamp_couloir'), ('lamp_salon', 'lamp_salle'),
                 ('lamp_cuisine', 'lamp_sdb')]
+shutters = [('Volet_Cuisine','2fe70f46-3ece-44d1-af34-2d82e10fb854'), 
+            ('Volet_SDB','e4b05165-be5d-46d5-acd0-4da7be1158ed')]
+
+double_thermometers = [('temp_owm', 'temp_bureau')]
+double_hygrometers  = [('rh_owm', 'rh_bureau')]
+
+wall_plug = ["5e50a1ed-5290-4cdb-b00f-1f968eee4401",
+             "5e50a1ed-5290-4cdb-b00f-1f968eee4402"]
 
 @route('/stats')
 @view('stats.mako')
@@ -106,7 +114,7 @@ def links():
 @route('/menu')
 @view('menu.mako')
 def menu():
-    return {"title" : "Menu"}
+    return {'title' : 'Menu'}
 
 @route('/house')
 @view('house.mako')
@@ -115,6 +123,10 @@ def get_devices_house():
     devs = xaal_core.monitor.devices
     r.update({"devs" : devs})
     r.update({"double_lamps" : double_lamps})
+    r.update({"shutters" : shutters})
+    r.update({"double_thermometers" : double_thermometers})
+    r.update({"double_hygrometers" : double_hygrometers})
+    r.update({"wall_plug" : wall_plug})
     return r
 
 @route('/modules')
