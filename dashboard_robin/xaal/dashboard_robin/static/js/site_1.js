@@ -1,6 +1,6 @@
 var tags = {}
 var onoff_devices = document.getElementsByTagName("onoff-device");
-var basic_devices = document.getElementsByTagName("basic-devices");
+var basic_devices = document.getElementsByTagName("basic-device");
 var evt_bus = null;
 var sio = null;
 
@@ -123,20 +123,6 @@ function run_sio()
           else if ('powerrelay.basic' == onoff_devices[t].attributes.title.value)
           {
             onoff_devices[t].setAttribute('status', data['attributes']['power']);
-          }
-        }
-      }
-    }
-    for (t in basic_devices)
-    {
-      var attrs = basic_devices[t].attributes;
-      if (attrs.hasOwnProperty('address'))
-      {
-        if (attrs.address.value == data['address'])
-        {
-          if ('thermometer.basic' == onoff_devices[t].attributes.title.value)
-          {
-            basic_devices[t].setAttribute('value', data['attributes']['temperature']);
           }
         }
       }
