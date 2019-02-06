@@ -1,11 +1,5 @@
 /* @author : You Robin */
 
-basic_devices    = document.getElementsByTagName("basic-device");
-onoff_devices    = document.getElementsByTagName("onoff-device");
-notfound_devices = document.getElementsByTagName("notfound-device");
-uds_devices      = document.getElementsByTagName("uds-device");
-scenario_devices = document.getElementsByTagName("basic-scenario");
-
 //########################################################################
 //@CLOCK
 
@@ -249,15 +243,15 @@ class OnOffButtons extends HTMLElement
       onButton.addEventListener('click', function()
       {
         var addr = this.id.replace('ON', '');
-        sio_send_request(addr, 'on', {});
         console.log("ON request sent to " + addr);
+        sio_send_request(addr, 'on', {});
       })
 
       offButton.addEventListener('click', function()
       {
         var addr = this.id.replace('OFF', '');
-        sio_send_request(addr, 'off', {});
         console.log("OFF request sent to " + addr);
+        sio_send_request(addr, 'off', {});
       })
 
       style.textContent = `
@@ -572,10 +566,7 @@ class OnOffDevice extends HTMLElement
   constructor() 
   {
     super();
-  }
 
-  connectedCallback()
-  {
     if (this.hasAttribute('address'))
     {
       this.address = this.getAttribute('address');
@@ -693,7 +684,18 @@ class OnOffDevice extends HTMLElement
 
   attributeChangedCallback(name, oldValue, newValue)
   {
-    console.log('Element attributes changed.');
+    const shadow = this.shadowRoot;
+    const childNodes = Array.from(shadow.childNodes);
+    var elem = childNodes[1];
+    
+    if (newValue == "true" || newValue == "True")
+    {
+      elem.setAttribute('class', 'box box-on');
+    }
+    else
+    {
+      elem.setAttribute('class', 'box box-off');
+    }
   }
 }
 

@@ -1,4 +1,4 @@
-var tags = {};
+var tags = {}
 var evt_bus = null;
 var sio = null;
 
@@ -46,7 +46,7 @@ function EventBus () {
         this.connected = false;
     });
 
-    this.on('tags-mount',function() {
+    this.on('devices-mount',function() {
         log('Event : mounted');
         this.mounted = true;
         run_sio();
@@ -73,91 +73,87 @@ function visibilityChanged(data) {
 }
 
 
-function log(msg) {
-    //elt = _('#messages');
-    //elt.innerText = elt.innerText +"\n" + msg;
-    //elt.style.color = 'green';
-    console.log(msg)
+function log(msg) 
+{
+  console.log(msg)
 }
 
-function display_tags() {
-    for (t in tags) {
-        tag = tags[t];
-        console.log(t + " " + tag.addr + " : " +  tag.opts.dataIs);    
-    }
-
-
+function display_onoff_devices() 
+{
+  for (t in onoff_devices) 
+  {
+    var device = onoff_devices[t];
+    var size   = device.attributes.length;
+    for (var i = 0 ; i < size ; i++)
+    {
+      console.log(t + " : " + device.attributes[i].name + " : " 
+                    + device.attributes[i].nodeValue);
+    }    
+  }
 }
 
 //================ SocketIO ================================================
-function run_sio() {
-    sio = io.connect('ws://' + document.domain + ':' + location.port,{transports: ['websocket'],forceNew:true});
-    sio.on('connect', function() {
-        evt_bus.trigger('sio-connect');
-    });
+function run_sio() 
+{
+  sio = io.connect('ws://' + document.domain + ':' + location.port,{transports: ['websocket'],forceNew:true});
+  sio.on('connect', function() {
+      evt_bus.trigger('sio-connect');
+  });
 
-    sio.on('disconnect', function() {
-        evt_bus.trigger('sio-disconnect');
-    });
+  sio.on('disconnect', function() {
+      evt_bus.trigger('sio-disconnect');
+  });
 
-    sio.on('event_attributeChanges', function(data) {
-        for (t in tags) {
-            var attrs = tags[t].root.attributes;
-            if (attrs.hasOwnProperty('xaal_addr')) {
-                if (attrs.xaal_addr.value == data['address']) {
-                    tags[t].receive(data);
-                    //console.log('Evt attr for : ' + data['address']);
-                }
-            }
+  sio.on('event_attributeChanges', function(data) 
+  {
+    for (t in onoff_devices)
+    {
+      var attrs = onoff_devices[t].attributes;
+      if (attrs.hasOwnProperty('address'))
+      {
+        if (attrs.address.value == data['address'])
+        {
+          onoff_devices[t].setAttribute('status', data['attributes']['light']);
         }
-    });
-}
-
-
-function sio_refresh_attributes_old() {
-    console.log('refresh_attributes');
-    var addrs = [];
-    for (t in tags) {
-        var attrs = tags[t].root.attributes;
-        if (attrs.hasOwnProperty('xaal_addr')) {
-            addrs.push(attrs.xaal_addr.value);
-        }
+      }
     }
-    sio.emit('refresh_attributes',addrs);
+  });
 }
 
-function sio_refresh_attributes() {
-    console.log('refresh_attributes');
-    for (t in tags) {
-        var attrs = tags[t].root.attributes;
-        if (attrs.hasOwnProperty('xaal_addr')) {
-            sio.emit('query_attributes',attrs.xaal_addr.value);
-        }
+function sio_refresh_attributes() 
+{
+  console.log('refresh_attributes');
+  for (t in onoff_devices) 
+  {
+    var attrs = onoff_devices[t].attributes;
+    if (attrs.hasOwnProperty('address')) 
+    {
+      sio.emit('query_attributes',attrs.address.value);
     }
+  }
 }
 
-function sio_send_request(addr,action,body) {
-    //console.log('Sending :' + addr + ' ' + action + ' ' + body);
-    sio.emit('send_request',addr,action,body);
+function sio_send_request(addr,action,body) 
+{
+  sio.emit('send_request',addr,action,body);
 }
 
-function sio_query_attributes(addr) {
-    //console.log('query '+ addr);
-    sio.emit('query_attributes',addr);
+function sio_query_attributes(addr) 
+{
+  sio.emit('query_attributes',addr);
 }
 
 
 //================ Main ========================================================
 evt_bus = new EventBus();
 
+onoff_devices = document.getElementsByTagName("onoff-device");
 
-riot.compile(function() {
-    tags = riot.mount('*');
-    evt_bus.trigger('tags-mount');
-})
+evt_bus.trigger('devices-mount');
 
 // We need to force sync the content if we use a mobile device.
 // mobile device need a refresh when it come back from sleep
-if (detectMobile() == true) {
+if (detectMobile() == true) 
+{
     document.addEventListener("visibilitychange", visibilityChanged);
 }
