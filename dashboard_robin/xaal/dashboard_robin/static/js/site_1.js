@@ -1,4 +1,6 @@
 var tags = {}
+var onoff_devices = document.getElementsByTagName("onoff-device");
+var basic_devices = document.getElementsByTagName("basic-devices");
 var evt_bus = null;
 var sio = null;
 
@@ -113,7 +115,29 @@ function run_sio()
       {
         if (attrs.address.value == data['address'])
         {
-          onoff_devices[t].setAttribute('status', data['attributes']['light']);
+          if ('lamp.dimmer' == onoff_devices[t].attributes.title.value)
+          {
+            onoff_devices[t].setAttribute('status', data['attributes']['light']);
+          }
+
+          else if ('powerrelay.basic' == onoff_devices[t].attributes.title.value)
+          {
+            onoff_devices[t].setAttribute('status', data['attributes']['power']);
+          }
+        }
+      }
+    }
+    for (t in basic_devices)
+    {
+      var attrs = basic_devices[t].attributes;
+      if (attrs.hasOwnProperty('address'))
+      {
+        if (attrs.address.value == data['address'])
+        {
+          if ('thermometer.basic' == onoff_devices[t].attributes.title.value)
+          {
+            basic_devices[t].setAttribute('value', data['attributes']['temperature']);
+          }
         }
       }
     }
@@ -146,8 +170,6 @@ function sio_query_attributes(addr)
 
 //================ Main ========================================================
 evt_bus = new EventBus();
-
-onoff_devices = document.getElementsByTagName("onoff-device");
 
 evt_bus.trigger('devices-mount');
 
