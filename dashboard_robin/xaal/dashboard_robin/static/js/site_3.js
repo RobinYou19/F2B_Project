@@ -3,6 +3,7 @@ var sio = null;
 
 var lamp_dimmer       = document.getElementsByTagName("lamp-dimmer");
 var powerrelay_basic  = document.getElementsByTagName("powerrelay-basic");
+var powermeter_basic  = document.getElementsByTagName("powermeter-basic");
 var thermometer_basic = document.getElementsByTagName('thermometer-basic');
 var hygrometer_basic  = document.getElementsByTagName('hygrometer-basic');
 var barometer_basic   = document.getElementsByTagName('barometer-basic');
@@ -142,6 +143,10 @@ function run_sio()
                 devices[i][t].setAttribute('status', data['attributes']['light']);
               }
               else if ('powerrelay.basic' == devices[i][t].attributes.title.value)
+              {
+                devices[i][t].setAttribute('status', data['attributes']['power']);
+              }
+              else if ('powermeter.basic' == devices[i][t].attributes.title.value)
               {
                 devices[i][t].setAttribute('status', data['attributes']['power']);
               }

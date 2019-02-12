@@ -45,7 +45,7 @@
 	%endif
 	<hr>
 	%if power_meter :
-		<basic-device address=${power_meter.address} title='Wall Plug PowerMeter' value=${power_meter.attributes['power']} src='/static/imgs/powermeter-profile.png'></basic-device>
+		<powermeter-basic address=${power_meter.address} title='Wall Plug PowerMeter' value=${power_meter.attributes['power']} src='/static/imgs/powermeter-profile.png'></powermeter-basic>
 	%else :
 		<notfound-device name='Wall Plug PowerMeter' src='static/imgs/powermeter-profile.png'></notfound-device>
 	%endif
@@ -57,13 +57,13 @@
 %>
 <div class='col-sm-3'>
 %if first_thermometer :
-	<basic-device address=${first_thermometer.address} title=${double_thermometers[0][0]} value=${first_thermometer.attributes['temperature']} src='static/imgs/thermometer-profile.png' width='50'></basic-device>
+	<thermometer-basic address=${first_thermometer.address} title=${double_thermometers[0][0]} value=${first_thermometer.attributes['temperature']} src='static/imgs/thermometer-profile.png' width='50'></thermometer-basic>
 	%else :
 		<notfound-device name=${double_thermometers[0][1]} src='static/imgs/thermometer-profile.png'></notfound-device>
 %endif
 <hr>
 %if second_thermometer :
-	<basic-device address=${second_thermometer.address} title=${double_thermometers[0][1]} value=${second_thermometer.attributes['temperature']} src='static/imgs/thermometer-profile.png' width='50'></basic-device>
+	<thermometer-basic address=${second_thermometer.address} title=${double_thermometers[0][1]} value=${second_thermometer.attributes['temperature']} src='static/imgs/thermometer-profile.png' width='50'></thermometer-basic>
 %else :
 	<notfound-device name=${double_thermometers[0][1]} src='static/imgs/thermometer-profile.png'></notfound-device>
 %endif
@@ -74,18 +74,18 @@
 	second_hygrometer = devs.fetch_one_kv('nickname', double_hygrometers[0][1])
 %>
 <div class='col-sm-3'>
-%if first_hygrometer :
-	<basic-device address=${first_hygrometer.address} title=${double_hygrometers[0][0]} value=${first.attributes['windStrength']} src='static/imgs/hygrometer-profile.png' width='50'></basic-device>
-	<hr>
-%else :
+	%if first_hygrometer :
+		<hygrometer-basic address=${first_hygrometer.address} title=${double_hygrometers[0][0]} value=${first.attributes['windStrength']} src='static/imgs/hygrometer-profile.png' width='50'></hygrometer-basic>
+		<hr>
+	%else :
 		<notfound-device name=${double_hygrometers[0][1]} src='static/imgs/hygrometer-profile.png'></notfound-device>
-%endif
-<hr>
-%if second_hygrometer :
-	<basic-device address=${second_hygrometer.address} title=${double_hygrometers[0][1]} value=${second.attributes['windStrength']} src='static/imgs/hygrometer-profile.png' width='50'></basic-device>
-%else :
-	<notfound-device name=${double_hygrometers[0][1]} src='static/imgs/hygrometer-profile.png'></notfound-device>
-%endif
+	%endif
+	<hr>
+	%if second_hygrometer :
+		<hygrometer-basic address=${second_hygrometer.address} title=${double_hygrometers[0][1]} value=${second.attributes['windStrength']} src='static/imgs/hygrometer-profile.png' width='50'></hygrometer-basic>
+	%else :
+		<notfound-device name=${double_hygrometers[0][1]} src='static/imgs/hygrometer-profile.png'></notfound-device>
+	%endif
 </div>
 
 

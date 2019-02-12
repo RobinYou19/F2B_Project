@@ -60,6 +60,37 @@ class PowerRelay extends OnOffDevice
 
 customElements.define('powerrelay-basic', PowerRelay);
 
+class PowerMeter extends OnOffDevice
+{
+  static get observedAttributes() 
+  {
+    return ['status'];
+  }
+
+  constructor()
+  {
+    super();
+  }
+
+  attributeChangedCallback(name, oldValue, newValue)
+  {
+    const shadow = this.shadowRoot;
+    const childNodes = Array.from(shadow.childNodes);
+    var elem = childNodes[1];
+    
+    if (newValue == "true" || newValue == "True")
+    {
+      elem.setAttribute('class', 'box box-on');
+    }
+    else
+    {
+      elem.setAttribute('class', 'box box-off');
+    }
+  }
+}
+
+customElements.define('powermeter-basic', PowerMeter);
+
 class Thermometer extends BasicDevice
 {
   static get observedAttributes()
