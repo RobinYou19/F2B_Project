@@ -20,13 +20,13 @@
 	%>
 	<div class='col-sm-3'>
 	%if first_lamp :
-		<onoff-device address=${first_lamp.address} title=${couple[0]} status=${first_lamp.attributes['light']} src='static/imgs/lampe-profile.png'></onoff-device>
+		<lamp-dimmer address=${first_lamp.address} title=${couple[0]} status=${first_lamp.attributes['light']} src='static/imgs/lampe-profile.png'></lamp-dimmer>
 	%else :
 		<notfound-device name=${couple[0]} src='static/imgs/lampe-profile.png'></notfound-device>
 	<hr>
 	%endif
 	%if second_lamp :
-		<onoff-device address=${second_lamp.address} title=${couple[0]} status=${second_lamp.attributes['light']} src='static/imgs/lampe-profile.png'></onoff-device>
+		<lamp-dimmer address=${second_lamp.address} title=${couple[0]} status=${second_lamp.attributes['light']} src='static/imgs/lampe-profile.png'></lamp-dimmer>
 	%else :
 		<notfound-device name=${couple[1]} src='static/imgs/lampe-profile.png'></notfound-device>	
 	%endif
@@ -39,7 +39,7 @@
 %>
 <div class='col-sm-3'>
 	%if power_relay :
-		<onoff-device address=${power_relay.address} title='Wall Plug PowerRelay' status=${power_relay.attributes['power']} src='static/imgs/powerrelay-profile.png'></onoff-device>
+		<powerrelay-basic address=${power_relay.address} title='Wall Plug PowerRelay' status=${power_relay.attributes['power']} src='static/imgs/powerrelay-profile.png'></powerrelay-basic>
 	%else :
 		<notfound-device name='Wall Plug PowerRelay' src='static/imgs/powerrelay-profile.png'></notfound-device>	
 	%endif
@@ -126,7 +126,7 @@
 %for dev in devs :
 	%if "thermometer.basic" in dev.devtype :
 		<div class='col-sm-3'>
-			<basic-device address=${dev.address} title=${dev.devtype} value=${dev.attributes['temperature']} src='static/imgs/thermometer-profile.png' width='50'></basic-device>
+			<thermometer-basic address=${dev.address} title=${dev.devtype} value=${dev.attributes['temperature']} src='static/imgs/thermometer-profile.png' width='50'></thermometer-basic>
 		</div>
 
 	%elif "barometer.basic" in dev.devtype :

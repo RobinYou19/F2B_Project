@@ -63,3 +63,27 @@ class PowerRelay extends OnOffDevice
 }
 
 customElements.define('powerrelay-basic', PowerRelay);
+
+class Thermometer extends BasicDevice
+{
+  static get observedAttributes()
+  {
+    return ['value'];
+  }
+
+  constructor()
+  {
+    super();
+  }
+  attributeChangedCallback(name, oldValue, newValue)
+  {
+    const shadow = this.shadowRoot;
+    const childNodes = Array.from(shadow.childNodes);
+    var title = childNodes[1];
+    const titleNodes = Array.from(title.childNodes);
+    var test = titleNodes[0];
+    test.setAttribute('value', newValue);
+  }
+}
+
+customElements.define('thermometer-basic', Thermometer);

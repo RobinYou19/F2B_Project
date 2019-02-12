@@ -3,10 +3,11 @@ var sio = null;
 
 var lamp_dimmer = document.getElementsByTagName("lamp-dimmer");
 var powerrelay_basic = document.getElementsByTagName("powerrelay-basic");
+var thermometer_basic = document.getElementsByTagName('thermometer-basic');
 var basic_devices = document.getElementsByTagName("basic-device");
 var notfound_devices = document.getElementsByTagName("notfound-device");
 
-var devices = [lamp_dimmer, powerrelay_basic, basic_devices];
+var devices = [lamp_dimmer, powerrelay_basic, thermometer_basic, basic_devices];
 
 //================ JS tools ====================================================
 // dumbs functions to mimic jQuery selectors
@@ -36,6 +37,7 @@ function detectMobile() {
 }
 
 //================ Event stuffs  ===============================================
+
 function EventBus () {
     riot.observable(this);
     this.mounted = false;
@@ -122,22 +124,37 @@ function run_sio()
 
   sio.on('event_attributeChanges', function(data) 
   {
-    for (t in lamp_dimmer)
+    for (var i = 0; i < devices.length ; i++)
     {
-      var attrs = lamp_dimmer[t].attributes;
-      if (attrs.hasOwnProperty('address'))
+      for (t in devices[i])
       {
-        if (attrs.address.value == data['address'])
+        try
         {
-          if ('lamp.dimmer' == lamp_dimmer[t].attributes.title.value)
+          var attrs = devices[i][t].attributes;
+          if (attrs.hasOwnProperty('address'))
           {
-            lamp_dimmer[t].setAttribute('status', data['attributes']['light']);
-          }
+            if (attrs.address.value == data['address'])
+            {
+              if ('thermometer.basic' == devices[i][t].attributes.title.value)
+              {
+                devices[i][t].setAttribute('value', data['attributes']['temperature']);
+              }
 
-          else if ('powerrelay.basic' == lamp_dimmer[t].attributes.title.value)
-          {
-            lamp_dimmer[t].setAttribute('status', data['attributes']['power']);
+              else if ('lamp.dimmer' == devices[i][t].attributes.title.value)
+              {
+                devices[i][t].setAttribute('status', data['attributes']['light']);
+              }
+
+              else if ('powerrelay.basic' == devices[i][t].attributes.title.value)
+              {
+                devices[i][t].setAttribute('status', data['attributes']['power']);
+              }
+            }
           }
+        }
+        catch(err)
+        {
+          console.error(err);
         }
       }
     }

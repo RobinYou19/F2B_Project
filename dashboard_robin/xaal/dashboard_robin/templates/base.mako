@@ -44,7 +44,7 @@
 <script src="/static/js/site_3.js"></script>
 
 <script src="/static/js/scenario.js"></script>
-<script src="/static/js/auxiliar_components.js"></script>
+<script src="/static/js/aux_components.js"></script>
 <script src="/static/js/components_11.js"></script>
 <script src="/static/js/device_0.js"></script>
 
