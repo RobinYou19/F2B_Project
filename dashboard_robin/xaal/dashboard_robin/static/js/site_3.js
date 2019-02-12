@@ -1,8 +1,12 @@
-var tags = {}
-var onoff_devices = document.getElementsByTagName("onoff-device");
-var basic_devices = document.getElementsByTagName("basic-device");
 var evt_bus = null;
 var sio = null;
+
+var lamp_dimmer = document.getElementsByTagName("lamp-dimmer");
+var powerrelay_basic = document.getElementsByTagName("powerrelay-basic");
+var basic_devices = document.getElementsByTagName("basic-device");
+var notfound_devices = document.getElementsByTagName("notfound-device");
+
+var devices = [lamp_dimmer, powerrelay_basic, basic_devices];
 
 //================ JS tools ====================================================
 // dumbs functions to mimic jQuery selectors
@@ -80,17 +84,27 @@ function log(msg)
   console.log(msg)
 }
 
-function display_onoff_devices() 
+function display_devices() 
 {
-  for (t in onoff_devices) 
+  for (var i = 0; i < devices.length; i++)
   {
-    var device = onoff_devices[t];
-    var size   = device.attributes.length;
-    for (var i = 0 ; i < size ; i++)
+    for (t in devices[i]) 
     {
-      console.log(t + " : " + device.attributes[i].name + " : " 
-                    + device.attributes[i].nodeValue);
-    }    
+      try
+      {
+        var device = devices[i][t];
+        var size   = device.attributes.length;
+        for (var i = 0 ; i < size ; i++)
+        {
+          console.log(t + " : " + device.attributes[i].name + " : " 
+                        + device.attributes[i].nodeValue);
+        }
+      }
+      catch(err)
+      {
+        console.error(err);
+      }  
+    }
   }
 }
 
@@ -108,21 +122,21 @@ function run_sio()
 
   sio.on('event_attributeChanges', function(data) 
   {
-    for (t in onoff_devices)
+    for (t in lamp_dimmer)
     {
-      var attrs = onoff_devices[t].attributes;
+      var attrs = lamp_dimmer[t].attributes;
       if (attrs.hasOwnProperty('address'))
       {
         if (attrs.address.value == data['address'])
         {
-          if ('lamp.dimmer' == onoff_devices[t].attributes.title.value)
+          if ('lamp.dimmer' == lamp_dimmer[t].attributes.title.value)
           {
-            onoff_devices[t].setAttribute('status', data['attributes']['light']);
+            lamp_dimmer[t].setAttribute('status', data['attributes']['light']);
           }
 
-          else if ('powerrelay.basic' == onoff_devices[t].attributes.title.value)
+          else if ('powerrelay.basic' == lamp_dimmer[t].attributes.title.value)
           {
-            onoff_devices[t].setAttribute('status', data['attributes']['power']);
+            lamp_dimmer[t].setAttribute('status', data['attributes']['power']);
           }
         }
       }
@@ -133,12 +147,22 @@ function run_sio()
 function sio_refresh_attributes() 
 {
   console.log('refresh_attributes');
-  for (t in onoff_devices) 
+  for (var i = 0; i < devices.length; i++)
   {
-    var attrs = onoff_devices[t].attributes;
-    if (attrs.hasOwnProperty('address')) 
+    for (t in devices[i]) 
     {
-      sio.emit('query_attributes',attrs.address.value);
+      try
+      {
+        var attrs = devices[i][t].attributes;
+        if (attrs.hasOwnProperty('address')) 
+        {
+          sio.emit('query_attributes',attrs.address.value);
+        }
+      }
+      catch(err)
+      {
+        console.error(err);
+      }
     }
   }
 }

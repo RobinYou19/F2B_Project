@@ -41,8 +41,12 @@
 <script src="/static/js/riot+compiler.min.js"></script>
 <script src="/static/js/socket.io.slim.js"></script>
 
-<script src="/static/js/site_1.js"></script>
+<script src="/static/js/site_3.js"></script>
+
+<script src="/static/js/scenario.js"></script>
+<script src="/static/js/auxiliar_components.js"></script>
 <script src="/static/js/components_11.js"></script>
+<script src="/static/js/device_0.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="static/css/bootstrap/js/bootstrap.min.js"></script>
