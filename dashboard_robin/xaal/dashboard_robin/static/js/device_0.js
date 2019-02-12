@@ -155,3 +155,23 @@ class Windgauge extends BasicDevice
 }
 
 customElements.define('windgauge-basic', Windgauge);
+
+class Gateway extends BasicDevice
+{
+  constructor()
+  {
+    super();
+  }
+}
+
+customElements.define('gateway-basic', Gateway);
+
+class HMI extends BasicDevice
+{
+  constructor()
+  {
+    super();
+  }
+}
+
+customElements.define('hmi-basic', HMI);
