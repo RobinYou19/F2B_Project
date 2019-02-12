@@ -131,17 +131,17 @@
 
 	%elif "barometer.basic" in dev.devtype :
 		<div class='col-sm-3'>
-			<basic-device address=${dev.address} title=${dev.devtype}  value=${dev.attributes['pressure']} src="static/imgs/barometer-profile.png"></barometer-basic>
+			<barometer-basic address=${dev.address} title=${dev.devtype}  value=${dev.attributes['pressure']} src="static/imgs/barometer-profile.png"></barometer-basic>
 		</div>
 
 	%elif "hygrometer.basic" in dev.devtype :
 		<div class='col-sm-3'>
-			<basic-device address=${dev.address} title=${dev.devtype} value=${dev.attributes['humidity']} src='/static/imgs/hygrometer-profile.png'></basic-device>
+			<hygrometer-basic address=${dev.address} title=${dev.devtype} value=${dev.attributes['humidity']} src='/static/imgs/hygrometer-profile.png'></hygrometer-basic>
 		</div>	
 
 	%elif "windgauge.basic" in dev.devtype :
 		<div class='col-sm-3'>
-			<basic-device address=${dev.address} title=${dev.devtype} value=${dev.attributes['windStrength']} src='/static/imgs/windgauge-profile.png'></basic-device>
+			<windgauge-basic address=${dev.address} title=${dev.devtype} value=${dev.attributes['windStrength']} src='/static/imgs/windgauge-profile.png'></windgauge-basic>
 		</div>
 
 	%endif

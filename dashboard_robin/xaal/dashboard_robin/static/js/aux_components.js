@@ -78,37 +78,12 @@ class Title extends HTMLElement
 
       if (this.value != "No Value")
       {
-        titleContent.innerHTML = this.title + " :<br>" + this.value;
-
-        if (this.title.includes("barometer"))
-        {
-          titleContent.innerHTML += " hPa";
-        }
-        else if (this.title.includes("hygrometer") || this.title.includes("rh"))
-        {
-          titleContent.innerHTML += "%";
-        }
-        else if (this.title.includes("windgauge"))
-        {
-          titleContent.innerHTML += " km/h";
-        }
-        else if (this.title.includes("thermometer") || this.title.includes("temp"))
-        {
-          titleContent.innerHTML += "°C";
-        }
-        else if (this.title.includes("powermeter"))
-        {
-          titleContent.innerHTML += " W";
-        }
-        else
-        {
-          titleContent.innerHTML += "";
-        }       
+        titleContent.innerHTML = this.title + " :<br>" + this.value;      
       }
-    else
-    {
-      titleContent.innerHTML = this.title
-    }
+      else
+      {
+        titleContent.innerHTML = this.title
+      }
 
       var style = document.createElement('style');
       style.textContent = `

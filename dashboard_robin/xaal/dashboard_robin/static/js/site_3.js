@@ -1,13 +1,15 @@
 var evt_bus = null;
 var sio = null;
 
-var lamp_dimmer = document.getElementsByTagName("lamp-dimmer");
-var powerrelay_basic = document.getElementsByTagName("powerrelay-basic");
+var lamp_dimmer       = document.getElementsByTagName("lamp-dimmer");
+var powerrelay_basic  = document.getElementsByTagName("powerrelay-basic");
 var thermometer_basic = document.getElementsByTagName('thermometer-basic');
-var basic_devices = document.getElementsByTagName("basic-device");
-var notfound_devices = document.getElementsByTagName("notfound-device");
+var hygrometer_basic  = document.getElementsByTagName('hygrometer-basic');
+var barometer_basic   = document.getElementsByTagName('barometer-basic');
+var windgauge_basic   = document.getElementsByTagName('windgauge-basic');
 
-var devices = [lamp_dimmer, powerrelay_basic, thermometer_basic, basic_devices];
+var devices = [lamp_dimmer, powerrelay_basic, thermometer_basic, hygrometer_basic,
+               barometer_basic, windgauge_basic ];
 
 //================ JS tools ====================================================
 // dumbs functions to mimic jQuery selectors
@@ -135,19 +137,29 @@ function run_sio()
           {
             if (attrs.address.value == data['address'])
             {
-              if ('thermometer.basic' == devices[i][t].attributes.title.value)
-              {
-                devices[i][t].setAttribute('value', data['attributes']['temperature']);
-              }
-
-              else if ('lamp.dimmer' == devices[i][t].attributes.title.value)
+              if ('lamp.dimmer' == devices[i][t].attributes.title.value)
               {
                 devices[i][t].setAttribute('status', data['attributes']['light']);
               }
-
               else if ('powerrelay.basic' == devices[i][t].attributes.title.value)
               {
                 devices[i][t].setAttribute('status', data['attributes']['power']);
+              }
+              else if ('thermometer.basic' == devices[i][t].attributes.title.value)
+              {
+                devices[i][t].setAttribute('value', data['attributes']['temperature']);
+              }
+              else if ('hygrometer.basic' == devices[i][t].attributes.title.value)
+              {
+                devices[i][t].setAttribute('value', data['attributes']['humidity']);
+              }
+              else if ('barometer.basic' == devices[i][t].attributes.title.value)
+              {
+                devices[i][t].setAttribute('value', data['attributes']['pressure']);
+              }
+              else if ('windgauge.basic' == devices[i][t].attributes.title.value)
+              {
+                devices[i][t].setAttribute('value', data['attributes']['windStrength']);
               }
             }
           }
