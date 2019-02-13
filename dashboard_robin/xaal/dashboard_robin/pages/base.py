@@ -253,6 +253,22 @@ def get_devices_scenario():
   r.update({"devs" : devs})
   return r
 
+@route('/on_power_relay_scenario')
+@view('on_power_relay_scenario.mako')
+def get_devices_scenario():
+  r = {"title" : "devices scenario"}
+  devs = xaal_core.monitor.devices
+  r.update({"devs" : devs})
+  return r
+
+@route('/off_power_relay_scenario')
+@view('off_power_relay_scenario.mako')
+def get_devices_scenario():
+  r = {"title" : "devices scenario"}
+  devs = xaal_core.monitor.devices
+  r.update({"devs" : devs})
+  return r
+
 #################################################################
 #@ OLD PAGES
 

@@ -11,13 +11,13 @@
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="manifest" href="/static/manifest.json">
   <link rel="stylesheet" href="/static/css/bootstrap/css/bootstrap.min.css">
-  <link rel="stylesheet" href="/static/css/main_1.css">
+  <link rel="stylesheet" href="/static/css/main_2.css">
   <link rel="stylesheet" href="/static/fonts/fontawesome/css/all.css">
   <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
 
 </head>
 <body>
-  <div class="topnav" id="myTopnav">
+  <div class="topnav" id="myTopnav"><b>
     <a href="/menu">Menu</a>
     <a href="/house">House</a>
     <a href="/modules">Modules</a>
@@ -28,7 +28,7 @@
     <a href="javascript:void(0);" class="icon" onclick="menuDisplay()">
       <i class="fa fa-bars"></i>
     </a>
-  </div>
+  </b></div>
 
   <div id="main">
     ${self.body()}
@@ -38,15 +38,15 @@
 <script src="/static/js/hammer.js"></script>
 <script src="static/js/navigation.js"></script>
 
-<script src="/static/js/socket.io.slim.js"></script>
+<script src="/static/js/socketio/socket.io.slim.js"></script>
 <script src="/static/js/observable.js"></script>
 
-<script src="/static/js/site_3.js"></script>
+<script src="/static/js/site_4.js"></script>
 
-<script src="/static/js/scenario.js"></script>
-<script src="/static/js/aux_components.js"></script>
-<script src="/static/js/components_11.js"></script>
-<script src="/static/js/device_0.js"></script>
+<script src="/static/js/components/scenario.js"></script>
+<script src="/static/js/components/block_components.js"></script>
+<script src="/static/js/components/components_12.js"></script>
+<script src="/static/js/components/device_0.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="static/css/bootstrap/js/bootstrap.min.js"></script>

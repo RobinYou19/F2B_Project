@@ -1,8 +1,11 @@
 body 
 {
+  background-image: url("/static/imgs/background.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
   padding: 0;
   margin: 0;
-  background: #596778;
   color: #EEEEEE;
   text-align: center;
   font-family: "Lato", sans-serif;
@@ -25,7 +28,7 @@ a
 .topnav 
 {
   overflow: hidden;
-  background-color: #596778;
+  background-color: black;
 }
 
 .topnav a 
@@ -41,7 +44,7 @@ a
 
 .topnav a:hover 
 {
-  color: black;
+  color: blue;
 }
 
 .topnav .icon 

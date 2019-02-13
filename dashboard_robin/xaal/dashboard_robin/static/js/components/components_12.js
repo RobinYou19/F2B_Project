@@ -46,7 +46,7 @@ class NotFoundDevice extends HTMLElement
       style.textContent = `
       .unfound
       {
-        background-color: rgba(255, 255, 255, .5);
+        background-color: LightGray;
         border-style: groove;
         border-radius: 5px;
         height: 150%;

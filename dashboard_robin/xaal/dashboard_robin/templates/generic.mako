@@ -10,7 +10,7 @@
             <img src="/static/imgs/lampe-profile.png" alt="Lamp Profile" style="width:300px;height:400px;">
 
           %elif "thermometer.basic" in dev.devtype :
-            <img src="/static/imgs/thermometer.png" alt="Thermometer Profile" style="width:300px;height:400px;">
+            <img src="/static/imgs/thermometer-profile.png" alt="Thermometer Profile" style="width:300px;height:400px;">
 
           %elif "barometer.basic" in dev.devtype :
             <img src="/static/imgs/barometer-profile.png" alt="Barometer Profile" style="width:300px;height:400px;">

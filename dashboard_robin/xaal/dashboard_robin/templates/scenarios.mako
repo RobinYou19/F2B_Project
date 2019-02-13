@@ -11,3 +11,15 @@
     <div class='link_category'><b>Turn Off All Lamp Dimmer</b></div>
   </div>
 </a>
+
+<a class="nav-link" href="/on_power_relay_scenario">
+  <div class='col-sm-3'>
+    <div class='link_category'><b>Turn On All Power Relays</b></div>
+  </div>
+</a>
+
+<a class="nav-link" href="/off_power_relay_scenario">
+  <div class='col-sm-3'>
+    <div class='link_category'><b>Turn Off All Power Relays</b></div>
+  </div>
+</a>
