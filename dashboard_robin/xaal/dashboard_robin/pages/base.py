@@ -61,12 +61,49 @@ def favorites():
 @route('/configuration')
 @view('configuration.mako')
 def configuration():
-    return {'title':'Configuration'}
+    r = {"title" : "Configuration"}
+    devs = xaal_core.monitor.devices
+    r.update({"devs" : devs})
+    return r
+
+@get('/edit_metadata/<addr>')
+@view('edit_metadata.mako')
+def edit_metadata(addr):
+    r = {"title" : "device %s" % addr}
+    dev = xaal_core.get_device(addr)
+    if dev:
+        r.update({"dev" : dev})
+    return r
+
+
+@post('/edit_metadata/<addr>')
+@view('edit_metadata.mako')
+def save_metadata(addr):
+    form = dict(request.forms.decode()) # just to shut up lint
+    kv = {}
+    for k in form:
+        key = str(k)
+        if form[k]=='': continue
+        if key.startswith('key_'):
+            id_ = key.split('key_')[-1]
+            v_key = 'value_'+id_
+            if v_key in form:
+                if form[v_key] =='':
+                    value = None
+                else:
+                    value = form[v_key]
+                kv.update({form[k]:value})
+    xaal_core.update_kv(addr,kv)
+    return edit_metadata(addr)
+    
 
 @route('/account')
 @view('account.mako')
 def account():
-    return {'title':'Account'}
+    r = {"title" : "Account"}
+    devs = xaal_core.monitor.devices
+    r.update({"devs" : devs})
+    return r
 
 
 #################################################################
@@ -308,37 +345,6 @@ def get_device():
     devs = xaal_core.monitor.devices
     r.update({"devs" : devs})
     return r
-
-@get('/edit_metadata/<addr>')
-@view('edit_metadata.mako')
-def edit_metadata(addr):
-    r = {"title" : "device %s" % addr}
-    dev = xaal_core.get_device(addr)
-    if dev:
-        r.update({"dev" : dev})
-    return r
-
-
-@post('/edit_metadata/<addr>')
-@view('edit_metadata.mako')
-def save_metadata(addr):
-    form = dict(request.forms.decode()) # just to shut up lint
-    kv = {}
-    for k in form:
-        key = str(k)
-        if form[k]=='': continue
-        if key.startswith('key_'):
-            id_ = key.split('key_')[-1]
-            v_key = 'value_'+id_
-            if v_key in form:
-                if form[v_key] =='':
-                    value = None
-                else:
-                    value = form[v_key]
-                kv.update({form[k]:value})
-    xaal_core.update_kv(addr,kv)
-    return edit_metadata(addr)
-    
 
 @route('/grid')
 @view('grid.mako')
