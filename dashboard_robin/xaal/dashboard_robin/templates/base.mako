@@ -38,8 +38,8 @@
 <script src="/static/js/hammer.js"></script>
 <script src="static/js/navigation.js"></script>
 
-<script src="/static/js/riot+compiler.min.js"></script>
 <script src="/static/js/socket.io.slim.js"></script>
+<script src="/static/js/observable.js"></script>
 
 <script src="/static/js/site_3.js"></script>
 

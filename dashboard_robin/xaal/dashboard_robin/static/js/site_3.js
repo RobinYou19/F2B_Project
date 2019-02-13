@@ -42,7 +42,7 @@ function detectMobile() {
 //================ Event stuffs  ===============================================
 
 function EventBus () {
-    riot.observable(this);
+    observable(this);
     this.mounted = false;
     this.connected = false;
 
