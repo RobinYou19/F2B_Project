@@ -4,7 +4,7 @@
 
 <div class='col-sm-3'>
 	%if lamp :
-		<onoff-device address=${lamp.address} title=${lamp_cuisine} status=${first_lamp.attributes['light']} src='static/imgs/lampe-profile.png'></onoff-device>
+		<lamp-dimmer address=${lamp.address} title=${lamp_cuisine} status=${first_lamp.attributes['light']} src='static/imgs/lampe-profile.png'></lamp-dimmer>
 	%else :
 		<notfound-device name=${lamp_cuisine} src='static/imgs/lampe-profile.png'></notfound-device>
 	%endif
