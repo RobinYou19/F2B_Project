@@ -138,34 +138,7 @@ function run_sio()
           {
             if (attrs.address.value == data['address'])
             {
-              if ('lamp.dimmer' == devices[i][t].attributes.title.value)
-              {
-                devices[i][t].setAttribute('status', data['attributes']['light']);
-              }
-              else if ('powerrelay.basic' == devices[i][t].attributes.title.value)
-              {
-                devices[i][t].setAttribute('status', data['attributes']['power']);
-              }
-              else if ('powermeter.basic' == devices[i][t].attributes.title.value)
-              {
-                devices[i][t].setAttribute('status', data['attributes']['power']);
-              }
-              else if ('thermometer.basic' == devices[i][t].attributes.title.value)
-              {
-                devices[i][t].setAttribute('value', data['attributes']['temperature']);
-              }
-              else if ('hygrometer.basic' == devices[i][t].attributes.title.value)
-              {
-                devices[i][t].setAttribute('value', data['attributes']['humidity']);
-              }
-              else if ('barometer.basic' == devices[i][t].attributes.title.value)
-              {
-                devices[i][t].setAttribute('value', data['attributes']['pressure']);
-              }
-              else if ('windgauge.basic' == devices[i][t].attributes.title.value)
-              {
-                devices[i][t].setAttribute('value', data['attributes']['windStrength']);
-              }
+              update(devices[i][t], data);
             }
           }
         }

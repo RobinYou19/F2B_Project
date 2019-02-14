@@ -35,13 +35,11 @@
   </div>
 
 </body>
-<script src="/static/js/hammer.js"></script>
-<script src="static/js/navigation.js"></script>
+<script src="/static/js/utils/hammer.js"></script>
+<script src="static/js/utils/utils.js"></script>
 
 <script src="/static/js/socketio/socket.io.slim.js"></script>
-<script src="/static/js/observable.js"></script>
-
-<script src="/static/js/site_4.js"></script>
+<script src="/static/js/site.js"></script>
 
 <script src="/static/js/components/scenario.js"></script>
 <script src="/static/js/components/block_components.js"></script>

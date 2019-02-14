@@ -39,29 +39,29 @@
 
       </div>
       <div class="flip-card-back">
-          %try :
-            <h2>${dev.devtype}</h2> 
-            <p>Address ${dev.address}</p> 
-            % for k in dev.description:
-            <%
-              value = dev.description[k]
-              if not value:
-                continue
-            %>
-              <p>${k} : ${value}</p>
-            %endfor
-            <h4>Attributes : </h4>
-            % for key in dev.attributes :
-            <%
-              value = dev.attributes[key]
-              if not value:
-                continue
-            %>
-              <p>${key} : ${value}</p>
-            %endfor
-          %except :
-            <h2> No Information Available </h2>
-          %endtry
+        %try :
+          <h2>${dev.devtype}</h2> 
+          <p>Address ${dev.address}</p> 
+          % for k in dev.description:
+          <%
+            value = dev.description[k]
+            if not value:
+              continue
+          %>
+            <p>${k} : ${value}</p>
+          %endfor
+          <h4>Attributes : </h4>
+          % for key in dev.attributes :
+          <%
+            value = dev.attributes[key]
+            if not value:
+              continue
+          %>
+            <p>${key} : ${value}</p>
+          %endfor
+        %except :
+          <h2> No Information Available </h2>
+        %endtry
       </div>
     </div>
   </div>
