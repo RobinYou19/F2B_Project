@@ -202,21 +202,26 @@ var observable = function(el) {
 function update(device, data)
 {
   var attributes_dict = {};
+  var values_dict = {}
   var list_title = ['lamp.dimmer', 'powerrelay.basic', 'powermeter.basic',
                     'thermometer.basic', 'hygrometer.basic', 'barometer.basic',
                     'windgauge.basic'];
   var list_value = ['light', 'power', 'power', 'temperature', 'humidity', 'pressure',
                     'windStrength'];
 
+  var to_change_value = ['status', 'status', 'status', 'value', 'value', 'value', 'value'];
+
   for (var i = 0 ; i < list_title.length ; i++)
   {
     attributes_dict[list_title[i]] = list_value[i];
+    values_dict[list_title[i]] = to_change_value[i]
   }
   for (var key in attributes_dict)
   {
     if (key == device.attributes.title.value)
     {
-      device.setAttribute('status', data['attributes'][attributes_dict[key]]);
+      device.setAttribute(values_dict[key], data['attributes'][attributes_dict[key]]);
+
     }
   }
 }
