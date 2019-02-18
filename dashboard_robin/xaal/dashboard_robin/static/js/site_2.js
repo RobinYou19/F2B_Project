@@ -1,6 +1,5 @@
 var evt_bus = null;
 var sio = null;
-devices = []
 
 //================ JS tools ====================================================
 // dumbs functions to mimic jQuery selectors
@@ -81,25 +80,11 @@ function log(msg)
 
 function display_devices() 
 {
-  for (var i = 0; i < devices.length; i++)
+  for (var i = 0; i < list_components.length; i++)
   {
-    for (t in devices[i]) 
-    {
-      try
-      {
-        var device = devices[i][t];
-        var size   = device.attributes.length;
-        for (var i = 0 ; i < size ; i++)
-        {
-          console.log(t + " : " + device.attributes[i].name + " : " 
-                        + device.attributes[i].nodeValue);
-        }
-      }
-      catch(err)
-      {
-        console.error(err);
-      }  
-    }
+    console.log(list_components[i].localName + " : " + 
+                list_components[i].status + '\naddress : ' +
+                list_components[i].address);
   }
 }
 
@@ -131,23 +116,9 @@ function run_sio()
 function sio_refresh_attributes() 
 {
   console.log('refresh_attributes');
-  for (var i = 0; i < devices.length; i++)
+  for (var i = 0; i < list_components.length; i++)
   {
-    for (t in devices[i]) 
-    {
-      try
-      {
-        var attrs = devices[i][t].attributes;
-        if (attrs.hasOwnProperty('address')) 
-        {
-          sio.emit('query_attributes',attrs.address.value);
-        }
-      }
-      catch(err)
-      {
-        console.error(err);
-      }
-    }
+    sio.emit('query_attributes',list_components[i].address);
   }
 }
 
