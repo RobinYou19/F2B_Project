@@ -1,10 +1,16 @@
 from .default import view,route,xaal_core
 
-from bottle import request,redirect,get,post
+from bottle import request,redirect,get,post, static_file
 
 import copy, json, os
 
 #GLOBAL VARIABLES
+this_directory = os.path.dirname(os.path.abspath(__file__))
+filename = '/../../../config.json'
+path = this_directory + filename
+
+my_file = open(path, 'r')
+my_lines = my_file.readlines()
 
 double_lamps        = [('lamp_entree' , 'lamp_couloir'), 
                        ('lamp_salon'  , 'lamp_salle'),
@@ -25,7 +31,7 @@ wall_plug           = ["5e50a1ed-5290-4cdb-b00f-1f968eee4401",
 @route('/menu')
 @view('menu.mako')
 def menu():
-    return {'title' : 'Menu'}
+    return {'title' : 'menu', 'lines' : my_lines}
 
 @route('/house')
 @view('house.mako')

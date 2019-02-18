@@ -218,7 +218,7 @@ function update(device, data)
   }
   for (var key in attributes_dict)
   {
-    if (key == device.attributes.title.value)
+    if (key == device.title)
     {
       device.setAttribute(values_dict[key], data['attributes'][attributes_dict[key]]);
 

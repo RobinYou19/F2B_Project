@@ -100,30 +100,36 @@ class Title extends HTMLElement
 
   attributeChangedCallback(name, oldValue, newValue)
   {
-    console.log(name);
-    const shadow = this.shadowRoot;
-    const childNodes = Array.from(shadow.childNodes);
-    var titleContent = childNodes[1];
+    try 
+    {
+      const shadow = this.shadowRoot;
+      const childNodes = Array.from(shadow.childNodes);
+      var titleContent = childNodes[1];
 
-    if (titleContent.innerHTML.includes("barometer"))
-    {
-      titleContent.innerHTML = 'barometer.basic :<br>' + newValue + " hPa";
+      if (titleContent.innerHTML.includes("barometer"))
+      {
+        titleContent.innerHTML = 'barometer.basic :<br>' + newValue + " hPa";
+      }
+      else if (titleContent.innerHTML.includes("hygrometer") || this.title.includes("rh"))
+      {
+        titleContent.innerHTML = 'hygrometer.basic :<br>' + newValue + "%";
+      }
+      else if (titleContent.innerHTML.includes("windgauge"))
+      {
+        titleContent.innerHTML = 'windgauge.basic :<br>' + newValue + " km/h";
+      }
+      else if (titleContent.innerHTML.includes("thermometer") || this.title.includes("temp"))
+      {
+        titleContent.innerHTML ='thermometer.basic :<br>' + newValue + "°C";
+      }
+      else if (titleContent.innerHTML.includes("powermeter"))
+      {
+        titleContent.innerHTML ='powermeter.basic :<br>' + newValue + " W";
+      }
     }
-    else if (titleContent.innerHTML.includes("hygrometer") || this.title.includes("rh"))
+    catch(err)
     {
-      titleContent.innerHTML = 'hygrometer.basic :<br>' + newValue + "%";
-    }
-    else if (titleContent.innerHTML.includes("windgauge"))
-    {
-      titleContent.innerHTML = 'windgauge.basic :<br>' + newValue + " km/h";
-    }
-    else if (titleContent.innerHTML.includes("thermometer") || this.title.includes("temp"))
-    {
-      titleContent.innerHTML ='thermometer.basic :<br>' + newValue + "°C";
-    }
-    else if (titleContent.innerHTML.includes("powermeter"))
-    {
-      titleContent.innerHTML ='powermeter.basic :<br>' + newValue + " W";
+      //Do Nothing
     }
   }
 }

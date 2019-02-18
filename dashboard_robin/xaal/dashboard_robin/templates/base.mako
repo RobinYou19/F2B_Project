@@ -38,13 +38,13 @@
 <script src="/static/js/utils/hammer.js"></script>
 <script src="static/js/utils/utils.js"></script>
 
-<script src="/static/js/socketio/socket.io.slim.js"></script>
-<script src="/static/js/site.js"></script>
-
 <script src="/static/js/components/scenario.js"></script>
-<script src="/static/js/components/block_components.js"></script>
+<script src="/static/js/components/block_components_1.js"></script>
 <script src="/static/js/components/components_12.js"></script>
-<script src="/static/js/components/device_0.js"></script>
+<script src="/static/js/components/device_1.js"></script>
+
+<script src="/static/js/socketio/socket.io.slim.js"></script>
+<script src="/static/js/site_1.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="static/css/bootstrap/js/bootstrap.min.js"></script>

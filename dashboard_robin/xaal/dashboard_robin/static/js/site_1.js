@@ -1,16 +1,6 @@
 var evt_bus = null;
 var sio = null;
-
-var lamp_dimmer       = document.getElementsByTagName("lamp-dimmer");
-var powerrelay_basic  = document.getElementsByTagName("powerrelay-basic");
-var powermeter_basic  = document.getElementsByTagName("powermeter-basic");
-var thermometer_basic = document.getElementsByTagName('thermometer-basic');
-var hygrometer_basic  = document.getElementsByTagName('hygrometer-basic');
-var barometer_basic   = document.getElementsByTagName('barometer-basic');
-var windgauge_basic   = document.getElementsByTagName('windgauge-basic');
-
-var devices = [lamp_dimmer, powerrelay_basic, thermometer_basic, hygrometer_basic,
-               barometer_basic, windgauge_basic ];
+devices = []
 
 //================ JS tools ====================================================
 // dumbs functions to mimic jQuery selectors
@@ -24,7 +14,7 @@ var __ = function ( elem ) {
 
 // check if we use a mobile user-agent
 function detectMobile() {
- if( navigator.userAgent.match(/Android/i)
+ if(navigator.userAgent.match(/Android/i)
  || navigator.userAgent.match(/webOS/i)
  || navigator.userAgent.match(/iPhone/i)
  || navigator.userAgent.match(/iPad/i)
@@ -127,25 +117,12 @@ function run_sio()
 
   sio.on('event_attributeChanges', function(data) 
   {
-    for (var i = 0; i < devices.length ; i++)
+    for (var i = 0; i < list_components.length ; i++)
     {
-      for (t in devices[i])
+      var address = list_components[i].address;
+      if (address == data['address'])
       {
-        try
-        {
-          var attrs = devices[i][t].attributes;
-          if (attrs.hasOwnProperty('address'))
-          {
-            if (attrs.address.value == data['address'])
-            {
-              update(devices[i][t], data);
-            }
-          }
-        }
-        catch(err)
-        {
-          console.error(err);
-        }
+        update(list_components[i], data);
       }
     }
   });

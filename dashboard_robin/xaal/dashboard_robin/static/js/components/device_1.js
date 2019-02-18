@@ -1,3 +1,5 @@
+list_components = []
+
 class LampDimmer extends OnOffDevice
 {
   static get observedAttributes() 
@@ -8,6 +10,7 @@ class LampDimmer extends OnOffDevice
   constructor()
   {
     super();
+    list_components.push(this);
   }
 
   attributeChangedCallback(name, oldValue, newValue)
@@ -39,6 +42,7 @@ class PowerRelay extends OnOffDevice
   constructor()
   {
     super();
+    list_components.push(this);
   }
 
   attributeChangedCallback(name, oldValue, newValue)
@@ -70,6 +74,7 @@ class PowerMeter extends OnOffDevice
   constructor()
   {
     super();
+    list_components.push(this);
   }
 
   attributeChangedCallback(name, oldValue, newValue)
@@ -101,6 +106,7 @@ class Thermometer extends BasicDevice
   constructor()
   {
     super();
+    list_components.push(this);
   }
   attributeChangedCallback(name, oldValue, newValue)
   {
@@ -125,6 +131,7 @@ class Hygrometer extends BasicDevice
   constructor()
   {
     super();
+    list_components.push(this);
   }
   attributeChangedCallback(name, oldValue, newValue)
   {
@@ -149,6 +156,7 @@ class Barometer extends BasicDevice
   constructor()
   {
     super();
+    list_components.push(this);
   }
   attributeChangedCallback(name, oldValue, newValue)
   {
@@ -173,6 +181,7 @@ class Windgauge extends BasicDevice
   constructor()
   {
     super();
+    list_components.push(this);
   }
   attributeChangedCallback(name, oldValue, newValue)
   {
@@ -192,6 +201,7 @@ class Gateway extends BasicDevice
   constructor()
   {
     super();
+    list_components.push(this);
   }
 }
 
@@ -202,6 +212,7 @@ class HMI extends BasicDevice
   constructor()
   {
     super();
+    list_components.push(this);
   }
 }
 
