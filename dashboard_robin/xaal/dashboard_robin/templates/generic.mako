@@ -13,19 +13,19 @@
             <img src="/static/imgs/thermometer-profile.png" alt="Thermometer Profile" style="width:300px;height:400px;">
 
           %elif "barometer.basic" in dev.devtype :
-            <img src="/static/imgs/barometer-profile.png" alt="Barometer Profile" style="width:300px;height:400px;">
+            <img src="/static/imgs/barometer-profile2.png" alt="Barometer Profile" style="width:300px;height:400px;">
 
           %elif "hygrometer.basic" in dev.devtype :
-            <img src="/static/imgs/hygrometer-profile.png" alt="Hygrometer Profile" style="width:300px;height:400px;">
+            <img src="/static/imgs/hygrometer-profile2.png" alt="Hygrometer Profile" style="width:300px;height:400px;">
 
           %elif "windgauge.basic" in dev.devtype :
             <img src="/static/imgs/windgauge-profile.png" alt="Windgauge Profile" style="width:300px;height:400px;">
 
           %elif "gateway.basic" in dev.devtype :
-            <img src="/static/imgs/gateway-profile.png" alt="Gateway Profile" style="width:300px;height:400px;">
+            <img src="/static/imgs/gateway-profile2.png" alt="Gateway Profile" style="width:300px;height:400px;">
 
           %elif "hmi.basic" in dev.devtype :
-            <img src="/static/imgs/hmi.png" alt="HMI Profile" style="width:300px;height:400px;">
+            <img src="/static/imgs/lampe-profile.png" alt="HMI Profile" style="width:300px;height:400px;">
 
           %elif "powerrelay.basic" in dev.devtype :
             <img src="/static/imgs/powerrelay-profile.png" alt="PowerRelay Profile" style="width:300px;height:400px;"> 

@@ -75,16 +75,16 @@
 %>
 <div class='col-sm-3'>
 	%if first_hygrometer :
-		<hygrometer-basic address=${first_hygrometer.address} title=${double_hygrometers[0][0]} value=${first.attributes['windStrength']} src='static/imgs/hygrometer-profile.png' width='50'></hygrometer-basic>
+		<hygrometer-basic address=${first_hygrometer.address} title=${double_hygrometers[0][0]} value=${first.attributes['windStrength']} src='static/imgs/hygrometer-profile2.png' width='50'></hygrometer-basic>
 		<hr>
 	%else :
-		<notfound-device name=${double_hygrometers[0][1]} src='static/imgs/hygrometer-profile.png'></notfound-device>
+		<notfound-device name=${double_hygrometers[0][1]} src='static/imgs/hygrometer-profile2.png'></notfound-device>
 	%endif
 	<hr>
 	%if second_hygrometer :
-		<hygrometer-basic address=${second_hygrometer.address} title=${double_hygrometers[0][1]} value=${second.attributes['windStrength']} src='static/imgs/hygrometer-profile.png' width='50'></hygrometer-basic>
+		<hygrometer-basic address=${second_hygrometer.address} title=${double_hygrometers[0][1]} value=${second.attributes['windStrength']} src='static/imgs/hygrometer-profile2.png' width='50'></hygrometer-basic>
 	%else :
-		<notfound-device name=${double_hygrometers[0][1]} src='static/imgs/hygrometer-profile.png'></notfound-device>
+		<notfound-device name=${double_hygrometers[0][1]} src='static/imgs/hygrometer-profile2.png'></notfound-device>
 	%endif
 </div>
 
@@ -131,12 +131,12 @@
 
 	%elif "barometer.basic" in dev.devtype :
 		<div class='col-sm-3'>
-			<barometer-basic address=${dev.address} title=${dev.devtype}  value=${dev.attributes['pressure']} src="static/imgs/barometer-profile.png"></barometer-basic>
+			<barometer-basic address=${dev.address} title=${dev.devtype}  value=${dev.attributes['pressure']} src="static/imgs/barometer-profile2.png"></barometer-basic>
 		</div>
 
 	%elif "hygrometer.basic" in dev.devtype :
 		<div class='col-sm-3'>
-			<hygrometer-basic address=${dev.address} title=${dev.devtype} value=${dev.attributes['humidity']} src='/static/imgs/hygrometer-profile.png'></hygrometer-basic>
+			<hygrometer-basic address=${dev.address} title=${dev.devtype} value=${dev.attributes['humidity']} src='/static/imgs/hygrometer-profile2.png'></hygrometer-basic>
 		</div>	
 
 	%elif "windgauge.basic" in dev.devtype :
@@ -150,12 +150,12 @@
 %for dev in devs :
 	%if "gateway.basic" in dev.devtype :
 		<div class='col-sm-3'>
-			<gateway-basic address=${dev.address} title=${dev.devtype} src='/static/imgs/gateway-profile.png'></gateway-basic>
+			<gateway-basic address=${dev.address} title=${dev.devtype} src='/static/imgs/gateway-profile2.png'></gateway-basic>
 		</div>	
 
 	%elif "hmi.basic" in dev.devtype :
 		<div class='col-sm-3'>
-			<hmi-basic address=${dev.address} title=${dev.devtype} src='/static/imgs/hmi.png'></hmi-basic>
+			<hmi-basic address=${dev.address} title=${dev.devtype} src='/static/imgs/lampe-profile.png'></hmi-basic>
 		</div>
 
 	%endif
