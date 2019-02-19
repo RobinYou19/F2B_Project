@@ -1,3 +1,15 @@
-test1
-test2
-test3
+{
+	"author"   : "Robin You",
+	"date"     : "19/02/2019",
+	"app name" :	"xAAL Dashboard",
+	"pages" :
+		{
+			"menu" : {},
+			"house" : {},
+			"modules" : {},
+			"favorites" : {},
+			"scenarios" : {},
+			"configuration" : {},
+			"account" : {}
+		}
+}

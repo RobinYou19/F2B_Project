@@ -7,10 +7,10 @@ import copy, json, os
 #GLOBAL VARIABLES
 this_directory = os.path.dirname(os.path.abspath(__file__))
 filename = '/../../../config.json'
-path = this_directory + filename
+config_path = this_directory + filename
 
-my_file = open(path, 'r')
-my_lines = my_file.readlines()
+with open(config_path) as f:
+  data = json.load(f)
 
 double_lamps        = [('lamp_entree' , 'lamp_couloir'), 
                        ('lamp_salon'  , 'lamp_salle'),
@@ -31,12 +31,12 @@ wall_plug           = ["5e50a1ed-5290-4cdb-b00f-1f968eee4401",
 @route('/menu')
 @view('menu.mako')
 def menu():
-    return {'title' : 'menu', 'lines' : my_lines}
+    return {'title' : 'menu', 'data' : data}
 
 @route('/house')
 @view('house.mako')
 def get_devices_house():
-    r = {"title" : "devices list"}
+    r = {"title" : "House"}
     devs = xaal_core.monitor.devices
     r.update({"devs" : devs})
     r.update({"double_lamps" : double_lamps})
