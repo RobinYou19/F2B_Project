@@ -31,7 +31,7 @@ wall_plug           = ["5e50a1ed-5290-4cdb-b00f-1f968eee4401",
 @route('/menu')
 @view('menu.mako')
 def menu():
-    return {'title' : 'menu', 'data' : data}
+    return {'title' : 'menu'}
 
 @route('/house')
 @view('house.mako')
@@ -44,6 +44,7 @@ def get_devices_house():
     r.update({"double_thermometers" : double_thermometers})
     r.update({"double_hygrometers" : double_hygrometers})
     r.update({"wall_plug" : wall_plug})
+    r.update({'house' : data['pages']['house']})
     return r
 
 @route('/modules')
