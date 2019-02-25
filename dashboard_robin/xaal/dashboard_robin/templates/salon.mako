@@ -1,11 +1,18 @@
 <%inherit file="base.mako"/>
 
-<% lamp = devs.fetch_one_kv('nickname', lamp_salon) %>
-
-<div class='col-sm-3'>
-	%if lamp :
-		<lamp-dimmer address=${lamp.address} title=${lamp_salon} status=${first_lamp.attributes['light']} src='static/imgs/lampe-profile.png'></lamp-dimmer>
+%for device in list :
+	<div class='col-sm-3'>
+	<% is_here = devs.fetch_one_kv('nickname', device['nickname']) %>
+	%if is_here :
+		%try:
+			<${device['component_type']} address=${is_here.address} title=${device['nickname']} src=${device['src']} width=${device['width']} value=${is_here.attributes[device['value']]}></${device['component_type']}>
+		%except :
+			<%
+				# do nothing
+			%>
+		%endtry
 	%else :
-		<notfound-device name=${lamp_salon} src='static/imgs/lampe-profile.png'></notfound-device>
+		<notfound-device name=${device['nickname']} src=${device['src']}></notfound-device>	
 	%endif
-</div>
+	</div>
+%endfor
