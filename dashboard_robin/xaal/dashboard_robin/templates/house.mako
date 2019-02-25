@@ -82,7 +82,7 @@
 	%>
 	<div class='col-sm-3'>
 	%if first_hygrometer :
-		<hygrometer-basic address=${first_hygrometer.address} title=${couple[0]['name']} value=${first_hygrometer.attributes['temperature']} src='static/imgs/hygrometer-profile.png' width='50'></hygrometer-basic>
+		<hygrometer-basic address=${first_hygrometer.address} title=${couple[0]['name']} value=${first_hygrometer.attributes['temperature']} src='static/imgs/hygrometer-profile2.png' width='50'></hygrometer-basic>
 	%else :
 		%try :
 			<% couple[0]['address'] %>
