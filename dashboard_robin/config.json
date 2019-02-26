@@ -309,15 +309,29 @@
 		,
 		"favorites" : 
 		{
+			"dynamic" :
+			[
+				"lamp.dimmer",
+				"powerrelay.basic",
+				"thermometer.basic"
+			],
+			"static" :
+			[
 
+			]
 		},
 		"scenarios" : 
 		{
+			"default" : "true",
+			"user" :
+			[
 
+			]
 		},
 		"configuration" : 
 		{
-
+			"display_devices"        : "true",
+			"display_config_file"    : "true" 
 		},
 		"account" : 
 		{
