@@ -1,5 +1,29 @@
 <%inherit file="base.mako"/>
 
+<style type='text/css'>
+
+%for balise in house['css']:
+	${balise} 
+	{
+	<% 
+		dict_string = house['css'][balise]['string'] 
+		dict_int    = house['css'][balise]['int']
+	%>
+	%for key, value in dict_string.items():
+		%if key.count('background-image') :
+		${key} : url("${value}") ;
+		%else :
+			${key} : "${value}" ;
+		%endif
+	%endfor
+	%for key, value in dict_int.items():
+		${key} : ${value} ;
+	%endfor
+	}
+%endfor
+
+</style>
+
 <body>
 
 %if house['static']['display_clock'] == "true":
@@ -30,7 +54,6 @@
 		%except :
 			<notfound-device name=${couple[0]['name']} src='static/imgs/lampe-profile.png'></notfound-device>
 		%endtry
-	<hr>
 	%endif
 	%if second_lamp :
 		<lamp-dimmer address=${second_lamp.address} title=${couple[0]['name']} status=${second_lamp.attributes['light']} src='static/imgs/lampe-profile.png'></lamp-dimmer>
@@ -61,7 +84,6 @@
 			<notfound-device name=${couple[0]['name']} src='static/imgs/thermometer-profile.png'></notfound-device>
 		%endtry
 	%endif
-	<hr>
 	%if second_thermometer :
 		<thermometer-basic address=${second_thermometer.address} title=${couple[0]['name']} value=${second_thermometer.attributes['temperature']} src='static/imgs/thermometer-profile.png' width='50'></thermometer-basic>
 	%else :
@@ -91,7 +113,6 @@
 			<notfound-device name=${couple[0]['name']} src='static/imgs/hygrometer-profile2.png'></notfound-device>
 		%endtry
 	%endif
-	<hr>
 	%if second_hygrometer :
 		<hygrometer-basic address=${second_hygrometer.address} title=${couple[0]['name']} value=${second_hygrometer.attributes['temperature']} src='static/imgs/hygrometer-profile2.png' width='50'></hygrometer-basic>
 	%else :
@@ -122,7 +143,7 @@
 			<notfound-device name=${shutter['name']} src='static/imgs/shutter-profile.png'></notfound-device>
 		%endif
 		%if i != size :
-			<hr>
+	
 		%endif
 	%endfor
 </div>
@@ -137,7 +158,6 @@
 	%else :
 		<notfound-device name=${house['static']['devices']['singles']['power_relays'][0]['name']} src='static/imgs/powerrelay-profile.png'></notfound-device>	
 	%endif
-	<hr>
 	%if power_meter :
 		<powermeter-basic address=${power_meter.address} title=${house['static']['devices']['singles']['power_meters'][0]['name']} value=${power_meter.attributes['power']} src='/static/imgs/powermeter-profile.png'></powermeter-basic>
 	%else :

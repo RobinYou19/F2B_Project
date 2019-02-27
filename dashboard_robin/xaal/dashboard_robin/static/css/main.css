@@ -1,6 +1,6 @@
 body 
 {
-  background-image: url("/static/imgs/background.jpg");
+  background-image : url("/static/imgs/background.jpg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -9,19 +9,16 @@ body
   text-align: center;
   font-family: "Lato", sans-serif;
 }
-
-@media screen and (max-width: 700px) 
-{
-  body 
-  {
-    padding: 0 0 0 0;
-    width: 20%
-  }
-}
-
 a 
 {
   color: inherit;
+}
+
+.col-sm-3
+{
+  position: relative;
+  float: left;
+  width: 25%;
 }
 
 .topnav 
@@ -419,7 +416,7 @@ a
 {
   border-style: groove;
   height: 150%;
-  margin: 5%;
+  margin: 2%;
 }
 
 .box
@@ -445,17 +442,14 @@ div#watch
 {
   position: relative;
   margin: auto;
-  width: 150px;
-  height:150px;
+  width: 137px;
+  height:137px;
   
   border-radius: 100px;
   border: 2px solid #5cb8ff;
   box-shadow: 0 0 10px 2px #123;
   
   background-color: #123;
-
-  margin-top: 5%;
-  margin-bottom: 5%;
 }
 
 div#hours, div#minutes 
@@ -475,14 +469,14 @@ div#hours, div#minutes
 div#hours 
 {
   z-index:10;
-  width: 45px;
+  width: 30px;
   height: 2px;  
 }
 
 div#minutes 
 {
   z-index:15;
-  width: 70px;
+  width: 60px;
   height: 2px;  
   
   background-color: #000;   

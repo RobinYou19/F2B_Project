@@ -1,7 +1,7 @@
 <%inherit file="base.mako"/>
 
 %for module in modules :
-	<div class='col-sm-4'>
+	<div class='col-sm-3'>
 		<div class='link_category'>
 		%try :
 				<basic-title title=${module['name']}></basic-title>

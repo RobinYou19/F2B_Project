@@ -4,9 +4,28 @@
 	"app name" : "xAAL Dashboard_Robin",
 	"pages" :
 	{
-		"menu"  : {},
+		"menu"  : 
+		{
+			"css" :
+			{
+				
+			}
+		},
 		"house" : 
 		{
+			"css" :
+			{
+				"body" : 
+				{
+					"string" :
+					{
+						"background-image" : "/static/imgs/background.jpg"
+					},
+					"int" :
+					{
+					} 
+				}
+			},
 			"static" : 
 			{
 				"display_clock" : "true",

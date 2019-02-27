@@ -1,5 +1,31 @@
 <%inherit file="base.mako"/>
 
+<style type='text/css'>
+
+%for balise in menu['css']:
+  ${balise} 
+  {
+  <% 
+    dict_string = house['css'][balise]['string'] 
+    dict_int    = house['css'][balise]['int']
+  %>
+  %for key, value in dict_string.items():
+    %if key.count('background-image') :
+    ${key} : url("${value}") ;
+    %else :
+      ${key} : "${value}" ;
+    %endif
+  %endfor
+  %for key, value in dict_int.items():
+    ${key} : ${value} ;
+  %endfor
+  }
+%endfor
+
+</style>
+
+<body>
+
 <nav class="menu">
   <input type="checkbox" href="#" class="menu-open" name="menu-open" id="menu-open" />
   <label class="menu-open-button" for="menu-open">
@@ -15,3 +41,5 @@
   <a href="/configuration" class="menu-item orange"> <i class="fas fa-tools"></i> </a>
   <a href="/account" class="menu-item lightblue"> <i class="fa fa-user-circle"></i> </a>
 </nav>
+
+</body>

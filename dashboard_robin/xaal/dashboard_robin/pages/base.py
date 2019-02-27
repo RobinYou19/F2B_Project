@@ -18,7 +18,9 @@ with open(config_path) as f:
 @route('/menu')
 @view('menu.mako')
 def menu():
-    return {'title' : 'menu'}
+    r =  {'title' : 'menu'}
+    r.update({'menu' : data['pages']['menu']})
+    return r
 
 @route('/house')
 @view('house.mako')

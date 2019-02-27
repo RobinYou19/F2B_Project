@@ -10,7 +10,6 @@
   <meta name="description" content="" />
   <meta name="mobile-web-app-capable" content="yes">
   <link rel="manifest" href="/static/manifest.json">
-  <link rel="stylesheet" href="/static/css/bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="/static/css/main.css">
   <link rel="stylesheet" href="/static/fonts/fontawesome/css/all.css">
   <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
@@ -46,6 +45,4 @@
 <script src="/static/js/socketio/socket.io.slim.js"></script>
 <script src="/static/js/site_2.js"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="static/css/bootstrap/js/bootstrap.min.js"></script>
 </html>
