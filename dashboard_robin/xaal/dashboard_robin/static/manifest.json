@@ -1,12 +1,13 @@
 {
     "short_name": "xAAL Dash",
-    "name": "xAAL SocketIO DashBoard",
+    "name": "xAAL SocketIO DashBoard Robin",
     "background_color": "#fff",
     "display": "standalone",
     "start_url": "/",
-    "icons": [
+    "icons": 
+    [
         {
-            "src": "/static/imgs/launcher-icon-4x.png",
+            "src": "/static/imgs/house.ico",
             "type": "image/png",
             "sizes": "192x192"
         }

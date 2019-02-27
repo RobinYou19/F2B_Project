@@ -8,8 +8,7 @@
   <title>${title}</title>
   <meta name="keywords"               content="" />
   <meta name="description"            content="" />
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel ="manifest"   href="/static/manifest.json">
+  <meta name="mobile-web-app-capable" content="yes" />
   <link rel ="stylesheet" href="/static/css/main.css">
   <link rel ="stylesheet" href="/static/fonts/fontawesome/css/all.css">
 </head>
