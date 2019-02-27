@@ -1,0 +1,90 @@
+<html>
+<body>
+
+<script src="https://unpkg.com/lighterhtml"></script>
+
+<script>
+
+// dumbs functions to mimic jQuery selectors
+var _ = function ( elem ) {
+  return document.querySelector( elem );
+}
+
+var devices = [];
+
+const {render, html} = lighterhtml;
+
+class MyCE extends HTMLElement {
+  static get observedAttributes() { return ['title']; }
+  constructor() {
+    super();
+    devices.push(this);
+    this.render = render.bind(
+      this,
+      this.attachShadow({mode: 'closed'}),
+      this.render
+    );
+    this.state = {yup: 0, nope: 0};
+  }
+
+  connectedCallback() {
+    if (this.getAttribute('addr')) {
+      this.title = this.getAttribute('addr');
+    }
+    this.update();
+  }
+
+  attributeChangedCallback() { this.update(); }
+
+  update() {
+    this.render();
+  }
+
+  render() {
+    const {yup, nope} = this.state; 
+    return html`
+    Title: <strong>${this.title} : </strong>
+    <button data-key=yup onclick=${this}>yup ${yup}</button>
+    <button data-key=nope onclick=${this}>nope ${nope}</button>`;
+  }
+
+  handleEvent(event) {
+    this[`on${event.type}`](event);
+  }
+
+  onclick(event) {
+    event.preventDefault();
+    const {key} = event.currentTarget.dataset;
+    this.state[key]++;
+    this.render();
+  }
+}
+customElements.define('my-ce', MyCE);
+</script>
+
+
+<!-- use new web component -->
+<my-ce id="foo" addr="xxxx"></my-ce><br/>
+<my-ce id="bar" addr="grrr"></my-ce>
+
+<!-- build list of devices -->
+<hr/>
+Devices: <ul id="devices"></ul>
+<script>
+  const disp = (dev) => html`<li>${dev.title}!</li>`;
+  render(_('#devices'), () => html`${devices.map(disp)}`);
+</script>
+
+ 
+<!-- create a new device in pure JS and display it -->
+<hr/>
+New Dev: <div id="new_dev"></div>
+<script>
+  obj = new MyCE();
+  obj.title = 'Pure JS Device';
+  render(_('#new_dev'),() => obj);
+</script>
+
+
+</body>
+</html>
