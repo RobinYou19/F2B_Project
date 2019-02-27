@@ -6,15 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>${title}</title>
-  <meta name="keywords" content="" />
-  <meta name="description" content="" />
+  <meta name="keywords"               content="" />
+  <meta name="description"            content="" />
   <meta name="mobile-web-app-capable" content="yes">
-  <link rel="manifest" href="/static/manifest.json">
-  <link rel="stylesheet" href="/static/css/main.css">
-  <link rel="stylesheet" href="/static/fonts/fontawesome/css/all.css">
-  <link href='https://fonts.googleapis.com/css?family=Sofia' rel='stylesheet'>
-
+  <link rel ="manifest"   href="/static/manifest.json">
+  <link rel ="stylesheet" href="/static/css/main.css">
+  <link rel ="stylesheet" href="/static/fonts/fontawesome/css/all.css">
 </head>
+
 <body>
   <div class="topnav" id="myTopnav"><b>
     <a href="/menu">Menu</a>
@@ -32,17 +31,17 @@
   <div id="main">
     ${self.body()}
   </div>
-
 </body>
+
 <script src="/static/js/utils/hammer.js"></script>
-<script src="static/js/utils/utils.js"></script>
+<script src="/static/js/utils/utils.js"></script>
 
 <script src="/static/js/components/scenario.js"></script>
 <script src="/static/js/components/block_components.js"></script>
-<script src="/static/js/components/components_12.js"></script>
-<script src="/static/js/components/device_1.js"></script>
+<script src="/static/js/components/components.js"></script>
+<script src="/static/js/components/device.js"></script>
 
 <script src="/static/js/socketio/socket.io.slim.js"></script>
-<script src="/static/js/site_2.js"></script>
+<script src="/static/js/site.js"></script>
 
 </html>
