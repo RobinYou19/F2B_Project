@@ -39,7 +39,7 @@
 <script src="static/js/utils/utils.js"></script>
 
 <script src="/static/js/components/scenario.js"></script>
-<script src="/static/js/components/block_components_1.js"></script>
+<script src="/static/js/components/block_components.js"></script>
 <script src="/static/js/components/components_12.js"></script>
 <script src="/static/js/components/device_1.js"></script>
 
