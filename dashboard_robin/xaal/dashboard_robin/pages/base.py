@@ -15,6 +15,12 @@ with open(config_path) as f:
 #################################################################
 #@ MENU PAGES
 
+@route ('/login')
+@view ('login.mako')
+def login():
+    r =  {'title' : 'Login'}
+    return r
+
 @route('/menu')
 @view('menu.mako')
 def menu():

@@ -9,7 +9,7 @@
   <meta name="keywords"               content="" />
   <meta name="description"            content="" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <link rel ="stylesheet" href="/static/css/main.css">
+  <link rel ="stylesheet" href="/static/css/main_3.css">
   <link rel ="stylesheet" href="/static/fonts/fontawesome/css/all.css">
 </head>
 
@@ -36,8 +36,8 @@
 <script src="/static/js/utils/utils.js"></script>
 
 <script src="/static/js/components/scenario.js"></script>
-<script src="/static/js/components/block_components.js"></script>
-<script src="/static/js/components/components.js"></script>
+<script src="/static/js/components/block_components_2.js"></script>
+<script src="/static/js/components/components_2.js"></script>
 <script src="/static/js/components/device.js"></script>
 
 <script src="/static/js/socketio/socket.io.slim.js"></script>

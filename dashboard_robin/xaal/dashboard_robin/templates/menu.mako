@@ -6,8 +6,8 @@
   ${balise} 
   {
   <% 
-    dict_string = house['css'][balise]['string'] 
-    dict_int    = house['css'][balise]['int']
+    dict_string = menu['css'][balise]['string'] 
+    dict_int    = menu['css'][balise]['int']
   %>
   %for key, value in dict_string.items():
     %if key.count('background-image') :

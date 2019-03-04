@@ -38,10 +38,20 @@ class NotFoundDevice extends HTMLElement
       content.setAttribute('class', 'unfound');
 
       title.setAttribute('title', this.name);
+      title.setAttribute('class', 'not_found_title');
 
       shadow.appendChild(style);
       shadow.appendChild(content);
       content.appendChild(title);
+
+      if (this.src != 'NoSrc')
+      {
+        var image = document.createElement('image-basic');
+        image.setAttribute('src', this.src);
+        image.setAttribute('class', 'not_found_image');
+
+        content.appendChild(image);
+      }
 
       style.textContent = `
       .unfound
@@ -49,18 +59,11 @@ class NotFoundDevice extends HTMLElement
         background-color: LightGray;
         border-style: groove;
         border-radius: 5px;
-        height: 150%;
+        height: 140px;
         margin: 5%;
+        padding: 0px;
       }
       `;
-
-      if (this.src != 'NoSrc')
-      {
-        var image = document.createElement('image-basic');
-        image.setAttribute('src', this.src);
-
-        content.appendChild(image);
-      }
     }
   }
 }
@@ -159,8 +162,9 @@ class BasicDevice extends HTMLElement
         background-color: rgba(22, 137, 237, 1);
         border-style: groove;
         border-radius: 5px;
-        height: 150%;
+        height: 140px;
         margin: 5%;
+        padding: 0px;
       }
       `;
 
@@ -275,8 +279,9 @@ class OnOffDevice extends HTMLElement
       {
         border-style: groove;
         border-radius: 5px;
-        height: 150%;
+        height: 140px;
         margin: 5%;
+        padding: 0px;
       }
 
       .box-on
@@ -396,8 +401,9 @@ class UDSDevice extends HTMLElement
         background-color: rgba(22, 137, 237, 1);
         border-style: groove;
         border-radius: 5px;
-        height: 150%;
+        height: 140px;
         margin: 5%;
+        padding: 0px;
       }
       `;
 

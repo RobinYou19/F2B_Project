@@ -97,6 +97,7 @@ class Title extends HTMLElement
       h4
       {
         font-style: bold;
+        margin: 5%;
       }
       `;
 
@@ -212,7 +213,12 @@ class basicImage extends HTMLElement
       img.setAttribute('height', this.height);
       img.setAttribute('width',  this.width);
 
-      style.textContent = ``;
+      style.textContent = `
+      img
+      {
+        margin: 0.5%;
+      }
+      `;
 
       shadow.appendChild(style);
       shadow.appendChild(link);
@@ -290,7 +296,6 @@ class OnOffButtons extends HTMLElement
         border: none;
         border-radius: 15px;
         box-shadow: 0 2px #999;
-        margin: 1px 1px 3px 1px;
       }
 
       .button:active 
@@ -410,7 +415,6 @@ class UDSButtons extends HTMLElement
         border: none;
         border-radius: 15px;
         box-shadow: 0 2px #999;
-        margin: 1px 1px 3px 1px;
       }
 
       .button:active 

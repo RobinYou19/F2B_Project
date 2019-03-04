@@ -23,7 +23,7 @@ def send_static(filename):
 
 @get('/')
 def goto_home():
-    redirect('/menu')
+    redirect('/login')
     
 def run():
     """ start the xAAL stack & launch the HTTP stuff"""
