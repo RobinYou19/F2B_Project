@@ -15,20 +15,13 @@ def get_config_file():
 
   try :
     login = my_lines[0]
-
     filename = '/../../../Configuration/config_' + login +'.json'
     config_path = this_directory + filename
 
     with open(config_path) as f:
       data = json.load(f)
-
   except :
-
-    filename = '/../../../Configuration/default_config.json'
-    config_path = this_directory + filename
-
-    with open(config_path) as f:
-      data = json.load(f)
+    data = "Sorry but you're not welcome here !"
   my_logins.close()
   return data
 
@@ -44,22 +37,35 @@ def login():
 @route ('/login', method='POST')
 @view('menu.mako')
 def do_login():
-  hash_object = hashlib.sha256(request.forms.get("pseudo").encode('utf-8'))
-  hex_digit = hash_object.hexdigest()
-  filename = '/../../../Database/db.txt'
+  authenticated = False
   this_directory = os.path.dirname(os.path.abspath(__file__))
+  hash_object = hashlib.sha256(request.forms.get("password").encode('utf-8'))
+  hash_pwd = hash_object.hexdigest()
+  filename = '/../../../Database/db.txt'
   config_path = this_directory + filename
-  my_file = open(config_path, 'w')
-  my_file.write(hex_digit)
+  my_file = open(config_path, 'r')
+  lines = my_file.readlines()
+  log_file = '/../../../Logins/logins.txt'
+  config_path = this_directory + log_file
+  my_file_2 = open(config_path, 'w')
+
+  for i in range(len(lines)//2):
+    if (lines[2*i].replace('\n','') == request.forms.get("pseudo")) and (lines[2*i+1] == str(hash_pwd)) :
+        authenticated = True
+        my_file_2.write(request.forms.get("pseudo"))
+  
+  my_file_2.close()
   my_file.close()
-  filename = '/../../../Logins/logins.txt'
-  config_path = this_directory + filename
-  my_file = open(config_path, 'w')
-  my_file.write(request.forms.get("pseudo"))
-  my_file.close()
+  if authenticated :
+    print('Authentication Granted')
+  else :
+    print('Authentication Failed')
   r = {'title' : 'Menu'}
   data = get_config_file()
-  r.update({'menu' : data['pages']['menu']})
+  try :
+    r.update({'menu' : data['pages']['menu']})
+  except :
+    print('Try to log in again ...')
   return r
 
 @route('/menu')
@@ -173,6 +179,7 @@ def account():
     r = {'title' : 'Account'}
     devs = xaal_core.monitor.devices
     r.update({'devs' : devs})
+    r.update({'bug_var' : data['pages']['account']})
     return r
 
 
