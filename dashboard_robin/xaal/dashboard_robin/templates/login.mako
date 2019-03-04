@@ -8,10 +8,10 @@
 
 <body>
 
-<form class="box">
-  <input type="text" placeholder="Username">
-  <input type="password" placeholder="Password">
-  <input type="button" value="Login" onclick="check();">
+<form class="box" action="/login" method="post">
+  <input type="text" placeholder="Username" name="pseudo">
+  <input type="password" placeholder="Password" name="password">
+  <input type="submit" value="login">
 </form>
 
 </body>

@@ -1,4 +1,5 @@
 {
+	"file name": "config_robin.json",
 	"author"   : "Robin You",
 	"date"     : "19/02/2019",
 	"app name" : "xAAL Dashboard_Robin",
@@ -8,7 +9,16 @@
 		{
 			"css" :
 			{
-				
+				"body" : 
+				{
+					"string" :
+					{
+						"background-image" : "/static/imgs/background.jpg"
+					},
+					"int" :
+					{
+					} 
+				}				
 			}
 		},
 		"house" : 

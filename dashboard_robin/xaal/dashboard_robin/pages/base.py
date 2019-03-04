@@ -2,15 +2,35 @@ from .default import view,route,xaal_core
 
 from bottle import request,redirect,get,post, static_file
 
-import copy, json, os
+import copy, json, os, hashlib
 
 #GLOBAL VARIABLES
-this_directory = os.path.dirname(os.path.abspath(__file__))
-filename = '/../../../config.json'
-config_path = this_directory + filename
 
-with open(config_path) as f:
-  data = json.load(f)
+def get_config_file():
+  this_directory = os.path.dirname(os.path.abspath(__file__))
+  logins = '/../../../Logins/logins.txt'
+  logins_path = this_directory + logins
+  my_logins = open(logins_path, 'r')
+  my_lines = my_logins.readlines()
+
+  try :
+    login = my_lines[0]
+
+    filename = '/../../../Configuration/config_' + login +'.json'
+    config_path = this_directory + filename
+
+    with open(config_path) as f:
+      data = json.load(f)
+
+  except :
+
+    filename = '/../../../Configuration/default_config.json'
+    config_path = this_directory + filename
+
+    with open(config_path) as f:
+      data = json.load(f)
+  my_logins.close()
+  return data
 
 #################################################################
 #@ MENU PAGES
@@ -18,12 +38,34 @@ with open(config_path) as f:
 @route ('/login')
 @view ('login.mako')
 def login():
-    r =  {'title' : 'Login'}
-    return r
+  r =  {'title' : 'Login'}
+  return r
+
+@route ('/login', method='POST')
+@view('menu.mako')
+def do_login():
+  hash_object = hashlib.sha256(request.forms.get("pseudo").encode('utf-8'))
+  hex_digit = hash_object.hexdigest()
+  filename = '/../../../Database/db.txt'
+  this_directory = os.path.dirname(os.path.abspath(__file__))
+  config_path = this_directory + filename
+  my_file = open(config_path, 'w')
+  my_file.write(hex_digit)
+  my_file.close()
+  filename = '/../../../Logins/logins.txt'
+  config_path = this_directory + filename
+  my_file = open(config_path, 'w')
+  my_file.write(request.forms.get("pseudo"))
+  my_file.close()
+  r = {'title' : 'Menu'}
+  data = get_config_file()
+  r.update({'menu' : data['pages']['menu']})
+  return r
 
 @route('/menu')
 @view('menu.mako')
 def menu():
+    data = get_config_file()
     r =  {'title' : 'Menu'}
     r.update({'menu' : data['pages']['menu']})
     return r
@@ -31,6 +73,7 @@ def menu():
 @route('/house')
 @view('house.mako')
 def get_devices_house():
+    data = get_config_file()
     r = {'title' : 'House'}
     devs = xaal_core.monitor.devices
     r.update({'devs' : devs})
@@ -40,6 +83,7 @@ def get_devices_house():
 @route('/modules')
 @view('modules.mako')
 def modules():
+    data = get_config_file()
     r = {'title':'Modules'}
     r.update({'modules' : data['pages']['modules']})
     return r
@@ -47,6 +91,7 @@ def modules():
 @route('/scenarios')
 @view('scenarios.mako')
 def scenarios():
+    data = get_config_file()
     r = {'title':'Scenarios'}
     r.update({'scenarios' : data['pages']['scenarios']})
     return r
@@ -54,6 +99,7 @@ def scenarios():
 @route('/favorites')
 @view('favorites.mako')
 def favorites():
+    data = get_config_file()
     r = {'title':'Favorites'}
     devs = xaal_core.monitor.devices
     r.update({'devs' : devs})
@@ -63,6 +109,7 @@ def favorites():
 @route('/configuration')
 @view('configuration.mako')
 def configuration():
+    data = get_config_file()
     r = {'title' : 'Configuration'}
     devs = xaal_core.monitor.devices
     r.update({'devs' : devs})
@@ -72,6 +119,7 @@ def configuration():
 @route('/config_file')
 @view('configuration_file.mako')
 def configuration():
+    data = get_config_file()
     r = {'title' : 'Configuration File'}
     r.update({'data' : data})
     return r
@@ -79,6 +127,7 @@ def configuration():
 @route('/config_device')
 @view('configuration_device.mako')
 def configuration():
+    data = get_config_file()
     r = {'title' : 'Configuration Device'}
     devs = xaal_core.monitor.devices
     r.update({'devs' : devs})
@@ -87,6 +136,7 @@ def configuration():
 @get('/edit_metadata/<addr>')
 @view('edit_metadata.mako')
 def edit_metadata(addr):
+    data = get_config_file()
     r = {'title' : 'device %s' % addr}
     dev = xaal_core.get_device(addr)
     if dev:
@@ -97,6 +147,7 @@ def edit_metadata(addr):
 @post('/edit_metadata/<addr>')
 @view('edit_metadata.mako')
 def save_metadata(addr):
+    data = get_config_file()
     form = dict(request.forms.decode()) # just to shut up lint
     kv = {}
     for k in form:
@@ -118,6 +169,7 @@ def save_metadata(addr):
 @route('/account')
 @view('account.mako')
 def account():
+    data = get_config_file()
     r = {'title' : 'Account'}
     devs = xaal_core.monitor.devices
     r.update({'devs' : devs})
@@ -130,6 +182,7 @@ def account():
 @route('/type')
 @view('type.mako')
 def type():
+    data = get_config_file()
     r =  {'title':'Type'}
     r.update({'objects' : data['pages']['modules'][0]['objects']})
     return r
@@ -137,6 +190,7 @@ def type():
 @route('/localisation')
 @view('localisation.mako')
 def localisation():
+    data = get_config_file()
     r = {'title':'Localisation'}
     r.update({'objects' : data['pages']['modules'][1]['objects']})
     return r
@@ -148,6 +202,7 @@ def localisation():
 @route('/barometers')
 @view('barometers.mako')
 def get_devices_barometers():
+    data = get_config_file()
     r = {'title' : 'devices list'}
     devs = xaal_core.monitor.devices
     r.update({'devs' : devs})
@@ -157,6 +212,7 @@ def get_devices_barometers():
 @route('/gateways')
 @view('gateways.mako')
 def get_devices_gateways():
+    data = get_config_file()
     r = {'title' : 'devices list'}
     devs = xaal_core.monitor.devices
     r.update({'devs' : devs})
@@ -166,6 +222,7 @@ def get_devices_gateways():
 @route('/hmis')
 @view('hmis.mako')
 def get_devices_hmis():
+    data = get_config_file()
     r = {'title' : 'devices list'}
     devs = xaal_core.monitor.devices
     r.update({'devs' : devs})
@@ -175,6 +232,7 @@ def get_devices_hmis():
 @route('/hygrometers')
 @view('hygrometers.mako')
 def get_devices_hygrometers():
+    data = get_config_file()
     r = {'title' : 'devices list'}
     devs = xaal_core.monitor.devices
     r.update({'devs' : devs})
@@ -184,6 +242,7 @@ def get_devices_hygrometers():
 @route('/lights')
 @view('lights.mako')
 def get_devices_lights():
+    data = get_config_file()
     r = {'title' : 'devices list'}
     devs = xaal_core.monitor.devices
     r.update({'devs' : devs})
@@ -193,6 +252,7 @@ def get_devices_lights():
 @route('/power_relays')
 @view('power_relays.mako')
 def get_devices_power_relays():
+    data = get_config_file()
     r = {'title' : 'devices list'}
     devs = xaal_core.monitor.devices
     r.update({'devs' : devs})
@@ -202,6 +262,7 @@ def get_devices_power_relays():
 @route('/thermometers')
 @view('thermometers.mako')
 def get_devices_thermometers():
+    data = get_config_file()
     r = {'title' : 'devices list'}
     devs = xaal_core.monitor.devices
     r.update({'devs' : devs})
@@ -211,6 +272,7 @@ def get_devices_thermometers():
 @route('/windgauges')
 @view('windgauges.mako')
 def get_devices_windgauges():
+    data = get_config_file()
     r = {'title' : 'devices list'}
     devs = xaal_core.monitor.devices
     r.update({'devs' : devs})
@@ -224,6 +286,7 @@ def get_devices_windgauges():
 @route('/generic/<addr>')
 @view('generic.mako')
 def get_device(addr):
+    data = get_config_file()
     r = {'title' : 'device %s' % addr}
     dev = xaal_core.get_device(addr)
     if dev:
@@ -237,6 +300,7 @@ def get_device(addr):
 @route('/bureau')
 @view('bureau.mako')
 def get_devices_bureau():
+  data = get_config_file()
   r = {'title' : 'devices bureau list'}
   devs = xaal_core.monitor.devices
   r.update({'devs' : devs})
@@ -246,6 +310,7 @@ def get_devices_bureau():
 @route('/couloir')
 @view('couloir.mako')
 def get_devices_couloir():
+  data = get_config_file()
   r = {'title' : 'devices couloir list'}
   devs = xaal_core.monitor.devices
   r.update({'devs' : devs})
@@ -255,6 +320,7 @@ def get_devices_couloir():
 @route('/cuisine')
 @view('cuisine.mako')
 def get_devices_cuisine():
+  data = get_config_file()
   r = {'title' : 'devices cuisine list'}
   devs = xaal_core.monitor.devices
   r.update({'devs' : devs})
@@ -264,6 +330,7 @@ def get_devices_cuisine():
 @route('/entree')
 @view('entree.mako')
 def get_devices_entree():
+  data = get_config_file()
   r = {'title' : 'devices entree list'}
   devs = xaal_core.monitor.devices
   r.update({'devs' : devs})
@@ -273,6 +340,7 @@ def get_devices_entree():
 @route('/salle')
 @view('salle.mako')
 def get_devices_salle():
+  data = get_config_file()
   r = {'title' : 'devices salle list'}
   devs = xaal_core.monitor.devices
   r.update({'devs' : devs})
@@ -282,6 +350,7 @@ def get_devices_salle():
 @route('/salon')
 @view('salon.mako')
 def get_devices_salon():
+  data = get_config_file()
   r = {'title' : 'devices salon list'}
   devs = xaal_core.monitor.devices
   r.update({'devs' : devs})
@@ -291,6 +360,7 @@ def get_devices_salon():
 @route('/sdb')
 @view('sdb.mako')
 def get_devices_sdb():
+  data = get_config_file()
   r = {'title' : 'devices salle de bain list'}
   devs = xaal_core.monitor.devices
   r.update({'devs' : devs})
@@ -304,6 +374,7 @@ def get_devices_sdb():
 @route('/on_dimmer_lamp_scenario')
 @view('on_dimmer_lamp_scenario.mako')
 def get_devices_scenario():
+  data = get_config_file()
   r = {'title' : 'devices scenario'}
   devs = xaal_core.monitor.devices
   r.update({'devs' : devs})
@@ -312,6 +383,7 @@ def get_devices_scenario():
 @route('/off_dimmer_lamp_scenario')
 @view('off_dimmer_lamp_scenario.mako')
 def get_devices_scenario():
+  data = get_config_file()
   r = {'title' : 'devices scenario'}
   devs = xaal_core.monitor.devices
   r.update({'devs' : devs})
@@ -320,6 +392,7 @@ def get_devices_scenario():
 @route('/on_power_relay_scenario')
 @view('on_power_relay_scenario.mako')
 def get_devices_scenario():
+  data = get_config_file()
   r = {'title' : 'devices scenario'}
   devs = xaal_core.monitor.devices
   r.update({'devs' : devs})
@@ -328,6 +401,7 @@ def get_devices_scenario():
 @route('/off_power_relay_scenario')
 @view('off_power_relay_scenario.mako')
 def get_devices_scenario():
+  data = get_config_file()
   r = {'title' : 'devices scenario'}
   devs = xaal_core.monitor.devices
   r.update({'devs' : devs})
