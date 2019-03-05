@@ -3,6 +3,8 @@
 //########################################################################
 //@CLOCK
 
+const {render, html} = lighterhtml;
+
 window.onload = function() 
 {
 	tick();

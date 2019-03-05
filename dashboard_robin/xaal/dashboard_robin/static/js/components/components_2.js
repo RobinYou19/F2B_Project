@@ -6,55 +6,34 @@ class NotFoundDevice extends HTMLElement
   constructor()
   {
     super();
+    this.render = render.bind(
+      this,
+      this.attachShadow({mode: 'closed'}),
+      this.render
+    );
   }
 
   connectedCallback()
   {
-    if (this.hasAttribute('name'))
-    {
-      this.name = this.getAttribute('name');
-    }
-    else
-    {
-      this.name = "";
-    }
-    if (this.hasAttribute('src'))
-    {
-      this.src = this.getAttribute('src');
-    }
-    else
-    {
-      this.src = 'NoSrc';
-    }  
-    if (!this.shadowRoot)
-    {
-      var shadow  = this.attachShadow({mode : 'open'});
-      var content = document.createElement('div');
-      var style   = document.createElement('style');   
-      var title   = document.createElement('basic-title');
+    if (this.hasAttribute('name')) { this.name = this.getAttribute('name'); }
+    else { this.name = ''; }
+    
+    if (this.hasAttribute('src')) { this.src = this.getAttribute('src'); }
+    else { this.src = '/static/imgs/default-image.jpeg'; }  
+    
+    this.update();
+  }
 
-      var content_id = 'NotFound' + this.name;
-      content.setAttribute('id', content_id);
-      content.setAttribute('class', 'unfound');
+  update()
+  {
+    this.render();
+  }
 
-      title.setAttribute('title', this.name);
-      title.setAttribute('class', 'not_found_title');
-
-      shadow.appendChild(style);
-      shadow.appendChild(content);
-      content.appendChild(title);
-
-      if (this.src != 'NoSrc')
-      {
-        var image = document.createElement('image-basic');
-        image.setAttribute('src', this.src);
-        image.setAttribute('class', 'not_found_image');
-
-        content.appendChild(image);
-      }
-
-      style.textContent = `
-      .unfound
+  render()
+  {
+    return html`
+    <style>
+      div
       {
         background-color: LightGray;
         border-style: groove;
@@ -63,8 +42,12 @@ class NotFoundDevice extends HTMLElement
         margin: 5%;
         padding: 0px;
       }
-      `;
-    }
+    </style>
+    <div>
+      <basic-title title=${this.name}></basic-title>
+      <image-basic src=${this.src}></image-basic>
+    </div>
+    `;
   }
 }
 
@@ -127,14 +110,6 @@ class BasicDevice extends HTMLElement
     {
       this.value = 'No Value';
     }
-    if (this.hasAttribute('class'))
-    {
-      this.class = this.getAttribute('class');
-    }
-    else
-    {
-      this.class = 'box';
-    }
 
     if (!this.shadowRoot)
     {
@@ -142,14 +117,10 @@ class BasicDevice extends HTMLElement
       var content = document.createElement('div');
       var style   = document.createElement('style');
       var image   = document.createElement('image-basic');
-
       var title = document.createElement('basic-title');
+
       title.setAttribute('title', this.title);
       title.setAttribute('value', this.value);
-
-      var div_id = "basic_device" + this.address ;
-      content.setAttribute('div', div_id);
-      content.setAttribute('class', this.class);
 
       image.setAttribute('src', this.src);
       image.setAttribute('height', this.height);
@@ -157,7 +128,7 @@ class BasicDevice extends HTMLElement
       image.setAttribute('address', this.address);
 
       style.textContent = `
-      .box 
+      div
       {
         background-color: rgba(22, 137, 237, 1);
         border-style: groove;
@@ -253,8 +224,6 @@ class OnOffDevice extends HTMLElement
       var buttons = document.createElement('onoff-buttons');
       var endline = document.createElement('br');
 
-      var div_id  = 'on_off_device' + this.address ;
-      content.setAttribute('id', div_id);
       if (this.status == 'True')
       {
         content.setAttribute('class', 'box box-on');
@@ -381,10 +350,6 @@ class UDSDevice extends HTMLElement
       var buttons = document.createElement('uds-buttons');
       var endline = document.createElement('br');
 
-      var div_id  = 'uds_device' + this.address ;
-      content.setAttribute('id', div_id);
-      content.setAttribute('class', 'box')
-
       bs_dev.setAttribute('title', this.title);
       bs_dev.setAttribute('src', this.src);
       bs_dev.setAttribute('height', this.height);
@@ -396,7 +361,7 @@ class UDSDevice extends HTMLElement
       buttons.setAttribute('address', this.address);
 
       style.textContent = `
-      .box 
+      div
       {
         background-color: rgba(22, 137, 237, 1);
         border-style: groove;

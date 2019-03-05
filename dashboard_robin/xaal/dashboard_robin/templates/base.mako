@@ -35,10 +35,11 @@
 <script src="/static/js/utils/hammer.js"></script>
 <script src="/static/js/utils/utils.js"></script>
 
+<script src="https://unpkg.com/lighterhtml"></script>
 <script src="/static/js/components/scenario.js"></script>
 <script src="/static/js/components/block_components_2.js"></script>
 <script src="/static/js/components/components_2.js"></script>
-<script src="/static/js/components/device.js"></script>
+<script src="/static/js/components/device_2.js"></script>
 
 <script src="/static/js/socketio/socket.io.slim.js"></script>
 <script src="/static/js/site.js"></script>
