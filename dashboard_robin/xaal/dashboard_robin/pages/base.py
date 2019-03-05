@@ -186,109 +186,37 @@ def account():
 #################################################################
 #@ MODULE PAGES
 
-@route('/type')
-@view('type.mako')
-def type():
+@route('/modules/<module>')
+@view('module.mako')
+def module(module):
+    helper = {"Type" : 0, "Localisation" : 1}
     data = get_config_file()
-    r =  {'title':'Type'}
-    r.update({'objects' : data['pages']['modules'][0]['objects']})
+    r = {'title': module}
+    r.update({'modules' : data['pages']['modules']})
+    r.update({'objects' : data['pages']['modules'][helper[module]]['objects']})
     return r
 
-@route('/localisation')
-@view('localisation.mako')
-def localisation():
-    data = get_config_file()
-    r = {'title':'Localisation'}
-    r.update({'objects' : data['pages']['modules'][1]['objects']})
-    return r
-
-
-#################################################################
-#@ TYPE PAGES
-
-@route('/barometers')
-@view('barometers.mako')
-def get_devices_barometers():
-    data = get_config_file()
-    r = {'title' : 'devices list'}
+@route('/modules/<module>/<name>')
+@view('category.mako')
+def module(module, name):
+    helper = {"Type" : 0, "Localisation" : 1}
+    helper2= {"Bureau" : 0, "Couloir" : 1, "Cuisine" : 2, "Entree": 3, "Salle": 4, "Salon": 5, "Salle_de_Bain": 6}
     devs = xaal_core.monitor.devices
-    r.update({'devs' : devs})
-    r.update({'objects' : data['pages']['modules'][0]['objects']})
-    return r
-
-@route('/gateways')
-@view('gateways.mako')
-def get_devices_gateways():
     data = get_config_file()
-    r = {'title' : 'devices list'}
-    devs = xaal_core.monitor.devices
+    r = {'title': name}
+    r.update({'category': module})
     r.update({'devs' : devs})
-    r.update({'objects' : data['pages']['modules'][0]['objects']})
-    return r
-
-@route('/hmis')
-@view('hmis.mako')
-def get_devices_hmis():
-    data = get_config_file()
-    r = {'title' : 'devices list'}
-    devs = xaal_core.monitor.devices
-    r.update({'devs' : devs})
-    r.update({'objects' : data['pages']['modules'][0]['objects']})
-    return r
-
-@route('/hygrometers')
-@view('hygrometers.mako')
-def get_devices_hygrometers():
-    data = get_config_file()
-    r = {'title' : 'devices list'}
-    devs = xaal_core.monitor.devices
-    r.update({'devs' : devs})
-    r.update({'objects' : data['pages']['modules'][0]['objects']})
-    return r
-
-@route('/lights')
-@view('lights.mako')
-def get_devices_lights():
-    data = get_config_file()
-    r = {'title' : 'devices list'}
-    devs = xaal_core.monitor.devices
-    r.update({'devs' : devs})
-    r.update({'objects' : data['pages']['modules'][0]['objects']})
-    return r
-
-@route('/power_relays')
-@view('power_relays.mako')
-def get_devices_power_relays():
-    data = get_config_file()
-    r = {'title' : 'devices list'}
-    devs = xaal_core.monitor.devices
-    r.update({'devs' : devs})
-    r.update({'objects' : data['pages']['modules'][0]['objects']})
-    return r
-
-@route('/thermometers')
-@view('thermometers.mako')
-def get_devices_thermometers():
-    data = get_config_file()
-    r = {'title' : 'devices list'}
-    devs = xaal_core.monitor.devices
-    r.update({'devs' : devs})
-    r.update({'objects' : data['pages']['modules'][0]['objects']})
-    return r
-
-@route('/windgauges')
-@view('windgauges.mako')
-def get_devices_windgauges():
-    data = get_config_file()
-    r = {'title' : 'devices list'}
-    devs = xaal_core.monitor.devices
-    r.update({'devs' : devs})
-    r.update({'objects' : data['pages']['modules'][0]['objects']})
+    r.update({'modules' : data['pages']['modules']})
+    if module == 'Type' :
+      r.update({'objects' : data['pages']['modules'][helper['Type']]['objects']})
+    else :   
+      r.update({'modules' : data['pages']['modules']})
+      r.update({'objects' : data['pages']['modules'][helper[module]]['objects']})
+      r.update({'list'    : data['pages']['modules'][helper[module]]['objects'][helper2[name]]['list']})
     return r
 
 #################################################################
 #@ GENERIC PAGES
-
 
 @route('/generic/<addr>')
 @view('generic.mako')
@@ -299,81 +227,6 @@ def get_device(addr):
     if dev:
         r.update({'dev' : dev})
     return r
-
-
-#################################################################
-#@ LOCALISATION PAGES
-
-@route('/bureau')
-@view('bureau.mako')
-def get_devices_bureau():
-  data = get_config_file()
-  r = {'title' : 'devices bureau list'}
-  devs = xaal_core.monitor.devices
-  r.update({'devs' : devs})
-  r.update({'list' : data['pages']['modules'][1]['objects'][0]['list']})
-  return r
-
-@route('/couloir')
-@view('couloir.mako')
-def get_devices_couloir():
-  data = get_config_file()
-  r = {'title' : 'devices couloir list'}
-  devs = xaal_core.monitor.devices
-  r.update({'devs' : devs})
-  r.update({'list' : data['pages']['modules'][1]['objects'][1]['list']})
-  return r
-
-@route('/cuisine')
-@view('cuisine.mako')
-def get_devices_cuisine():
-  data = get_config_file()
-  r = {'title' : 'devices cuisine list'}
-  devs = xaal_core.monitor.devices
-  r.update({'devs' : devs})
-  r.update({'list' : data['pages']['modules'][1]['objects'][2]['list']})
-  return r
-
-@route('/entree')
-@view('entree.mako')
-def get_devices_entree():
-  data = get_config_file()
-  r = {'title' : 'devices entree list'}
-  devs = xaal_core.monitor.devices
-  r.update({'devs' : devs})
-  r.update({'list' : data['pages']['modules'][1]['objects'][3]['list']})
-  return r
-
-@route('/salle')
-@view('salle.mako')
-def get_devices_salle():
-  data = get_config_file()
-  r = {'title' : 'devices salle list'}
-  devs = xaal_core.monitor.devices
-  r.update({'devs' : devs})
-  r.update({'list' : data['pages']['modules'][1]['objects'][4]['list']})
-  return r
-
-@route('/salon')
-@view('salon.mako')
-def get_devices_salon():
-  data = get_config_file()
-  r = {'title' : 'devices salon list'}
-  devs = xaal_core.monitor.devices
-  r.update({'devs' : devs})
-  r.update({'list' : data['pages']['modules'][1]['objects'][5]['list']})
-  return r
-
-@route('/sdb')
-@view('sdb.mako')
-def get_devices_sdb():
-  data = get_config_file()
-  r = {'title' : 'devices salle de bain list'}
-  devs = xaal_core.monitor.devices
-  r.update({'devs' : devs})
-  r.update({'list' : data['pages']['modules'][1]['objects'][6]['list']})
-  return r
-
 
 #################################################################
 #@ SCENARIOS PAGES
@@ -413,53 +266,3 @@ def get_devices_scenario():
   devs = xaal_core.monitor.devices
   r.update({'devs' : devs})
   return r
-
-#################################################################
-#@ OLD PAGES
-
-@route('/stats')
-@view('stats.mako')
-def stats():
-    total = 0
-    results = {}
-    for dev in xaal_core.monitor.devices:
-        total = total + 1
-        try:
-            k = dev.devtype
-            results[k]=results[k]+1
-        except KeyError:
-            results.update({k:1})
-    r = {'title' : 'Network stats'}
-    r.update({'total'   :total})
-    r.update({'devtypes':results})
-    r.update({'uptime'  : xaal_core.get_uptime()})
-    return r
-
-
-@route('/bottle_info')
-@view('bottle_info.mako')
-def info():
-    r = {'title' : 'Bottle Server Info'}
-    r.update({'headers' : request.headers})
-    r.update({'query'   : request.query})
-    r.update({'environ' : copy.copy(request.environ)})
-    return r
-
-
-@route('/devices')
-@view('devices.mako')
-def get_device():
-    r = {'title' : 'devices list'}
-    devs = xaal_core.monitor.devices
-    r.update({'devs' : devs})
-    return r
-
-@route('/grid')
-@view('grid.mako')
-def test_grid():
-    return {'title' : 'Grid','devices':xaal_core.monitor.devices}
-
-
-@route('/latency')
-def socketio_latency_test():
-    redirect('/static/latency.html')

@@ -128,17 +128,17 @@
 		"modules" : 
 		[
 			{
-				"name"  : "Object_Type",
+				"name"  : "Type",
 				"href"  : "/type",
-				"alt"   : "Object_Type",
+				"alt"   : "Type",
 				"src"   : "/static/imgs/type.png",
 				"height": "200",
 				"width" : "200",
 				"objects" :
 				[
 					{
-						"type" : "Barometers",
-						"href" : "/barometers",
+						"type" : "barometer",
+						"href" : "/barometer",
 						"list" :
 						{
 							"dynamic" : "True",
@@ -146,26 +146,8 @@
 						}
 					},
 					{
-						"type" : "Gateways",
-						"href" : "/gateways",
-						"list" :
-						{
-							"dynamic" : "True",
-							"static"  : []
-						}
-					},
-					{
-						"type" : "HMIS",
-						"href" : "/hmis",
-						"list" :
-						{
-							"dynamic" : "True",
-							"static"  : []
-						}
-					},
-					{
-						"type" : "Hygrometers",
-						"href" : "/hygrometers",
+						"type" : "hygrometer",
+						"href" : "/hygrometer",
 						"list" :
 						{
 							"dynamic" : "True",
@@ -173,8 +155,8 @@
 						}
 					},
 					{
-						"type" : "Lights",
-						"href" : "/lights",
+						"type" : "thermometer",
+						"href" : "/thermometer",
 						"list" :
 						{
 							"dynamic" : "True",
@@ -182,26 +164,8 @@
 						}
 					},
 					{
-						"type" : "Power_Relays",
-						"href" : "/power_relays",
-						"list" :
-						{
-							"dynamic" : "True",
-							"static"  : []
-						}
-					},
-					{
-						"type" : "Thermometers",
-						"href" : "/thermometers",
-						"list" :
-						{
-							"dynamic" : "True",
-							"static"  : []
-						}
-					},
-					{
-						"type" : "Windgauges",
-						"href" : "/windgauges",
+						"type" : "windgauge",
+						"href" : "/windgauge",
 						"list" :
 						{
 							"dynamic" : "True",
@@ -211,9 +175,9 @@
 				]
 			},
 			{
-				"name"  : "Object_Localisation",
+				"name"  : "Localisation",
 				"href"  : "/localisation",
-				"alt"   : "Object_Localisation",
+				"alt"   : "Localisation",
 				"src"   : "/static/imgs/localisation.png",
 				"height": "200",
 				"width" : "200",
@@ -228,7 +192,7 @@
 								"type"           : "thermometer",
 								"nickname"       : "temp_bureau",
 								"component_type" : "thermometer-basic",
-								"src"            : "static/imgs/thermometer-profile.png",
+								"src"            : "/static/imgs/thermometer-profile.png",
 								"width"          : "50",
 								"value"          : "temperature" 
 							},
@@ -236,7 +200,7 @@
 								"type"           : "hygrometer",
 								"nickname"       : "rh_bureau",
 								"component_type" : "hygrometer-basic",
-								"src"            : "static/imgs/hygrometer-profile2.png",
+								"src"            : "/static/imgs/hygrometer-profile2.png",
 								"width"          : "50",
 								"value"          : "windStrength"
 							}
@@ -251,7 +215,7 @@
 								"type"           : "lamp",
 								"nickname"       : "lamp_couloir",
 								"component_type" : "lamp-basic",
-								"src"            : "static/imgs/lampe-profile.png",
+								"src"            : "/static/imgs/lampe-profile.png",
 								"width"          : "50",
 								"value"          : "" 
 							}
@@ -266,7 +230,7 @@
 								"type"           : "lamp",
 								"nickname"       : "lamp_cuisine",
 								"component_type" : "lamp-basic",
-								"src"            : "static/imgs/lampe-profile.png",
+								"src"            : "/static/imgs/lampe-profile.png",
 								"width"          : "50",
 								"value"          : "" 
 							}
@@ -281,7 +245,7 @@
 								"type"           : "lamp",
 								"nickname"       : "lamp_entree",
 								"component_type" : "lamp-basic",
-								"src"            : "static/imgs/lampe-profile.png",
+								"src"            : "/static/imgs/lampe-profile.png",
 								"width"          : "50",
 								"value"          : "" 
 							}
@@ -296,7 +260,7 @@
 								"type"           : "lamp",
 								"nickname"       : "lamp_salle",
 								"component_type" : "lamp-basic",
-								"src"            : "static/imgs/lampe-profile.png",
+								"src"            : "/static/imgs/lampe-profile.png",
 								"width"          : "50",
 								"value"          : "" 
 							}
@@ -311,7 +275,7 @@
 								"type"           : "lamp",
 								"nickname"       : "lamp_salon",
 								"component_type" : "lamp-basic",
-								"src"            : "static/imgs/lampe-profile.png",
+								"src"            : "/static/imgs/lampe-profile.png",
 								"width"          : "50",
 								"value"          : "" 
 							}
@@ -326,7 +290,7 @@
 								"type"           : "lamp",
 								"nickname"       : "lamp_sdb",
 								"component_type" : "lamp-basic",
-								"src"            : "static/imgs/lampe-profile.png",
+								"src"            : "/static/imgs/lampe-profile.png",
 								"width"          : "50",
 								"value"          : "" 
 							}

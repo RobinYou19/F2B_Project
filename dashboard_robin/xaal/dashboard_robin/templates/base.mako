@@ -14,7 +14,8 @@
 </head>
 
 <body>
-  <div class="topnav" id="myTopnav"><b>
+  <div class="topnav" id="myTopnav">
+    <b>
     <a href="/menu">Menu</a>
     <a href="/house">House</a>
     <a href="/modules">Modules</a>
@@ -25,17 +26,18 @@
     <a href="javascript:void(0);" class="icon" onclick="menuDisplay()">
       <i class="fa fa-bars"></i>
     </a>
-  </b></div>
+    </b>
+  </div>
 
   <div id="main">
     ${self.body()}
   </div>
 </body>
 
+<script src="/static/js/utils/lighter.js"></script>
 <script src="/static/js/utils/hammer.js"></script>
 <script src="/static/js/utils/utils.js"></script>
 
-<script src="https://unpkg.com/lighterhtml"></script>
 <script src="/static/js/components/scenario.js"></script>
 <script src="/static/js/components/block_components_2.js"></script>
 <script src="/static/js/components/components_2.js"></script>
