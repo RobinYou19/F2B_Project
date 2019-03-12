@@ -306,7 +306,10 @@
 			[
 				"lamp.dimmer",
 				"powerrelay.basic",
-				"thermometer.basic"
+				"thermometer.basic",
+				"hygrometer.basic",
+				"barometer.basic",
+				"hygrometer.basic"
 			],
 			"static" :
 			[
