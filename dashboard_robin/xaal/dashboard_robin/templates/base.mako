@@ -9,7 +9,7 @@
   <meta name="keywords"               content="" />
   <meta name="description"            content="" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <link rel ="stylesheet" href="/static/css/main_3.css">
+  <link rel ="stylesheet" href="/static/css/main_2.css">
   <link rel ="stylesheet" href="/static/fonts/fontawesome/css/all.css">
 </head>
 

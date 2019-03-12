@@ -123,7 +123,7 @@
 					}
 				}
 			},
-			"dynamic" : "true"
+			"dynamic" : "false"
 		},
 		"modules" : 
 		[
