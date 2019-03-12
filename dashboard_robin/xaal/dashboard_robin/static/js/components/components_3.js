@@ -346,7 +346,7 @@ class UDSDevice extends HTMLElement
       var shadow  = this.attachShadow({mode : 'open'});
       var content = document.createElement('div');
       var style   = document.createElement('style');
-      var bs_dev  = document.createElement('basic-device');
+      var bs_dev  = document.createElement('title-image');
       var buttons = document.createElement('uds-buttons');
       var endline = document.createElement('br');
 

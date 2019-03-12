@@ -209,7 +209,18 @@
 						#DO NOTHING
 						%>
 				%endtry
-		</div>
+			</div>
+
+		%elif "shutter.basic" in dev.devtype :
+			<div class='col-sm-3'>
+				%try :
+					<uds-device address=${shutter['address']} title=${shutter['name']} src='/static/imgs/shutter-profile.png'></uds-device>
+				%except :
+					<% 
+						#DO NOTHING
+						%>
+				%endtry
+			</div>
 		%endif
 	%endfor
 

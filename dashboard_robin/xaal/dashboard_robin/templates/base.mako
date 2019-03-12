@@ -36,11 +36,11 @@
 
 <script src="/static/js/utils/lighter.js"></script>
 <script src="/static/js/utils/hammer.js"></script>
-<script src="/static/js/utils/utils.js"></script>
+<script src="/static/js/utils/utils_2.js"></script>
 
 <script src="/static/js/components/scenario.js"></script>
 <script src="/static/js/components/block_components_2.js"></script>
-<script src="/static/js/components/components_2.js"></script>
+<script src="/static/js/components/components_3.js"></script>
 <script src="/static/js/components/device_2.js"></script>
 
 <script src="/static/js/socketio/socket.io.slim.js"></script>
