@@ -179,8 +179,14 @@
 			</div>
 
 		%elif "powerrelay.basic" in dev.devtype :
-		<div class='col-sm-3'>
-			<powerrelay-basic address=${dev.address} title=${dev.devtype} status=${dev.attributes['power']} src='static/imgs/powerrelay-profile.png'></powerrelay-basic>
+			<div class='col-sm-3'>
+				%try :
+					<powerrelay-basic address=${dev.address} title=${dev.devtype} status=${dev.attributes['power']} src='static/imgs/powerrelay-profile.png'></powerrelay-basic>
+				%except :
+					<% 
+						#DO NOTHING
+						%>
+				%endtry
 		</div>
 		%endif
 	%endfor
@@ -188,22 +194,46 @@
 	%for dev in devs :
 		%if "thermometer.basic" in dev.devtype :
 			<div class='col-sm-3'>
-				<thermometer-basic address=${dev.address} title=${dev.devtype} value=${dev.attributes['temperature']} src='static/imgs/thermometer-profile.png' width='50'></thermometer-basic>
+				%try :
+					<thermometer-basic address=${dev.address} title=${dev.devtype} value=${dev.attributes['temperature']} src='static/imgs/thermometer-profile.png' width='50'></thermometer-basic>
+				%except :
+					<% 
+						#DO NOTHING
+					%>
+				%endtry
 			</div>
 
 		%elif "barometer.basic" in dev.devtype :
 			<div class='col-sm-3'>
-				<barometer-basic address=${dev.address} title=${dev.devtype}  value=${dev.attributes['pressure']} src="static/imgs/barometer-profile2.png"></barometer-basic>
+				%try :
+					<barometer-basic address=${dev.address} title=${dev.devtype}  value=${dev.attributes['pressure']} src="static/imgs/barometer-profile2.png"></barometer-basic>
+				%except :
+					<% 
+						#DO NOTHING
+					%>
+				%endtry
 			</div>
 
 		%elif "hygrometer.basic" in dev.devtype :
 			<div class='col-sm-3'>
-				<hygrometer-basic address=${dev.address} title=${dev.devtype} value=${dev.attributes['humidity']} src='/static/imgs/hygrometer-profile2.png'></hygrometer-basic>
+				%try :
+					<hygrometer-basic address=${dev.address} title=${dev.devtype} value=${dev.attributes['humidity']} src='/static/imgs/hygrometer-profile2.png'></hygrometer-basic>
+				%except :
+					<% 
+						#DO NOTHING
+					%>
+				%endtry
 			</div>	
 
 		%elif "windgauge.basic" in dev.devtype :
 			<div class='col-sm-3'>
-				<windgauge-basic address=${dev.address} title=${dev.devtype} value=${dev.attributes['windStrength']} src='/static/imgs/windgauge-profile.png'></windgauge-basic>
+				%try :
+					<windgauge-basic address=${dev.address} title=${dev.devtype} value=${dev.attributes['windStrength']} src='/static/imgs/windgauge-profile.png'></windgauge-basic>
+				%except :
+					<% 
+						#DO NOTHING
+					%>
+				%endtry
 			</div>
 
 		%endif
@@ -212,12 +242,24 @@
 	%for dev in devs :
 		%if "gateway.basic" in dev.devtype :
 			<div class='col-sm-3'>
-				<gateway-basic address=${dev.address} title=${dev.devtype} src='/static/imgs/gateway-profile2.png'></gateway-basic>
+				%try :
+					<gateway-basic address=${dev.address} title=${dev.devtype} src='/static/imgs/gateway-profile2.png'></gateway-basic>
+				%except :
+					<% 
+						#DO NOTHING
+					%>
+				%endtry
 			</div>	
 
 		%elif "hmi.basic" in dev.devtype :
 			<div class='col-sm-3'>
-				<hmi-basic address=${dev.address} title=${dev.devtype} src='/static/imgs/lampe-profile.png'></hmi-basic>
+				%try :
+					<hmi-basic address=${dev.address} title=${dev.devtype} src='/static/imgs/lampe-profile.png'></hmi-basic>
+				%except :
+					<% 
+						#DO NOTHING
+					%>
+				%endtry
 			</div>
 
 		%endif
