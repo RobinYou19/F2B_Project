@@ -28,7 +28,13 @@
 					value = ''
 				%>
 				<div class='col-sm-3'>
-					<${balise_name} address=${dev.address} title=${dev.devtype} status=${dev.attributes[attr]} src=${src} value=${value}></${balise_name}>				
+					%try :
+						<${balise_name} address=${dev.address} title=${dev.devtype} status=${dev.attributes[attr]} src=${src} value=${value}></${balise_name}>
+					%except :
+						<%
+							# DO NOTHING
+						%>
+					%endtry			
 				</div>
 			%elif balise_name.count('thermometer'):
 				<%
@@ -37,7 +43,13 @@
 					value = dev.attributes[attr]
 				%>
 				<div class='col-sm-3'>
-					<${balise_name} address=${dev.address} title=${dev.devtype} status=${dev.attributes[attr]} src=${src} value=${value}></${balise_name}>				
+					%try :
+						<${balise_name} address=${dev.address} title=${dev.devtype} status=${dev.attributes[attr]} src=${src} value=${value}></${balise_name}>		
+					%except :
+						<%
+							# DO NOTHING
+						%>
+					%endtry		
 				</div>
 			%endif
 		%endif
