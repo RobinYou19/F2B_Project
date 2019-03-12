@@ -37,7 +37,7 @@
 					%endtry			
 				</div>
 			%elif balise_name.count('thermometer'):
-				try :
+				%try :
 					<%
 						attr  = 'temperature'
 						src   = 'static/imgs/thermometer-profile.png'
