@@ -178,6 +178,28 @@
 				%endtry
 			</div>
 
+		%elif "lamp.basic" in dev.devtype :
+			<div class='col-sm-3'>
+				%try :
+					<lamp-dimmer address=${dev.address} title=${dev.devtype} status=${dev.attributes['light']} src='static/imgs/lampe-profile.png'></lamp-dimmer>
+				%except :
+					<% 
+						#DO NOTHING
+					%>
+				%endtry
+			</div>
+
+		%elif "lamp.toggle" in dev.devtype :
+			<div class='col-sm-3'>
+				%try :
+					<lamp-dimmer address=${dev.address} title=${dev.devtype} status=${dev.attributes['light']} src='static/imgs/lampe-profile.png'></lamp-dimmer>
+				%except :
+					<% 
+						#DO NOTHING
+					%>
+				%endtry
+			</div>
+
 		%elif "powerrelay.basic" in dev.devtype :
 			<div class='col-sm-3'>
 				%try :
