@@ -203,13 +203,13 @@ function update(device, data)
 {
   var attributes_dict = {};
   var values_dict = {}
-  var list_title = ['lamp.toggle', 'lamp.dimmer', 'powerrelay.basic', 'powermeter.basic',
+  var list_title = ['lamp.basic','lamp.toggle', 'lamp.dimmer', 'powerrelay.basic', 'powermeter.basic',
                     'thermometer.basic', 'hygrometer.basic', 'barometer.basic',
                     'windgauge.basic'];
-  var list_value = ['light','light', 'power', 'power', 'temperature', 'humidity', 'pressure',
+  var list_value = ['light','light','light', 'power', 'power', 'temperature', 'humidity', 'pressure',
                     'windStrength'];
 
-  var to_change_value = ['status','status', 'status', 'status', 'value', 'value', 'value', 'value'];
+  var to_change_value = ['status','status','status', 'status', 'status', 'value', 'value', 'value', 'value'];
 
   for (var i = 0 ; i < list_title.length ; i++)
   {
