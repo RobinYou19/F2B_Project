@@ -59,7 +59,7 @@ md.on('swipe', function(ev)
     var name;
     name = window.location.pathname;
     dest = panleft_dict[name];
-    window.location.href = "http://localhost:9090"+dest;    
+    window.location.href = "http://robin:9090"+dest;    
   }
   else
   {
@@ -68,7 +68,7 @@ md.on('swipe', function(ev)
     var name;
     name = window.location.pathname;
     dest = panright_dict[name];
-    window.location.href = "http://localhost:9090"+dest;   
+    window.location.href = "http://robin:9090"+dest;   
   }
 })
 
@@ -77,7 +77,7 @@ md.on("double_tap",function(ev)
 {
   var name;
   name = window.location.pathname;
-  window.location.href = "http://localhost:9090/menu";
+  window.location.href = "http://robin:9090/menu";
 })
 
 /*********************************************/
